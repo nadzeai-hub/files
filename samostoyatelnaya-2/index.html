@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Самостоятельная работа № 2</title>
+<style>:root{--ink:#17232c;--navy:#223a4a;--cyan:#10a9b7;--cyan2:#dff6f7;--lime:#dff08b;--paper:#fff;--bg:#eef3f2;--muted:#6c7b83;--line:#d7e1e2;--good:#16845b;--bad:#b94b43}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;font-size:17px;line-height:1.5}.topbar{height:42px;background:var(--ink);color:white;display:flex;justify-content:space-between;align-items:center;padding:0 max(24px,calc((100vw - 1100px)/2));font-size:13px;font-weight:800;letter-spacing:.12em}.app{max-width:1100px;margin:auto;padding:38px 24px 70px}.hero{min-height:265px;background:var(--navy);color:white;border-radius:24px;padding:38px 46px;display:grid;grid-template-columns:1.3fr .7fr;overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:320px;height:320px;border:55px solid #ffffff0c;border-radius:50%;right:-90px;top:-105px}.tag{display:inline-block;background:var(--lime);color:#314126;padding:6px 10px;border-radius:5px;font-size:12px;font-weight:900;letter-spacing:.12em}.hero h1{font-size:46px;line-height:1.02;margin:16px 0 13px}.hero p{max-width:600px;color:#dce7ea;margin:0}.paperclipHero{display:flex;align-items:center;justify-content:center;position:relative;z-index:1}.clipShape{font-family:Georgia,serif;font-size:150px;line-height:.5;color:var(--cyan);transform:rotate(23deg);font-weight:normal}.bubble{position:absolute;background:white;color:var(--ink);padding:12px 15px;border-radius:14px;right:0;top:32px;font-size:14px;box-shadow:0 8px 25px #0002}.layout{display:grid;grid-template-columns:220px 1fr;gap:24px;margin-top:25px}.steps{position:sticky;top:20px;align-self:start}.step{width:100%;border:0;background:transparent;text-align:left;padding:11px 9px;border-left:3px solid #cdd9dc;color:#60727a;font-weight:700;cursor:pointer}.step span{font-size:12px;margin-right:7px;color:#8b9aa0}.step.active{border-left-color:var(--cyan);color:var(--ink);background:#ffffff80}.miniHelp{margin-top:22px;background:var(--cyan2);border-radius:16px;padding:17px;font-size:14px}.miniHelp p{margin:5px 0 0;color:#567079}.miniClip{font-size:43px;line-height:1;color:var(--cyan);transform:rotate(20deg);display:inline-block}.tasks{min-width:0}.card{background:white;border-radius:20px;padding:30px 34px;margin-bottom:18px;border:1px solid #e1e8e9;box-shadow:0 7px 22px #2030390b;scroll-margin-top:20px}.card.current{border-top:4px solid var(--cyan)}.cardTop{display:flex;align-items:center;gap:12px;margin-bottom:16px}.num{width:42px;height:42px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font-weight:900}.skill{font-size:12px;color:#668089;letter-spacing:.13em;font-weight:900}.card h2{font-size:21px;line-height:1.48;margin:0 0 22px;font-weight:650}.radioAnswers{display:grid;gap:9px}.radioAnswers label{cursor:pointer}.radioAnswers input{position:absolute;opacity:0}.radioAnswers span{display:block;border:1.5px solid var(--line);border-radius:11px;padding:12px 15px;font-size:18px}.radioAnswers input:checked+span{border-color:var(--cyan);background:var(--cyan2)}select,input{font:inherit;border:1.5px solid #aebec3;border-radius:9px;background:white;padding:9px 11px}.compare{display:flex;gap:30px;flex-wrap:wrap;font-size:20px}.compare select{width:60px;text-align:center}.roundGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.roundGrid label{background:#f6f9f9;border-radius:12px;padding:16px;display:flex;align-items:center;gap:9px}.roundGrid span{font-weight:800}.roundGrid i{font-style:normal;color:var(--cyan);font-size:24px}.roundGrid input{width:100%;min-width:0}.cardFoot{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:23px;padding-top:18px;border-top:1px dashed #cedadc}.hintBtn{border:0;background:transparent;color:#087f8b;font-weight:800;cursor:pointer;padding:5px 0}.feedback{font-weight:800}.ok{color:var(--good)}.bad{color:var(--bad)}.rayPanel{border:1px solid var(--line);border-radius:15px;background:#fbfdfd;padding:14px 17px}.rayCaption{display:flex;justify-content:space-between;gap:15px;font-size:14px}.rayCaption span{color:var(--muted)}.axis,.tick{stroke:#25343b;stroke-width:2.2}.hit{fill:transparent;cursor:pointer}.nlabel{font:15px Arial;fill:#43545c}.point{fill:var(--cyan)}.plabel{font:bold 17px Arial;fill:#087f8b}.twoInputs{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:14px}.twoInputs label{background:#f6f9f9;border-radius:11px;padding:13px}.twoInputs label>span{display:block;font-size:13px;color:#60747c;font-weight:800;margin-bottom:7px}.twoInputs input{width:100px}.twoInputs label div{display:flex;align-items:center;gap:7px}.days{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.days label{background:#f6f9f9;border-radius:12px;padding:14px}.days small{display:block;font-weight:900;color:#60747c;margin-bottom:7px}.days input{width:90px}.days span{margin-left:6px;color:#60747c}.finish{background:var(--lime);border-radius:20px;padding:25px 30px;display:flex;justify-content:space-between;align-items:center;gap:20px}.finishTag{font-size:12px;font-weight:900;letter-spacing:.14em}.finish h2{margin:3px 0;font-size:26px}.finish p{margin:0;color:#53603f}.finish button{border:0;background:var(--ink);color:white;border-radius:12px;padding:14px 18px;font:inherit;font-weight:900;cursor:pointer}.finish button span{margin-left:15px;color:var(--lime)}.result{display:none;margin-top:16px;background:white;border-radius:18px;padding:25px 30px}.result.show{display:block}.result .score{font-size:34px;font-weight:900}.reset{margin:15px auto 0;display:block;border:0;background:transparent;text-decoration:underline;color:#687980;cursor:pointer}.modal{position:fixed;inset:0;background:#12202988;display:none;place-items:center;padding:20px;z-index:10}.modal.open{display:grid}.modalCard{width:min(570px,100%);background:white;border-radius:22px;padding:27px;display:grid;grid-template-columns:80px 1fr;gap:20px;position:relative;box-shadow:0 25px 80px #0004}.modalClip{font-size:85px;line-height:.8;color:var(--cyan);transform:rotate(22deg);text-align:center}.modalCard small{font-weight:900;color:#087f8b;letter-spacing:.1em}.modalCard h3{margin:4px 0 7px}.modalCard p{margin:0;font-size:18px}.close{position:absolute;right:13px;top:10px;border:0;background:transparent;font-size:27px;cursor:pointer}@media(max-width:800px){.hero{grid-template-columns:1fr;padding:30px}.paperclipHero{display:none}.hero h1{font-size:38px}.layout{grid-template-columns:1fr}.steps{position:static;display:flex;overflow:auto}.step{min-width:135px;border-left:0;border-bottom:3px solid #cdd9dc}.step.active{border-bottom-color:var(--cyan)}.miniHelp{display:none}.roundGrid,.days,.twoInputs{grid-template-columns:1fr}.card{padding:24px 20px}.finish{align-items:flex-start;flex-direction:column}.rayCaption{flex-direction:column}.topbar{padding:0 18px}}</style>
+</head>
+<body>
+<div class="topbar"><span>МАТЕМАТИКА • 5 КЛАСС</span><span id="progressTop">0 / 5</span></div>
+
+<main class="app">
+  <section class="hero">
+    <div>
+      <div class="tag">ПРОВЕРКА • ГЛАВА 1, § 2–7</div>
+      <h1>Самостоятельная<br>работа № 2</h1>
+      <p>Работай в своём темпе. Скрепка подскажет направление, если застрянешь — но ответ за тебя не скажет.</p>
+    </div>
+    <div class="paperclipHero" aria-hidden="true">
+      <div class="clipShape">⌇</div>
+      <div class="bubble">Я рядом.<br><b>Но считаешь ты :)</b></div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <nav class="steps" aria-label="Задания">
+      <button class="step active" data-go="1"><span>01</span> Запись числа</button>
+      <button class="step" data-go="2"><span>02</span> Сравнение</button>
+      <button class="step" data-go="3"><span>03</span> Округление</button>
+      <button class="step" data-go="4"><span>04</span> Координатный луч</button>
+      <button class="step" data-go="5"><span>05</span> Задача</button>
+      <div class="miniHelp">
+        <div class="miniClip">⌇</div>
+        <b>Нужен намёк?</b>
+        <p>В каждом задании есть кнопка «Подсказка Скрепки».</p>
+      </div>
+    </nav>
+
+    <div class="tasks">
+      <article class="card current" data-q="1">
+        <div class="cardTop"><span class="num">01</span><span class="skill">ЧИТАЕМ БОЛЬШИЕ ЧИСЛА</span></div>
+        <h2>Выберите верную запись числа «семь миллионов двадцать три тысячи четыреста пять»:</h2>
+        <div class="answers radioAnswers">
+          <label><input type="radio" name="q1" value="a"><span>а) 7 230 405;</span></label>
+          <label><input type="radio" name="q1" value="b"><span>б) 7 023 450;</span></label>
+          <label><input type="radio" name="q1" value="c"><span>в) 7 023 405.</span></label>
+        </div>
+        <div class="cardFoot"><button class="hintBtn" data-h="1">⌇ Подсказка Скрепки</button><div class="feedback"></div></div>
+      </article>
+
+      <article class="card" data-q="2">
+        <div class="cardTop"><span class="num">02</span><span class="skill">СРАВНИВАЕМ</span></div>
+        <h2>Сравните числа:</h2>
+        <div class="compare">
+          <div>а) <b>3030</b> <select id="a2"><option value="">?</option><option>&lt;</option><option>&gt;</option><option>=</option></select> <b>330</b>;</div>
+          <div>б) <b>14 479</b> <select id="b2"><option value="">?</option><option>&lt;</option><option>&gt;</option><option>=</option></select> <b>14 480</b>.</div>
+        </div>
+        <div class="cardFoot"><button class="hintBtn" data-h="2">⌇ Подсказка Скрепки</button><div class="feedback"></div></div>
+      </article>
+
+      <article class="card" data-q="3">
+        <div class="cardTop"><span class="num">03</span><span class="skill">ОКРУГЛЯЕМ</span></div>
+        <h2>Выполните округление чисел до сотен:</h2>
+        <div class="roundGrid">
+          <label><span>а) 8276</span><i>→</i><input id="a3" inputmode="numeric" placeholder="ответ"></label>
+          <label><span>б) 2345</span><i>→</i><input id="b3" inputmode="numeric" placeholder="ответ"></label>
+          <label><span>в) 6980</span><i>→</i><input id="c3" inputmode="numeric" placeholder="ответ"></label>
+        </div>
+        <div class="cardFoot"><button class="hintBtn" data-h="3">⌇ Подсказка Скрепки</button><div class="feedback"></div></div>
+      </article>
+
+      <article class="card" data-q="4">
+        <div class="cardTop"><span class="num">04</span><span class="skill">КООРДИНАТНЫЙ ЛУЧ</span></div>
+        <h2>Начертите координатный луч, единичный отрезок которого равен 1 см. Отметьте на этом луче точки T(9), K(3). Запишите длину отрезка TK и координату точки C, если известно, что C — середина отрезка TK.</h2>
+        <div class="rayPanel">
+          <div class="rayCaption"><b>Работа на луче</b><span>Нажми на нужные деления, чтобы отметить T, K и C.</span></div>
+          <svg id="ray" viewBox="0 0 760 135">
+            <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L0 6L9 3z"/></marker></defs>
+            <line x1="50" y1="65" x2="720" y2="65" class="axis" marker-end="url(#arr)"/>
+            <g id="ticks"></g><g id="marks"></g>
+          </svg>
+        </div>
+        <div class="twoInputs">
+          <label><span>Длина отрезка TK</span><div><input id="len4" inputmode="numeric"><b>см</b></div></label>
+          <label><span>Координата точки C</span><input id="c4" inputmode="numeric"></label>
+        </div>
+        <div class="cardFoot"><button class="hintBtn" data-h="4">⌇ Подсказка Скрепки</button><div class="feedback"></div></div>
+      </article>
+
+      <article class="card" data-q="5">
+        <div class="cardTop"><span class="num">05</span><span class="skill">РЕШАЕМ ЗАДАЧУ</span></div>
+        <h2><strong>Решите задачу.</strong><br>За три дня Катя прочитала 150 страниц, причём за первые два дня ею было прочитано 97 страниц. Сколько страниц прочитала Катя в каждый из трёх дней, если во второй день она прочитала на 7 страниц больше, чем в третий?</h2>
+        <div class="days">
+          <label><small>1-Й ДЕНЬ</small><input id="a5" inputmode="numeric"><span>стр.</span></label>
+          <label><small>2-Й ДЕНЬ</small><input id="b5" inputmode="numeric"><span>стр.</span></label>
+          <label><small>3-Й ДЕНЬ</small><input id="c5" inputmode="numeric"><span>стр.</span></label>
+        </div>
+        <div class="cardFoot"><button class="hintBtn" data-h="5">⌇ Подсказка Скрепки</button><div class="feedback"></div></div>
+      </article>
+
+      <section class="finish">
+        <div><span class="finishTag">ГОТОВО?</span><h2>Проверяем работу.</h2><p>Можно вернуться к любому заданию и исправить ответ.</p></div>
+        <button id="check">Проверить работу <span>→</span></button>
+      </section>
+      <section id="result" class="result"></section>
+      <button id="reset" class="reset">Начать работу заново</button>
+    </div>
+  </div>
+</main>
+
+<div id="hintModal" class="modal" aria-hidden="true">
+  <div class="modalCard">
+    <button id="closeHint" class="close">×</button>
+    <div class="modalClip">⌇</div>
+    <div><small>СКРЕПКА • ПОДСКАЗКА</small><h3 id="hintTitle">Задание</h3><p id="hintText"></p></div>
+  </div>
+</div>
+<script>const $=s=>document.querySelector(s), clean=s=>$(s).value.replace(/\s/g,"").trim();
+const hints={
+1:"Разбей запись числа на классы: миллионы, тысячи, единицы. В каждом классе, кроме первого, должно быть по три цифры.",
+2:"Сначала сравни количество цифр. Если оно одинаково — двигайся слева направо до первой различающейся цифры.",
+3:"Округляем до сотен — значит, решение принимает цифра десятков.",
+4:"Отметь концы отрезка по их координатам. Длина показывает расстояние между ними, а середина делит это расстояние пополам.",
+5:"Сначала найди, сколько страниц пришлось на третий день. После этого условие про второй день даст ещё одно известное число."
+};
+const modal=$("#hintModal");
+document.querySelectorAll(".hintBtn").forEach(b=>b.onclick=()=>{let n=b.dataset.h;$("#hintTitle").textContent="Задание "+n;$("#hintText").textContent=hints[n];modal.classList.add("open");modal.setAttribute("aria-hidden","false")});
+$("#closeHint").onclick=()=>{modal.classList.remove("open");modal.setAttribute("aria-hidden","true")};modal.onclick=e=>{if(e.target===modal)$("#closeHint").click()};
+document.querySelectorAll(".step").forEach(b=>b.onclick=()=>{document.querySelector(`[data-q="${b.dataset.go}"]`).scrollIntoView({behavior:"smooth"});document.querySelectorAll(".step").forEach(x=>x.classList.remove("active"));b.classList.add("active")});
+
+const ticks=$("#ticks"),marks=$("#marks"),chosen=new Set();
+for(let n=0;n<=10;n++){let x=55+n*62;ticks.insertAdjacentHTML("beforeend",`<line x1="${x}" y1="56" x2="${x}" y2="74" class="tick"/><text x="${x}" y="99" text-anchor="middle" class="nlabel">${n}</text><rect x="${x-20}" y="37" width="40" height="65" class="hit" data-n="${n}"/>`)}
+function draw(){marks.innerHTML="";[...chosen].sort((a,b)=>a-b).forEach(n=>{let x=55+n*62,label=n===9?"T":n===3?"K":n===6?"C":"•";marks.insertAdjacentHTML("beforeend",`<circle cx="${x}" cy="65" r="6" class="point"/><text x="${x}" y="39" text-anchor="middle" class="plabel">${label}</text>`)})}
+ticks.querySelectorAll(".hit").forEach(e=>e.onclick=()=>{let n=+e.dataset.n;chosen.has(n)?chosen.delete(n):chosen.add(n);draw()});
+function feedback(n,ok,msg){let e=document.querySelector(`[data-q="${n}"] .feedback`);e.className="feedback "+(ok?"ok":"bad");e.textContent=msg}
+$("#check").onclick=()=>{let score=0;
+let q1=document.querySelector('input[name=q1]:checked')?.value==="c";feedback(1,q1,q1?"✓ Выполнено":"Проверь запись числа по классам.");score+=q1;
+let q2=$("#a2").value===">"&&$("#b2").value==="<";feedback(2,q2,q2?"✓ Выполнено":"Проверь оба сравнения.");score+=q2;
+let q3=clean("#a3")==="8300"&&clean("#b3")==="2300"&&clean("#c3")==="7000";feedback(3,q3,q3?"✓ Выполнено":"Проверь округление каждого числа.");score+=q3;
+let q4=chosen.size===3&&chosen.has(3)&&chosen.has(6)&&chosen.has(9)&&clean("#len4")==="6"&&clean("#c4")==="6";feedback(4,q4,q4?"✓ Выполнено":"Проверь точки на луче, длину TK и координату C.");score+=q4;
+let q5=clean("#a5")==="37"&&clean("#b5")==="60"&&clean("#c5")==="53";feedback(5,q5,q5?"✓ Выполнено":"Проверь, выполняются ли оба условия задачи.");score+=q5;
+$("#progressTop").textContent=score+" / 5";let r=$("#result");r.classList.add("show");r.innerHTML=`<div class="score">${score} / 5</div><b>${score===5?"Все задания выполнены верно.":score>=3?"Хорошая основа. Проверь отмеченные задания.":"Вернись к заданиям с пометками и воспользуйся подсказками."}</b>`;
+r.scrollIntoView({behavior:"smooth",block:"center"});
+};
+$("#reset").onclick=()=>{document.querySelectorAll("input").forEach(e=>e.type==="radio"?e.checked=false:e.value="");document.querySelectorAll("select").forEach(e=>e.value="");document.querySelectorAll(".feedback").forEach(e=>{e.textContent="";e.className="feedback"});chosen.clear();draw();$("#result").classList.remove("show");$("#result").innerHTML="";$("#progressTop").textContent="0 / 5";scrollTo({top:0,behavior:"smooth"})};</script>
+</body></html>
