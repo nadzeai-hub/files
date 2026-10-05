@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Лаборатория вычислений — 5 станций</title>
+  <style>
+    :root{--bg1:#0e2347;--bg2:#173d70;--panel:#f7fbff;--card:#ffffff;--ink:#152033;--muted:#5d6b82;--line:#cbd8ea;--blue:#1f62a5;--cyan:#dff4ff;--green:#2b8756;--green2:#eaf7ef;--red:#b13f3f;--red2:#fff0f0;--yellow:#fff2bf;--violet:#efe8ff;--shadow:0 18px 42px rgba(15,35,70,.18)}
+    *{box-sizing:border-box}body{margin:0;font:17px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 0,#365f9d 0,#122e58 30%,#eef4fb 31%,#f5f8fc 100%)}
+    .wrap{max-width:1120px;margin:0 auto;padding:22px 16px 42px}.hero{position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(135deg,#122c58,#1d5c94 55%,#253b76);color:#fff;box-shadow:var(--shadow);padding:26px;border:1px solid rgba(255,255,255,.25)}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center}.kicker{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:8px 12px;font-weight:800}.hero h1{font-size:clamp(32px,5vw,56px);line-height:1.03;margin:14px 0 12px}.hero p{color:#dbeaff;margin:0;max-width:650px}.startbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:1px solid #adc4df;background:#fff;color:#173b6c;border-radius:999px;padding:12px 17px;font-weight:900;cursor:pointer;min-height:46px}.btn.primary{background:#ffd65f;color:#173b6c;border-color:#ffd65f}.btn.dark{background:#173b6c;color:#fff;border-color:#173b6c}.btn:disabled{opacity:.45;cursor:not-allowed}.lab-visual{min-height:260px;border-radius:24px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);position:relative;overflow:hidden}.lab-visual svg{width:100%;height:100%;min-height:260px;display:block}.dashboard{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:18px}.map,.meter,.game-card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.map{padding:16px}.map h2,.meter h2{font-size:19px;color:#173b6c;margin:0 0 12px}.route{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.node{min-height:86px;border:1px solid #d7e1ef;border-radius:18px;background:#fafdff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;font-size:12px;font-weight:800;color:#526278}.node .num{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#e8f2ff;color:#173b6c;margin-bottom:6px}.node.active{border-color:#1f62a5;background:#eaf3ff;box-shadow:0 0 0 3px rgba(31,98,165,.13);color:#173b6c}.node.done{background:#eaf7ef;border-color:#95caa7}.node.done .num{background:#2b8756;color:white}.meter{padding:16px}.energy{height:16px;border-radius:999px;background:#e6edf7;border:1px solid #cfd9e8;overflow:hidden}.energy span{display:block;height:100%;width:0;background:linear-gradient(90deg,#71b7ff,#9bd59b,#ffd65f);transition:.35s width ease}.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.pill{border:1px solid #d2deed;background:#fafdff;border-radius:999px;padding:8px 12px;font-weight:900;color:#173b6c}.game-card{padding:24px;margin-top:18px;min-height:430px}.screen-title{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}.icon{width:64px;height:64px;flex:0 0 auto}.station{display:none}.station.active{display:block}.station h2{font-size:28px;color:#173b6c;margin:0 0 6px}.story{margin:0;color:#526278}.terminal{border:1px solid #dbe4f0;border-radius:22px;background:linear-gradient(180deg,#fbfdff,#f5f8fe);padding:18px;margin-top:16px}.math{font-size:24px;font-weight:950;color:#122c58;letter-spacing:.2px}.options{display:grid;gap:10px;margin-top:14px}.option{min-height:50px;border:1.6px solid #cfd9e8;background:#fff;border-radius:16px;padding:13px 14px;text-align:left;font:inherit;cursor:pointer}.option:hover{border-color:#78aee5}.option.selected{border-color:#1f62a5;background:#eaf3ff}.option.good{border-color:#2b8756;background:var(--green2)}.option.bad{border-color:#b13f3f;background:var(--red2)}.inputs{display:grid;gap:12px;margin-top:14px}.field{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.field label{font-weight:900;color:#173b6c}.field input{font:inherit;font-size:18px;padding:11px 12px;border:1.5px solid #bcc9db;border-radius:13px;min-width:140px;background:#fff}.scheme{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mini{border:1px solid #d9e3f0;border-radius:16px;background:#fff;padding:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.feedback{display:none;margin-top:14px;border-radius:16px;padding:12px 14px;font-weight:850}.feedback.ok{display:block;color:var(--green);background:var(--green2);border:1px solid #b8d9c4}.feedback.no{display:block;color:var(--red);background:var(--red2);border:1px solid #efb7b7}.final{display:none;text-align:center;padding:28px 14px}.final.active{display:block}.scorebig{font-size:62px;font-weight:950;color:#173b6c}.launch{font-size:44px;margin-bottom:10px}.hidden{display:none!important}
+    @media(max-width:820px){.hero-grid,.dashboard,.scheme{grid-template-columns:1fr}.route{grid-template-columns:repeat(2,1fr)}.game-card{padding:18px}.station h2{font-size:24px}.math{font-size:21px}}
+    @media(max-width:440px){.route{grid-template-columns:1fr}.screen-title{display:block}.icon{margin-bottom:8px}.field input{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">⚙️ Миссия 5 класса</div>
+          <h1>Лаборатория вычислений</h1>
+          <p>Главный вычислительный модуль остановился. Чтобы запустить систему, нужно пройти 5 станций: правило, удобная сумма, неизвестные компоненты, задача и изменение суммы.</p>
+          <div class="startbar"><button class="btn primary" id="startBtn" type="button">Начать миссию</button><button class="btn" id="restartTop" type="button">Сбросить</button></div>
+        </div>
+        <div class="lab-visual" aria-hidden="true">
+          <svg viewBox="0 0 520 320">
+            <defs><linearGradient id="g1" x1="0" x2="1"><stop stop-color="#9fd4ff"/><stop offset="1" stop-color="#9bd59b"/></linearGradient></defs>
+            <rect x="42" y="92" width="330" height="174" rx="28" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.55)"/>
+            <rect x="72" y="122" width="138" height="26" rx="13" fill="#9bd59b"/><rect x="72" y="164" width="210" height="26" rx="13" fill="#ffd65f"/><rect x="72" y="206" width="170" height="26" rx="13" fill="#9fd4ff"/>
+            <circle cx="395" cy="105" r="44" fill="#ffd65f"/><circle cx="395" cy="105" r="19" fill="#173b6c" opacity=".8"/>
+            <path d="M378 145 C342 177 352 229 392 250" fill="none" stroke="white" stroke-width="16" stroke-linecap="round" opacity=".92"/>
+            <path d="M384 151 C360 178 368 218 398 236" fill="none" stroke="#173b6c" stroke-width="6" stroke-linecap="round" opacity=".72"/>
+            <path d="M335 74 L356 48 L388 64" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="112" cy="74" r="9" fill="#9bd59b"/><circle cx="150" cy="74" r="9" fill="#ffd65f"/><circle cx="188" cy="74" r="9" fill="#9fd4ff"/>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <section class="dashboard">
+      <div class="map"><h2>Карта станций</h2><div class="route" id="route"></div></div>
+      <div class="meter"><h2>Энергия лаборатории</h2><div class="energy"><span id="energy"></span></div><div class="stats"><span class="pill" id="where">Станция 1 / 5</span><span class="pill" id="score">Баллы: 0</span></div></div>
+    </section>
+
+    <main class="game-card" id="game">
+      <section class="station active" data-station="0">
+        <div class="screen-title"><svg class="icon" viewBox="0 0 80 80"><rect x="11" y="12" width="58" height="56" rx="14" fill="#edf5ff" stroke="#8ab4f8"/><path d="M25 33h30M25 45h30" stroke="#173b6c" stroke-width="5" stroke-linecap="round"/><circle cx="26" cy="58" r="4" fill="#9bd59b"/></svg><div><h2>Станция 1. Модуль правил</h2><p class="story">Система просит восстановить правило. Выберите верное утверждение.</p></div></div>
+        <div class="terminal"><b>Чтобы найти неизвестное уменьшаемое, надо:</b><div class="options" data-choice="rule"><button class="option" type="button" data-value="a">а) из разности вычесть вычитаемое;</button><button class="option" type="button" data-value="b">б) из вычитаемого вычесть разность;</button><button class="option" type="button" data-value="c">в) к разности прибавить вычитаемое.</button></div></div>
+        <div class="actions"><button class="btn dark" data-check="0" type="button">Проверить станцию</button><button class="btn" data-next type="button" disabled>Следующая станция</button></div><div class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="station" data-station="1">
+        <div class="screen-title"><svg class="icon" viewBox="0 0 80 80"><rect x="12" y="16" width="56" height="48" rx="14" fill="#eef8ee" stroke="#9bd59b"/><path d="M23 40h34M40 23v34" stroke="#25744d" stroke-width="7" stroke-linecap="round"/></svg><div><h2>Станция 2. Удобная сумма</h2><p class="story">Найдите удобную пару и введите итог вычисления.</p></div></div>
+        <div class="terminal"><div class="math">8073 + 11 300 + 627</div><div class="options" data-choice="pair"><button class="option" type="button" data-value="8073+627">8073 + 627</button><button class="option" type="button" data-value="11300+627">11 300 + 627</button><button class="option" type="button" data-value="8073+11300">8073 + 11 300</button></div><div class="inputs"><div class="field"><label for="sumAnswer">Итог:</label><input id="sumAnswer" inputmode="numeric" autocomplete="off" placeholder="ответ"></div></div></div>
+        <div class="actions"><button class="btn dark" data-check="1" type="button">Проверить станцию</button><button class="btn" data-next type="button" disabled>Следующая станция</button></div><div class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="station" data-station="2">
+        <div class="screen-title"><svg class="icon" viewBox="0 0 80 80"><rect x="12" y="12" width="56" height="56" rx="18" fill="#fff7da" stroke="#e0c15a"/><text x="25" y="50" font-size="34" font-weight="900" fill="#173b6c">x</text></svg><div><h2>Станция 3. Неизвестные компоненты</h2><p class="story">Два неизвестных элемента мешают лаборатории завершить расчёт.</p></div></div>
+        <div class="terminal"><div class="scheme"><div class="mini"><div class="math">2034 − n = 158</div><div class="field"><label for="nAnswer">n =</label><input id="nAnswer" inputmode="numeric" autocomplete="off" placeholder="ответ"></div></div><div class="mini"><div class="math">c − 407 = 1093</div><div class="field"><label for="cAnswer">c =</label><input id="cAnswer" inputmode="numeric" autocomplete="off" placeholder="ответ"></div></div></div></div>
+        <div class="actions"><button class="btn dark" data-check="2" type="button">Проверить станцию</button><button class="btn" data-next type="button" disabled>Следующая станция</button></div><div class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="station" data-station="3">
+        <div class="screen-title"><svg class="icon" viewBox="0 0 80 80"><rect x="10" y="18" width="60" height="44" rx="10" fill="#efe8ff" stroke="#bda7f2"/><path d="M24 51h32M24 39h20M24 28h28" stroke="#173b6c" stroke-width="5" stroke-linecap="round"/></svg><div><h2>Станция 4. Аналитический отдел</h2><p class="story">Решите задачу на сумму и разность, чтобы восстановить базу данных.</p></div></div>
+        <div class="terminal"><p>В четвёртых и пятых классах школы 240 учащихся, причём в пятых классах на 24 ученика меньше. Сколько учащихся в четвёртых и пятых классах в отдельности?</p><div class="options" data-choice="step"><button class="option" type="button" data-value="minus">Сначала 240 − 24</button><button class="option" type="button" data-value="plus">Сначала 240 + 24</button><button class="option" type="button" data-value="divide">Сначала 240 : 2</button></div><div class="inputs"><div class="field"><label for="fifthAnswer">В пятых:</label><input id="fifthAnswer" inputmode="numeric" autocomplete="off" placeholder="ответ"></div><div class="field"><label for="fourthAnswer">В четвёртых:</label><input id="fourthAnswer" inputmode="numeric" autocomplete="off" placeholder="ответ"></div></div></div>
+        <div class="actions"><button class="btn dark" data-check="3" type="button">Проверить станцию</button><button class="btn" data-next type="button" disabled>Следующая станция</button></div><div class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="station" data-station="4">
+        <div class="screen-title"><svg class="icon" viewBox="0 0 80 80"><circle cx="40" cy="40" r="29" fill="#fff2bf" stroke="#e0c15a"/><path d="M40 22v20l14 8" fill="none" stroke="#173b6c" stroke-width="6" stroke-linecap="round"/></svg><div><h2>Станция 5. Регулятор суммы</h2><p class="story">Настройте последнее слагаемое так, чтобы система получила нужное изменение.</p></div></div>
+        <div class="terminal"><p>Одно слагаемое увеличили на 148. Как нужно изменить второе слагаемое, чтобы сумма уменьшилась на 352?</p><div class="options" data-choice="change"><button class="option" type="button" data-value="plus204">увеличить на 204</button><button class="option" type="button" data-value="minus204">уменьшить на 204</button><button class="option" type="button" data-value="plus500">увеличить на 500</button><button class="option" type="button" data-value="minus500">уменьшить на 500</button></div></div>
+        <div class="actions"><button class="btn dark" data-check="4" type="button">Проверить станцию</button><button class="btn primary" id="finishBtn" type="button" disabled>Запустить лабораторию</button></div><div class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section class="final" id="final"><div class="launch">🚀</div><h2>Лаборатория запущена!</h2><div class="scorebig" id="finalScore">0 / 5</div><p id="finalText">Результат появится здесь.</p><button class="btn dark" id="restartFinal" type="button">Пройти ещё раз</button></section>
+    </main>
+  </div>
+
+  <script>
+  const root=document;
+  const names=['Правило','Удобная сумма','Компоненты','Задача','Регулятор'];
+  const route=root.getElementById('route');
+  const stations=[...root.querySelectorAll('.station')];
+  const energy=root.getElementById('energy');
+  const where=root.getElementById('where');
+  const scoreEl=root.getElementById('score');
+  const final=root.getElementById('final');
+  const finalScore=root.getElementById('finalScore');
+  const finalText=root.getElementById('finalText');
+  let current=0, score=0, solved=[false,false,false,false,false];
+  route.innerHTML=names.map((n,i)=>`<div class="node ${i===0?'active':''}" data-node="${i}"><span class="num">${i+1}</span>${n}</div>`).join('');
+  function digits(v){return String(v||'').replace(/\s+/g,'').replace(',', '.');}
+  function chosen(name){const b=root.querySelector(`[data-choice="${name}"] .option.selected`);return b?b.dataset.value:null;}
+  root.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',()=>{const box=btn.closest('.options');box.querySelectorAll('.option').forEach(b=>b.classList.remove('selected','good','bad'));btn.classList.add('selected');}));
+  function setFeedback(section, ok, text){const f=section.querySelector('.feedback');f.className='feedback '+(ok?'ok':'no');f.textContent=text;}
+  function markChoice(name, correct){const box=root.querySelector(`[data-choice="${name}"]`);if(!box)return;box.querySelectorAll('.option').forEach(b=>{b.classList.remove('good','bad');if(b.dataset.value===correct)b.classList.add('good');else if(b.classList.contains('selected'))b.classList.add('bad');});}
+  function check(i){const sec=stations[i];let ok=false; if(i===0){ok=chosen('rule')==='c';markChoice('rule','c');}
+    if(i===1){ok=chosen('pair')==='8073+627' && digits(root.getElementById('sumAnswer').value)==='20000';markChoice('pair','8073+627');}
+    if(i===2){ok=digits(root.getElementById('nAnswer').value)==='1876' && digits(root.getElementById('cAnswer').value)==='1500';}
+    if(i===3){ok=chosen('step')==='minus' && digits(root.getElementById('fifthAnswer').value)==='108' && digits(root.getElementById('fourthAnswer').value)==='132';markChoice('step','minus');}
+    if(i===4){ok=chosen('change')==='minus500';markChoice('change','minus500');}
+    if(ok && !solved[i]){solved[i]=true;score++;}
+    setFeedback(sec,ok, ok?'Модуль включён. Станция пройдена.':'Есть ошибка. Проверьте ответ и попробуйте ещё раз.');
+    const next=sec.querySelector('[data-next]'); if(next) next.disabled=!ok; if(i===4) root.getElementById('finishBtn').disabled=!ok; update();}
+  function update(){scoreEl.textContent='Баллы: '+score; where.textContent=current<5?'Станция '+(current+1)+' / 5':'Финал'; energy.style.width=(score*20)+'%'; root.querySelectorAll('.node').forEach((n,i)=>{n.classList.toggle('active',i===current);n.classList.toggle('done',solved[i]);});}
+  function go(i){current=i;stations.forEach((s,idx)=>s.classList.toggle('active',idx===i));final.classList.remove('active');update();root.getElementById('game').scrollIntoView({behavior:'smooth',block:'start'});}
+  function finish(){stations.forEach(s=>s.classList.remove('active'));current=5;final.classList.add('active');finalScore.textContent=score+' / 5';finalText.textContent=score===5?'Отлично: все модули восстановлены без ошибок.':'Лаборатория запущена, но часть модулей требует повторной проверки.';update();}
+  function restart(){current=0;score=0;solved=[false,false,false,false,false];root.querySelectorAll('input').forEach(i=>i.value='');root.querySelectorAll('.option').forEach(b=>b.classList.remove('selected','good','bad'));root.querySelectorAll('.feedback').forEach(f=>{f.className='feedback';f.textContent='';});root.querySelectorAll('[data-next]').forEach(b=>b.disabled=true);root.getElementById('finishBtn').disabled=true;go(0);}
+  root.querySelectorAll('[data-check]').forEach(b=>b.addEventListener('click',()=>check(Number(b.dataset.check))));
+  root.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>go(Math.min(current+1,4))));
+  root.getElementById('finishBtn').addEventListener('click',finish);root.getElementById('startBtn').addEventListener('click',()=>go(0));root.getElementById('restartTop').addEventListener('click',restart);root.getElementById('restartFinal').addEventListener('click',restart);update();
+  </script>
+</body>
+</html>
