@@ -5,35 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Самостоятельная работа №3 — сложение и вычитание натуральных чисел</title>
   <style>
-    :root{--ink:#1d2433;--muted:#5c667a;--line:#cfd7e6;--blue:#2f6fb2;--green-soft:#f0f7ef;--yellow:#fff6d8;--paper:#fff;--shadow:0 10px 30px rgba(31,52,84,.08)}
-    *{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.wrap{max-width:1120px;margin:0 auto;padding:24px 16px 40px}header{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}header:before{content:"";position:absolute;inset:0 0 auto 0;height:8px;background:linear-gradient(90deg,#7cb7e8,#a8d5a3,#ffd76b)}h1{margin:4px 0 6px;font-size:clamp(25px,4vw,38px);line-height:1.08;color:#15396a}.subtitle{margin:0;color:var(--muted)}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 0}button{border:1px solid #adc4df;background:#fff;color:#173b6c;border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(21,57,106,.07)}button.active{background:#173b6c;color:#fff;border-color:#173b6c}.note{display:flex;gap:12px;align-items:center;background:var(--yellow);border:1px solid #e6c45f;border-radius:16px;margin:18px 0 0;padding:12px 14px;color:#26354e}.clip{width:42px;height:42px;flex:0 0 auto}main{margin-top:18px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.work{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);min-height:780px;break-inside:avoid}.work h2{margin:0 0 14px;font-size:24px;color:#173b6c;display:flex;align-items:center;gap:10px}.badge{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;border-radius:999px;background:#e6f0fb;color:#173b6c;font-weight:800;border:1px solid #b9d2ee}.task{border-top:1px dashed #c9d4e4;padding-top:14px;margin-top:14px}.task:first-of-type{border-top:0;padding-top:0}.task-title{font-weight:800;color:#1f385e;margin-bottom:8px}.variants{display:grid;gap:7px;margin:8px 0 0;padding-left:0;list-style:none}.variants li{padding:7px 10px;border:1px solid #dbe3ef;border-radius:10px;background:#fbfdff}.answer-line{display:inline-block;border-bottom:2px solid #95a4b8;min-width:160px;height:1.25em;vertical-align:baseline}.math{font-weight:750;font-size:18px;letter-spacing:.2px}textarea{width:100%;border:1.5px solid #ccd7e5;border-radius:12px;background:#fff;padding:10px 12px;font:16px/1.35 inherit;min-height:44px;resize:vertical}textarea.big{min-height:110px}.mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px}.solve{background:#f9fbfe;border:1px solid #d8e1ee;border-radius:14px;padding:10px;margin-top:9px}.helper{background:var(--green-soft);border:1px solid #bed7be;border-radius:14px;padding:10px 12px;margin-top:10px;color:#31503a;font-size:14px}.hidden{display:none!important}.four .work{min-height:680px;padding:18px}.four .work h2{font-size:21px}.four .task{margin-top:10px;padding-top:10px}.four textarea.big{min-height:82px}footer{margin:18px 0 0;color:#6a7280;font-size:13px;text-align:center}@media(max-width:860px){.grid{grid-template-columns:1fr}.work{min-height:auto}}@media print{body{background:#fff;font-size:14px}.wrap{max-width:none;padding:0}.toolbar,.note,footer{display:none}header{box-shadow:none;border:0;padding:0 0 8mm}.grid{display:block}.work{box-shadow:none;border:1px solid #aaa;border-radius:0;margin:0 0 10mm;padding:12mm;min-height:auto;page-break-after:always}.work:last-child{page-break-after:auto}textarea{border:1px solid #999;min-height:36px}.task{break-inside:avoid}.hidden{display:none!important}}
+    :root{
+      --ink:#1d2433;--muted:#667085;--line:#cfd7e6;--blue:#255f9f;--blue-soft:#eef5ff;
+      --green:#18794e;--green-soft:#edf8f1;--red:#b42318;--red-soft:#fff1f0;--paper:#fff;
+      --shadow:0 10px 28px rgba(31,52,84,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:#f5f7fb;color:var(--ink);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+    .wrap{max-width:880px;margin:0 auto;padding:24px 16px 40px}
+    header{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    header:before{content:"";position:absolute;inset:0 0 auto 0;height:7px;background:linear-gradient(90deg,#77b8e8,#a8d5a3,#ffd76b)}
+    h1{margin:4px 0 6px;font-size:clamp(26px,4vw,36px);line-height:1.08;color:#15396a}
+    .subtitle{margin:0;color:var(--muted)}
+    .topbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    button{border:1px solid #adc4df;background:#fff;color:#173b6c;border-radius:999px;padding:10px 14px;font-weight:750;cursor:pointer;box-shadow:0 2px 8px rgba(21,57,106,.07)}
+    button:hover{background:#f0f6ff}
+    .work{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow);margin-top:18px}
+    .task{border-top:1px dashed #c9d4e4;padding-top:18px;margin-top:18px}
+    .task:first-child{border-top:0;padding-top:0;margin-top:0}
+    .task-title{font-weight:850;color:#1f385e;margin-bottom:10px;font-size:19px}
+    .math{font-weight:780;font-size:21px;letter-spacing:.2px;color:#172b4d}
+    .variants{display:grid;gap:8px;margin:10px 0 12px;padding-left:0;list-style:none}
+    .choice{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid #dbe3ef;border-radius:12px;background:#fbfdff;cursor:pointer}
+    .choice input{margin-top:4px;transform:scale(1.15)}
+    .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:10px}
+    input[type="text"], input[type="number"], select{border:1.5px solid #ccd7e5;border-radius:12px;background:#fff;padding:10px 12px;font:17px/1.2 inherit;min-width:150px}
+    input.small{width:130px;min-width:130px}
+    select{min-width:190px}
+    .check{background:#173b6c;color:#fff;border-color:#173b6c}
+    .result{margin-top:10px;border-radius:12px;padding:10px 12px;font-weight:750;display:none}
+    .result.ok{display:block;background:var(--green-soft);border:1px solid #a6d8b8;color:var(--green)}
+    .result.bad{display:block;background:var(--red-soft);border:1px solid #ffc9c4;color:var(--red)}
+    .result.neutral{display:block;background:#f2f4f7;border:1px solid #d0d5dd;color:#344054}
+    .answer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:10px}
+    .mini{border:1px solid #dbe3ef;border-radius:14px;background:#fbfdff;padding:12px}
+    .label{font-size:14px;color:var(--muted);margin-bottom:6px}
+    @media(max-width:700px){.answer-grid{grid-template-columns:1fr}.work{padding:18px}body{font-size:16px}}
+    @media print{body{background:#fff}.wrap{padding:0;max-width:none}header{box-shadow:none;border:0;border-radius:0}.topbar,button.check{display:none}.work{box-shadow:none;border:1px solid #aaa;border-radius:0;margin:0;padding:12mm}.result{display:none!important}input,select{border:1px solid #999}}
   </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>Самостоятельная работа №3</h1>
-    <p class="subtitle">Глава 1, § 8. Сложение и вычитание натуральных чисел</p>
-    <div class="toolbar" aria-label="Режим показа">
-      <button id="btn-v1" class="active" onclick="setMode('v1')">Вариант 1</button>
-      <button id="btn-v2" onclick="setMode('v2')">Вариант 2</button>
-      <button id="btn-four" onclick="setMode('four')">4 ученика</button>
+    <p class="subtitle">Глава 1, § 8. Сложение и вычитание натуральных чисел. Один вариант, быстрая проверка.</p>
+    <div class="topbar">
+      <button onclick="resetAll()">Очистить ответы</button>
       <button onclick="window.print()">Печать / PDF</button>
     </div>
-    <div class="note">
-      <svg class="clip" viewBox="0 0 64 64" aria-hidden="true"><path d="M31 8c-9 0-15 7-15 16v24c0 8 6 14 14 14s14-6 14-14V23c0-6-4-10-10-10s-10 4-10 10v24c0 3 2 6 6 6s6-3 6-6V25" fill="none" stroke="#6f7fc8" stroke-width="5" stroke-linecap="round"/><circle cx="27" cy="27" r="2.3" fill="#203864"/><circle cx="38" cy="27" r="2.3" fill="#203864"/><path d="M27 38q5 5 11 0" fill="none" stroke="#203864" stroke-width="2" stroke-linecap="round"/></svg>
-      <div><b>Формат:</b> можно открыть на онлайн-доске, вписывать ответы прямо в поля или распечатать.</div>
-    </div>
   </header>
-  <main><section id="single" class="grid"><article class="work variant v1"></article><article class="work variant v2 hidden"></article></section><section id="four" class="grid four hidden"></section></main>
-  <footer>Материал подготовлен для учебной группы 5 класса.</footer>
+
+  <main class="work">
+    <section class="task" id="task1">
+      <div class="task-title">1. Выберите верное утверждение.</div>
+      <div>Чтобы найти неизвестное уменьшаемое, надо:</div>
+      <ul class="variants">
+        <li><label class="choice"><input type="radio" name="q1" value="a"> <span>а) из разности вычесть вычитаемое;</span></label></li>
+        <li><label class="choice"><input type="radio" name="q1" value="b"> <span>б) из вычитаемого вычесть разность;</span></label></li>
+        <li><label class="choice"><input type="radio" name="q1" value="c"> <span>в) к разности прибавить вычитаемое.</span></label></li>
+      </ul>
+      <button class="check" onclick="checkRadio('q1','c','r1')">Проверить</button>
+      <div id="r1" class="result"></div>
+    </section>
+
+    <section class="task" id="task2">
+      <div class="task-title">2. Вычислите, применяя законы сложения.</div>
+      <div class="math">8073 + 11 300 + 627 =</div>
+      <div class="row">
+        <input id="q2" type="text" inputmode="numeric" placeholder="Ответ">
+        <button class="check" onclick="checkNumber('q2',20000,'r2')">Проверить</button>
+      </div>
+      <div id="r2" class="result"></div>
+    </section>
+
+    <section class="task" id="task3">
+      <div class="task-title">3. Найдите неизвестный компонент действия.</div>
+      <div class="answer-grid">
+        <div class="mini">
+          <div class="math">а) 2034 − n = 158</div>
+          <div class="row"><span class="label">n =</span><input id="q3a" class="small" type="text" inputmode="numeric" placeholder="Ответ"></div>
+        </div>
+        <div class="mini">
+          <div class="math">б) c − 407 = 1093</div>
+          <div class="row"><span class="label">c =</span><input id="q3b" class="small" type="text" inputmode="numeric" placeholder="Ответ"></div>
+        </div>
+      </div>
+      <div class="row"><button class="check" onclick="checkPair('q3a',1876,'q3b',1500,'r3')">Проверить</button></div>
+      <div id="r3" class="result"></div>
+    </section>
+
+    <section class="task" id="task4">
+      <div class="task-title">4. Решите задачу.</div>
+      <div>В четвёртых и пятых классах школы 240 учащихся, причём в пятых классах на 24 ученика меньше. Сколько учащихся в четвёртых и пятых классах в отдельности?</div>
+      <div class="answer-grid">
+        <div class="mini">
+          <div class="label">В четвёртых классах</div>
+          <input id="q4a" type="text" inputmode="numeric" placeholder="Ответ">
+        </div>
+        <div class="mini">
+          <div class="label">В пятых классах</div>
+          <input id="q4b" type="text" inputmode="numeric" placeholder="Ответ">
+        </div>
+      </div>
+      <div class="row"><button class="check" onclick="checkPair('q4a',132,'q4b',108,'r4')">Проверить</button></div>
+      <div id="r4" class="result"></div>
+    </section>
+
+    <section class="task" id="task5">
+      <div class="task-title">5. Ответ обоснуйте.</div>
+      <div>Одно слагаемое увеличили на 148. Как нужно изменить второе слагаемое, чтобы сумма уменьшилась на 352?</div>
+      <div class="row">
+        <select id="q5action" aria-label="Действие со вторым слагаемым">
+          <option value="">Выберите действие</option>
+          <option value="increase">Увеличить</option>
+          <option value="decrease">Уменьшить</option>
+        </select>
+        <input id="q5num" class="small" type="text" inputmode="numeric" placeholder="На сколько">
+        <button class="check" onclick="checkChange()">Проверить</button>
+      </div>
+      <div id="r5" class="result"></div>
+    </section>
+  </main>
 </div>
+
 <script>
-const data={v1:{title:'Вариант 1',q1:'Чтобы найти неизвестное уменьшаемое, надо:',opts:['а) из разности вычесть вычитаемое;','б) из вычитаемого вычесть разность;','в) к разности прибавить вычитаемое.'],sum:'8073 + 11 300 + 627',unknown:['а) 2034 − n = 158','б) c − 407 = 1093'],problem:'В четвёртых и пятых классах школы 240 учащихся, причём в пятых классах на 24 ученика меньше. Сколько учащихся в четвёртых и пятых классах в отдельности?',change:'Одно слагаемое увеличили на 148. Как нужно изменить второе слагаемое, чтобы сумма уменьшилась на 352? Ответ обоснуйте.'},v2:{title:'Вариант 2',q1:'Чтобы найти неизвестное вычитаемое, надо:',opts:['а) к уменьшаемому прибавить разность;','б) из уменьшаемого вычесть разность;','в) из разности вычесть вычитаемое.'],sum:'5762 + 14 200 + 38',unknown:['а) z − 526 = 2074','б) 2345 − m = 678'],problem:'В двух шкафах 190 книг. В первом на 36 книг больше, чем во втором. Сколько книг в каждом шкафу?',change:'Одно слагаемое уменьшили на 316. Как нужно изменить второе слагаемое, чтобы сумма увеличилась на 208? Ответ обоснуйте.'}};
-function renderCard(v,label){const d=data[v];return `<h2><span class="badge">${label||d.title.replace('Вариант ','')}</span>${d.title}</h2><div class="task"><div class="task-title">1. Выберите верное утверждение.</div><div>${d.q1}</div><ul class="variants">${d.opts.map(o=>`<li>${o}</li>`).join('')}</ul><div class="solve">Ответ: <span class="answer-line"></span></div></div><div class="task"><div class="task-title">2. Вычислите, применяя законы сложения.</div><div class="math">${d.sum} = <span class="answer-line"></span></div><textarea aria-label="Решение задания 2" placeholder="Решение"></textarea></div><div class="task"><div class="task-title">3. Найдите неизвестный компонент действия.</div><div class="mini-grid">${d.unknown.map(u=>`<div><div class="math">${u}</div><textarea aria-label="Решение уравнения" placeholder="Решение"></textarea></div>`).join('')}</div></div><div class="task"><div class="task-title">4. Решите задачу, используя алгоритм решения задач «на сумму и разность».</div><div>${d.problem}</div><div class="helper">Подсказка: сначала убираем разницу, затем делим поровну.</div><textarea class="big" aria-label="Решение задачи" placeholder="Решение"></textarea><div class="solve">Ответ: <span class="answer-line"></span></div></div><div class="task"><div class="task-title">5. Ответ обоснуйте.</div><div>${d.change}</div><textarea class="big" aria-label="Обоснование" placeholder="Ответ и обоснование"></textarea></div>`}
-function init(){document.querySelector('.v1').innerHTML=renderCard('v1');document.querySelector('.v2').innerHTML=renderCard('v2');document.getElementById('four').innerHTML=`<article class="work">${renderCard('v1','1')}</article><article class="work">${renderCard('v2','2')}</article><article class="work">${renderCard('v1','3')}</article><article class="work">${renderCard('v2','4')}</article>`}
-function setMode(mode){['v1','v2','four'].forEach(x=>document.getElementById('btn-'+x).classList.toggle('active',x===mode));document.getElementById('single').classList.toggle('hidden',mode==='four');document.getElementById('four').classList.toggle('hidden',mode!=='four');document.querySelector('.variant.v1').classList.toggle('hidden',mode!=='v1');document.querySelector('.variant.v2').classList.toggle('hidden',mode!=='v2')}
-init();
+function normalizeNumber(value){
+  return String(value||'').replace(/\s+/g,'').replace(',', '.').trim();
+}
+function setResult(id, ok, okText='Верно.', badText='Проверь ещё раз.'){
+  const el=document.getElementById(id);
+  el.className='result '+(ok?'ok':'bad');
+  el.textContent=ok?okText:badText;
+}
+function checkRadio(name, correct, resultId){
+  const chosen=document.querySelector(`input[name="${name}"]:checked`);
+  if(!chosen){const el=document.getElementById(resultId);el.className='result neutral';el.textContent='Выберите вариант ответа.';return;}
+  setResult(resultId, chosen.value===correct);
+}
+function checkNumber(inputId, correct, resultId){
+  const val=Number(normalizeNumber(document.getElementById(inputId).value));
+  setResult(resultId, val===correct);
+}
+function checkPair(id1, ans1, id2, ans2, resultId){
+  const v1=Number(normalizeNumber(document.getElementById(id1).value));
+  const v2=Number(normalizeNumber(document.getElementById(id2).value));
+  setResult(resultId, v1===ans1 && v2===ans2);
+}
+function checkChange(){
+  const action=document.getElementById('q5action').value;
+  const num=Number(normalizeNumber(document.getElementById('q5num').value));
+  setResult('r5', action==='decrease' && num===500, 'Верно.', 'Проверь изменение суммы ещё раз.');
+}
+function resetAll(){
+  document.querySelectorAll('input[type="text"]').forEach(i=>i.value='');
+  document.querySelectorAll('input[type="radio"]').forEach(i=>i.checked=false);
+  document.querySelectorAll('select').forEach(s=>s.value='');
+  document.querySelectorAll('.result').forEach(r=>{r.className='result';r.textContent='';});
+}
 </script>
 </body>
 </html>
