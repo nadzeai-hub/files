@@ -5,15 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>5 станций вычислительной лаборатории</title>
   <style>
-    :root{--ink:#172033;--muted:#61708a;--line:#cfd9e8;--blue:#225a9b;--blue2:#eaf3ff;--green:#1f7a4d;--green2:#ecf8f0;--red:#b84040;--red2:#fff0f0;--yellow:#fff6d8;--card:#fff;--bg:#f5f7fb;--shadow:0 14px 34px rgba(31,52,84,.10)}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.wrap{max-width:980px;margin:0 auto;padding:24px 16px 44px}.top{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:24px;position:relative;overflow:hidden}.top:before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:linear-gradient(90deg,#7cb7e8,#a8d5a3,#ffd76b,#bda7f2)}h1{margin:4px 0 8px;font-size:clamp(27px,4vw,42px);line-height:1.08;color:#15396a}.lead{margin:0;color:var(--muted);max-width:720px}.barbox{margin-top:18px;display:grid;gap:10px}.status{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:8px 12px;font-weight:800;color:#173b6c}.progress{height:12px;border-radius:999px;background:#e5edf8;overflow:hidden;border:1px solid #d5e0ee}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#2d6ab0,#3b8f65);transition:.25s width ease}.board{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:22px}.station{display:none}.station.active{display:block}.station h2{margin:0 0 12px;font-size:25px;color:#173b6c;display:flex;align-items:center;gap:10px}.badge{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:#e6f0fb;border:1px solid #b9d2ee;font-weight:900}.task{border:1px solid #dbe4f0;background:#fbfdff;border-radius:18px;padding:18px;margin:14px 0}.math{font-size:22px;font-weight:850;color:#152f55;letter-spacing:.2px}.options{display:grid;gap:10px;margin-top:12px}.option{border:1.5px solid #cfd9e8;background:#fff;border-radius:14px;padding:13px 14px;text-align:left;font:inherit;cursor:pointer;min-height:48px}.option:hover{border-color:#8ab4f8}.option.selected{border-color:#225a9b;background:#eaf3ff}.option.good{border-color:#2e8b57;background:var(--green2)}.option.bad{border-color:#c84a4a;background:var(--red2)}.inputs{display:grid;gap:12px;margin-top:12px}.field{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.field label{font-weight:800;color:#203864}.field input{font:inherit;font-size:18px;padding:10px 12px;border:1.5px solid #bcc9db;border-radius:12px;min-width:130px;max-width:220px;background:#fff}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid #adc4df;background:#fff;color:#173b6c;border-radius:999px;padding:11px 16px;font-weight:850;cursor:pointer;min-height:44px}.btn.primary{background:#173b6c;color:#fff;border-color:#173b6c}.btn:disabled{opacity:.5;cursor:not-allowed}.feedback{margin-top:14px;border-radius:14px;padding:12px 14px;font-weight:800;display:none}.feedback.ok{display:block;background:var(--green2);color:var(--green);border:1px solid #b8d9c4}.feedback.no{display:block;background:var(--red2);color:var(--red);border:1px solid #efb7b7}.final{display:none;text-align:center;padding:20px}.final.active{display:block}.scorebig{font-size:54px;font-weight:950;color:#173b6c;margin:8px 0}.small{color:var(--muted);font-size:14px}.scheme{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.mini{border:1px solid #d8e3f2;border-radius:14px;background:#fff;padding:12px}@media(max-width:720px){.scheme{grid-template-columns:1fr}.board,.top{padding:17px}.math{font-size:19px}.field input{max-width:100%;width:100%}}@media print{body{background:#fff}.wrap{max-width:none}.actions,.status,.progress{display:none}.top,.board{box-shadow:none;border:1px solid #999}.station{display:block;page-break-inside:avoid;border-top:1px solid #ddd;padding-top:10px;margin-top:10px}.feedback,.final{display:none!important}}
+    :root{
+      --ink:#172033;--muted:#60708a;--line:#cfd9e8;--deep:#173b6c;--blue:#2768a8;--cyan:#dff3ff;--green:#25744d;--green2:#eaf7ef;--red:#b23d3d;--red2:#fff0f0;--yellow:#fff4ce;--violet:#efe9ff;--card:#fff;--bg:#f4f7fb;--shadow:0 18px 42px rgba(31,52,84,.13)
+    }
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0,#e9f5ff 0,#f4f7fb 32%,#f8fafc 100%);color:var(--ink);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.wrap{max-width:1060px;margin:0 auto;padding:24px 16px 44px}.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#ffffff 0,#edf6ff 55%,#f5f0ff 100%);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:24px}.hero:before{content:"";position:absolute;inset:0 0 auto 0;height:9px;background:linear-gradient(90deg,#69aee8,#9bd59b,#ffd65f,#bda7f2)}h1{margin:6px 0 8px;font-size:clamp(28px,4.3vw,46px);line-height:1.05;color:#15396a}.lead{margin:0;color:var(--muted);max-width:760px}.lab-scene{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:center;margin-top:18px}.map{background:rgba(255,255,255,.78);border:1px solid #d8e4f2;border-radius:22px;padding:14px}.map-title{font-weight:900;color:var(--deep);margin:0 0 10px}.route{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.node{min-height:76px;border:1px solid #d7e1ef;border-radius:16px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7px;color:#4f5d72;font-size:12px;font-weight:750;transition:.2s}.node b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e8f2ff;color:var(--deep);margin-bottom:5px}.node.active{border-color:#2d6ab0;box-shadow:0 0 0 3px rgba(45,106,176,.13);color:var(--deep)}.node.done{background:var(--green2);border-color:#9ac7aa}.node.done b{background:#2e8b57;color:#fff}.screen{border:1px solid #bfd3ee;border-radius:24px;background:linear-gradient(160deg,#173b6c,#215a94);min-height:190px;position:relative;overflow:hidden;color:#fff;padding:18px}.screen:before{content:"";position:absolute;inset:auto -20px -40px auto;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.09)}.screen svg{position:absolute;right:8px;bottom:-4px;width:200px;max-width:52%;height:auto}.screen h2{position:relative;margin:0 0 8px;font-size:23px}.screen p{position:relative;margin:0;max-width:310px;color:#dbeaff}.barbox{margin-top:18px;display:grid;gap:10px}.status{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:8px 12px;font-weight:900;color:#173b6c}.progress{height:13px;border-radius:999px;background:#e5edf8;overflow:hidden;border:1px solid #d5e0ee}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#2d6ab0,#3b8f65);transition:.25s width ease}.board{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:24px}.station{display:none}.station.active{display:block}.station h2{margin:0 0 12px;font-size:26px;color:#173b6c;display:flex;align-items:center;gap:10px}.badge{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#e6f0fb;border:1px solid #b9d2ee;font-weight:950}.story{background:linear-gradient(90deg,#fff7d6,#eef7ff);border:1px solid #e7d39a;border-radius:18px;padding:13px 15px;margin:12px 0;color:#26354e}.task{border:1px solid #dbe4f0;background:#fbfdff;border-radius:20px;padding:18px;margin:14px 0}.math{font-size:23px;font-weight:900;color:#152f55;letter-spacing:.2px}.options{display:grid;gap:10px;margin-top:12px}.option{border:1.5px solid #cfd9e8;background:#fff;border-radius:15px;padding:13px 14px;text-align:left;font:inherit;cursor:pointer;min-height:50px}.option:hover{border-color:#8ab4f8}.option.selected{border-color:#225a9b;background:#eaf3ff}.option.good{border-color:#2e8b57;background:var(--green2)}.option.bad{border-color:#c84a4a;background:var(--red2)}.inputs{display:grid;gap:12px;margin-top:12px}.field{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.field label{font-weight:900;color:#203864}.field input{font:inherit;font-size:18px;padding:10px 12px;border:1.5px solid #bcc9db;border-radius:12px;min-width:130px;max-width:230px;background:#fff}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid #adc4df;background:#fff;color:#173b6c;border-radius:999px;padding:11px 16px;font-weight:900;cursor:pointer;min-height:44px}.btn.primary{background:#173b6c;color:#fff;border-color:#173b6c}.btn:disabled{opacity:.5;cursor:not-allowed}.feedback{margin-top:14px;border-radius:15px;padding:12px 14px;font-weight:850;display:none}.feedback.ok{display:block;background:var(--green2);color:var(--green);border:1px solid #b8d9c4}.feedback.no{display:block;background:var(--red2);color:var(--red);border:1px solid #efb7b7}.final{display:none;text-align:center;padding:18px}.final.active{display:block}.scorebig{font-size:58px;font-weight:950;color:#173b6c;margin:8px 0}.scheme{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.mini{border:1px solid #d8e3f2;border-radius:15px;background:#fff;padding:12px}.mission-icon{width:54px;height:54px;flex:0 0 auto}.lab-panel{display:flex;gap:12px;align-items:flex-start}.muted{color:var(--muted);font-size:14px}.confetti{font-size:34px;margin:8px 0}.hidden{display:none!important}@media(max-width:780px){.lab-scene{grid-template-columns:1fr}.route{grid-template-columns:1fr 1fr}.screen{min-height:165px}.scheme{grid-template-columns:1fr}.board,.hero{padding:17px}.math{font-size:19px}.field input{max-width:100%;width:100%}}@media(max-width:430px){.route{grid-template-columns:1fr}.screen svg{opacity:.35}.station h2{font-size:22px}.mission-icon{width:44px;height:44px}}@media print{body{background:#fff}.wrap{max-width:none}.actions,.status,.progress,.map,.screen{display:none}.hero,.board{box-shadow:none;border:1px solid #999}.station{display:block;page-break-inside:avoid;border-top:1px solid #ddd;padding-top:10px;margin-top:10px}.feedback,.final{display:none!important}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header class="top">
+    <header class="hero">
       <h1>5 станций вычислительной лаборатории</h1>
-      <p class="lead">Мини-игра для быстрой проверки знаний по теме «Сложение и вычитание натуральных чисел». Без подсказок: отвечаем, проверяем, переходим дальше.</p>
+      <p class="lead">Полноценная сюжетная мини-игра для проверки знаний по теме «Сложение и вычитание натуральных чисел». Нужно восстановить работу лаборатории, пройдя 5 станций.</p>
+      <div class="lab-scene">
+        <div class="map" aria-label="Карта станций">
+          <p class="map-title">Маршрут лаборатории</p>
+          <div class="route" id="route"></div>
+        </div>
+        <div class="screen">
+          <h2>Система ждёт запуск</h2>
+          <p>Каждый правильный ответ включает один модуль. В конце лаборатория покажет результат.</p>
+          <svg viewBox="0 0 260 220" aria-hidden="true">
+            <rect x="24" y="70" width="190" height="112" rx="18" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.5)"/>
+            <rect x="45" y="92" width="86" height="16" rx="8" fill="#9bd59b"/><rect x="45" y="120" width="130" height="16" rx="8" fill="#ffd65f"/><rect x="45" y="148" width="102" height="16" rx="8" fill="#9fd4ff"/>
+            <circle cx="205" cy="72" r="26" fill="#ffd65f" opacity=".95"/><circle cx="205" cy="72" r="12" fill="#173b6c" opacity=".75"/>
+            <path d="M194 97 C177 116 180 145 201 161" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".9"/>
+            <path d="M199 100 C188 116 190 139 205 151" fill="none" stroke="#173b6c" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+          </svg>
+        </div>
+      </div>
       <div class="barbox">
         <div class="status"><span class="pill" id="where">Станция 1 / 5</span><span class="pill" id="score">Баллы: 0</span></div>
         <div class="progress" aria-label="Прогресс"><span id="progress"></span></div>
@@ -21,130 +40,108 @@
     </header>
 
     <main class="board" id="game">
-      <section class="station active" data-station="1" data-type="mc" data-answer="c">
-        <h2><span class="badge">1</span>Верное правило</h2>
-        <div class="task">
-          <div class="task-title"><b>Чтобы найти неизвестное уменьшаемое, надо:</b></div>
-          <div class="options">
-            <button class="option" type="button" data-value="a">а) из разности вычесть вычитаемое</button>
-            <button class="option" type="button" data-value="b">б) из вычитаемого вычесть разность</button>
-            <button class="option" type="button" data-value="c">в) к разности прибавить вычитаемое</button>
-          </div>
+      <section class="station active" data-station="0">
+        <div class="lab-panel">
+          <svg class="mission-icon" viewBox="0 0 80 80" aria-hidden="true"><rect x="11" y="12" width="58" height="56" rx="14" fill="#edf5ff" stroke="#8ab4f8"/><path d="M25 33h30M25 45h30" stroke="#173b6c" stroke-width="5" stroke-linecap="round"/><circle cx="26" cy="58" r="4" fill="#9bd59b"/></svg>
+          <div><h2><span class="badge">1</span> Станция правил</h2><div class="story">Модуль правил заблокирован. Выберите верное утверждение, чтобы открыть вход в лабораторию.</div></div>
         </div>
-        <div class="actions"><button class="btn primary check" type="button">Проверить</button><button class="btn next" type="button" disabled>Дальше</button></div><div class="feedback"></div>
+        <div class="task"><b>Чтобы найти неизвестное уменьшаемое, надо:</b><div class="options" data-choice="rule">
+          <button class="option" type="button" data-value="a">а) из разности вычесть вычитаемое;</button>
+          <button class="option" type="button" data-value="b">б) из вычитаемого вычесть разность;</button>
+          <button class="option" type="button" data-value="c">в) к разности прибавить вычитаемое.</button>
+        </div></div>
+        <div class="actions"><button class="btn primary" type="button" data-check="0">Проверить станцию</button><button class="btn" type="button" data-next disabled>Дальше</button></div><div class="feedback" aria-live="polite"></div>
       </section>
 
-      <section class="station" data-station="2" data-type="mixed">
-        <h2><span class="badge">2</span>Собери удобную сумму</h2>
-        <div class="task">
-          <div class="math">8073 + 11 300 + 627</div>
-          <p>Какие два числа удобно сложить сначала?</p>
-          <div class="options" data-group="pair">
-            <button class="option" type="button" data-value="8073+11300">8073 и 11 300</button>
-            <button class="option" type="button" data-value="8073+627">8073 и 627</button>
-            <button class="option" type="button" data-value="11300+627">11 300 и 627</button>
-          </div>
-          <div class="inputs"><div class="field"><label for="sum-final">Итог:</label><input id="sum-final" inputmode="numeric" autocomplete="off" placeholder="ответ" /></div></div>
+      <section class="station" data-station="1">
+        <div class="lab-panel">
+          <svg class="mission-icon" viewBox="0 0 80 80" aria-hidden="true"><rect x="12" y="16" width="56" height="48" rx="14" fill="#eef8ee" stroke="#9bd59b"/><path d="M23 40h34M40 23v34" stroke="#25744d" stroke-width="7" stroke-linecap="round"/></svg>
+          <div><h2><span class="badge">2</span> Станция удобной суммы</h2><div class="story">На панели вычислений нужно найти удобную пару и ввести итоговый результат.</div></div>
         </div>
-        <div class="actions"><button class="btn primary check" type="button">Проверить</button><button class="btn next" type="button" disabled>Дальше</button></div><div class="feedback"></div>
+        <div class="task"><div class="math">8073 + 11 300 + 627</div><div class="options" data-choice="pair">
+          <button class="option" type="button" data-value="8073+627">8073 + 627</button>
+          <button class="option" type="button" data-value="11300+627">11 300 + 627</button>
+          <button class="option" type="button" data-value="8073+11300">8073 + 11 300</button>
+        </div><div class="inputs"><div class="field"><label for="sumAnswer">Итог:</label><input id="sumAnswer" inputmode="numeric" placeholder="ответ"></div></div></div>
+        <div class="actions"><button class="btn primary" type="button" data-check="1">Проверить станцию</button><button class="btn" type="button" data-next disabled>Дальше</button></div><div class="feedback" aria-live="polite"></div>
       </section>
 
-      <section class="station" data-station="3" data-type="inputs">
-        <h2><span class="badge">3</span>Неизвестный компонент</h2>
-        <div class="task">
-          <div class="inputs">
-            <div class="field"><label for="n-answer">2034 − n = 158, n =</label><input id="n-answer" inputmode="numeric" autocomplete="off" /></div>
-            <div class="field"><label for="c-answer">c − 407 = 1093, c =</label><input id="c-answer" inputmode="numeric" autocomplete="off" /></div>
-          </div>
+      <section class="station" data-station="2">
+        <div class="lab-panel">
+          <svg class="mission-icon" viewBox="0 0 80 80" aria-hidden="true"><rect x="12" y="12" width="56" height="56" rx="18" fill="#fff7da" stroke="#e0c15a"/><text x="25" y="50" font-size="34" font-weight="900" fill="#173b6c">x</text></svg>
+          <div><h2><span class="badge">3</span> Станция неизвестного компонента</h2><div class="story">Два неизвестных элемента мешают системе завершить расчёт. Введите значения.</div></div>
         </div>
-        <div class="actions"><button class="btn primary check" type="button">Проверить</button><button class="btn next" type="button" disabled>Дальше</button></div><div class="feedback"></div>
+        <div class="task"><div class="scheme"><div class="mini"><div class="math">2034 − n = 158</div><div class="field"><label for="nAnswer">n =</label><input id="nAnswer" inputmode="numeric" placeholder="ответ"></div></div><div class="mini"><div class="math">c − 407 = 1093</div><div class="field"><label for="cAnswer">c =</label><input id="cAnswer" inputmode="numeric" placeholder="ответ"></div></div></div></div>
+        <div class="actions"><button class="btn primary" type="button" data-check="2">Проверить станцию</button><button class="btn" type="button" data-next disabled>Дальше</button></div><div class="feedback" aria-live="polite"></div>
       </section>
 
-      <section class="station" data-station="4" data-type="problem">
-        <h2><span class="badge">4</span>Задача на сумму и разность</h2>
-        <div class="task">
-          <p><b>В четвёртых и пятых классах школы 240 учащихся, причём в пятых классах на 24 ученика меньше. Сколько учащихся в четвёртых и пятых классах в отдельности?</b></p>
-          <p>Выберите первый шаг решения:</p>
-          <div class="options" data-group="step">
-            <button class="option" type="button" data-value="plus">240 + 24</button>
-            <button class="option" type="button" data-value="minus">240 − 24</button>
-            <button class="option" type="button" data-value="divide">240 : 2</button>
-          </div>
-          <div class="scheme">
-            <div class="mini"><div class="field"><label for="fifth">В пятых классах:</label><input id="fifth" inputmode="numeric" autocomplete="off" /></div></div>
-            <div class="mini"><div class="field"><label for="fourth">В четвёртых классах:</label><input id="fourth" inputmode="numeric" autocomplete="off" /></div></div>
-          </div>
+      <section class="station" data-station="3">
+        <div class="lab-panel">
+          <svg class="mission-icon" viewBox="0 0 80 80" aria-hidden="true"><rect x="10" y="17" width="60" height="46" rx="12" fill="#efe9ff" stroke="#bda7f2"/><path d="M24 48h32M28 34h24" stroke="#673ab7" stroke-width="5" stroke-linecap="round"/><circle cx="24" cy="34" r="4" fill="#ffd65f"/></svg>
+          <div><h2><span class="badge">4</span> Станция задачи</h2><div class="story">Архив классов перемешал данные. Восстановите количество учащихся.</div></div>
         </div>
-        <div class="actions"><button class="btn primary check" type="button">Проверить</button><button class="btn next" type="button" disabled>Дальше</button></div><div class="feedback"></div>
+        <div class="task"><p>В четвёртых и пятых классах школы 240 учащихся, причём в пятых классах на 24 ученика меньше. Сколько учащихся в четвёртых и пятых классах в отдельности?</p><b>Первый шаг:</b><div class="options" data-choice="step">
+          <button class="option" type="button" data-value="240+24">240 + 24</button><button class="option" type="button" data-value="240-24">240 − 24</button><button class="option" type="button" data-value="240:2">240 : 2</button>
+        </div><div class="inputs"><div class="field"><label for="fifth">Пятые классы:</label><input id="fifth" inputmode="numeric" placeholder="ответ"></div><div class="field"><label for="fourth">Четвёртые классы:</label><input id="fourth" inputmode="numeric" placeholder="ответ"></div></div></div>
+        <div class="actions"><button class="btn primary" type="button" data-check="3">Проверить станцию</button><button class="btn" type="button" data-next disabled>Дальше</button></div><div class="feedback" aria-live="polite"></div>
       </section>
 
-      <section class="station" data-station="5" data-type="mc" data-answer="d">
-        <h2><span class="badge">5</span>Измени сумму</h2>
-        <div class="task">
-          <p><b>Одно слагаемое увеличили на 148. Как нужно изменить второе слагаемое, чтобы сумма уменьшилась на 352?</b></p>
-          <div class="options">
-            <button class="option" type="button" data-value="a">а) увеличить на 204</button>
-            <button class="option" type="button" data-value="b">б) уменьшить на 204</button>
-            <button class="option" type="button" data-value="c">в) увеличить на 500</button>
-            <button class="option" type="button" data-value="d">г) уменьшить на 500</button>
-          </div>
+      <section class="station" data-station="4">
+        <div class="lab-panel">
+          <svg class="mission-icon" viewBox="0 0 80 80" aria-hidden="true"><rect x="12" y="13" width="56" height="54" rx="16" fill="#eaf3ff" stroke="#8ab4f8"/><path d="M25 28h30M25 40h30M25 52h30" stroke="#173b6c" stroke-width="5" stroke-linecap="round"/><path d="M55 26l8 8-8 8" fill="none" stroke="#2e8b57" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><h2><span class="badge">5</span> Финальная станция изменения суммы</h2><div class="story">Последний модуль проверяет, как меняется сумма при изменении слагаемых.</div></div>
         </div>
-        <div class="actions"><button class="btn primary check" type="button">Проверить</button><button class="btn next" type="button" disabled>Финиш</button></div><div class="feedback"></div>
+        <div class="task"><p>Одно слагаемое увеличили на 148. Как нужно изменить второе слагаемое, чтобы сумма уменьшилась на 352?</p><div class="options" data-choice="change">
+          <button class="option" type="button" data-value="up204">увеличить на 204</button><button class="option" type="button" data-value="down204">уменьшить на 204</button><button class="option" type="button" data-value="up500">увеличить на 500</button><button class="option" type="button" data-value="down500">уменьшить на 500</button>
+        </div></div>
+        <div class="actions"><button class="btn primary" type="button" data-check="4">Проверить станцию</button><button class="btn" type="button" data-next disabled>Финиш</button></div><div class="feedback" aria-live="polite"></div>
       </section>
 
-      <section class="final" id="final">
-        <h2>Лаборатория восстановлена!</h2>
-        <div class="scorebig" id="finalScore">0 / 5</div>
-        <p id="finalText">Результат готов.</p>
-        <div class="actions" style="justify-content:center"><button class="btn primary" type="button" id="restart">Пройти ещё раз</button></div>
-      </section>
+      <section class="final" id="final"><div class="confetti">⚙️✨</div><h2>Лаборатория восстановлена!</h2><p class="scorebig" id="finalScore">0 / 5</p><p id="finalText"></p><button class="btn primary" type="button" id="restart">Пройти ещё раз</button></section>
     </main>
   </div>
+
 <script>
 (function(){
   const root=document.getElementById('game');
   const stations=[...root.querySelectorAll('.station')];
-  const final=document.getElementById('final');
-  const progress=document.getElementById('progress');
-  const where=document.getElementById('where');
-  const scoreEl=document.getElementById('score');
-  let current=0, score=0; const solved=new Set();
-  const norm=v=>String(v||'').replace(/\s+/g,'').replace(',', '.');
-  function selected(section, group){const scope=group?section.querySelector(`[data-group="${group}"]`):section; const b=scope.querySelector('.option.selected'); return b?b.dataset.value:null;}
-  root.addEventListener('click', e=>{
-    const opt=e.target.closest('.option');
-    if(opt){const box=opt.parentElement; box.querySelectorAll('.option').forEach(b=>b.classList.remove('selected','good','bad')); opt.classList.add('selected'); return;}
-    const check=e.target.closest('.check'); if(check){checkStation(stations[current]); return;}
-    const next=e.target.closest('.next'); if(next){goNext();}
-  });
-  document.getElementById('restart').addEventListener('click', ()=>{
-    current=0; score=0; solved.clear();
-    root.querySelectorAll('input').forEach(i=>i.value='');
-    root.querySelectorAll('.option').forEach(b=>b.classList.remove('selected','good','bad'));
-    root.querySelectorAll('.feedback').forEach(f=>{f.className='feedback'; f.textContent='';});
-    root.querySelectorAll('.next').forEach(b=>b.disabled=true);
-    stations.forEach((s,i)=>s.classList.toggle('active',i===0)); final.classList.remove('active'); update();
-  });
-  function checkStation(s){
-    const n=Number(s.dataset.station); let ok=false; let message='';
-    if(s.dataset.type==='mc'){
-      const val=selected(s); ok=val===s.dataset.answer; colorOptions(s, val, s.dataset.answer); message=ok?'Верно. Можно идти дальше.':'Пока неверно. Исправь ответ и проверь ещё раз.';
-    }
-    if(s.dataset.type==='mixed'){
-      const pair=selected(s,'pair'); const answer=norm(document.getElementById('sum-final').value); ok=pair==='8073+627' && answer==='20000'; colorOptions(s, pair, '8073+627', 'pair'); message=ok?'Верно: удобная пара 8073 и 627, итог 20 000.':'Проверь пару чисел и итоговый ответ.';
-    }
-    if(s.dataset.type==='inputs'){
-      ok=norm(document.getElementById('n-answer').value)==='1876' && norm(document.getElementById('c-answer').value)==='1500'; message=ok?'Верно: n = 1876, c = 1500.':'Проверь оба неизвестных компонента.';
-    }
-    if(s.dataset.type==='problem'){
-      const step=selected(s,'step'); const fifth=norm(document.getElementById('fifth').value); const fourth=norm(document.getElementById('fourth').value); ok=step==='minus' && fifth==='108' && fourth==='132'; colorOptions(s, step, 'minus', 'step'); message=ok?'Верно: в пятых 108, в четвёртых 132.':'Проверь первый шаг и оба ответа.';
-    }
-    showFeedback(s, ok, message); if(ok){s.querySelector('.next').disabled=false; if(!solved.has(n)){score++; solved.add(n); update();}}
+  const route=document.getElementById('route');
+  const labels=['Правило','Сумма','Компонент','Задача','Изменение'];
+  let current=0; let score=0; const solved=new Array(5).fill(false);
+  route.innerHTML=labels.map((l,i)=>`<div class="node ${i===0?'active':''}" data-node="${i}"><b>${i+1}</b>${l}</div>`).join('');
+  const nodes=[...route.querySelectorAll('.node')];
+  const byId=(id)=>document.getElementById(id);
+  const norm=(v)=>String(v||'').replace(/\s+/g,'').replace(',', '.').trim();
+  function selected(name){ const el=root.querySelector(`[data-choice="${name}"] .option.selected`); return el?el.dataset.value:null; }
+  function setFeedback(st, ok, msg){ const fb=st.querySelector('.feedback'); fb.className='feedback '+(ok?'ok':'no'); fb.textContent=msg; }
+  function update(){
+    byId('where').textContent=current<5?`Станция ${current+1} / 5`:'Финиш';
+    byId('score').textContent=`Баллы: ${score}`;
+    byId('progress').style.width=`${Math.min(100,(current/5)*100)}%`;
+    nodes.forEach((n,i)=>{n.classList.toggle('active',i===current);n.classList.toggle('done',solved[i]);});
   }
-  function colorOptions(s,val,ans,group){const scope=group?s.querySelector(`[data-group="${group}"]`):s; scope.querySelectorAll('.option').forEach(b=>{b.classList.toggle('good',b.dataset.value===ans); if(val && b.dataset.value===val && val!==ans)b.classList.add('bad');});}
-  function showFeedback(s,ok,msg){const f=s.querySelector('.feedback'); f.className='feedback '+(ok?'ok':'no'); f.textContent=msg;}
-  function goNext(){stations[current].classList.remove('active'); current++; if(current>=stations.length){final.classList.add('active'); document.getElementById('finalScore').textContent=score+' / 5'; document.getElementById('finalText').textContent=score===5?'Отлично: все станции пройдены без ошибок в зачёте.':'Есть что повторить: можно пройти ещё раз и добрать баллы.';} else {stations[current].classList.add('active');} update();}
-  function update(){where.textContent=current<stations.length?'Станция '+(current+1)+' / 5':'Финиш'; scoreEl.textContent='Баллы: '+score; progress.style.width=(Math.min(current,5)/5*100)+'%'; if(current>=stations.length)progress.style.width='100%';}
+  function show(i){ stations.forEach((s,k)=>s.classList.toggle('active',k===i)); byId('final').classList.remove('active'); current=i; update(); }
+  root.addEventListener('click',e=>{
+    const opt=e.target.closest('.option');
+    if(opt){ const box=opt.parentElement; box.querySelectorAll('.option').forEach(o=>o.classList.remove('selected','good','bad')); opt.classList.add('selected'); }
+    const check=e.target.closest('[data-check]'); if(check){ checkStation(Number(check.dataset.check)); }
+    if(e.target.closest('[data-next]')){ current<4?show(current+1):finish(); }
+  });
+  byId('restart').addEventListener('click',()=>{score=0;current=0;solved.fill(false);root.querySelectorAll('input').forEach(i=>i.value='');root.querySelectorAll('.option').forEach(o=>o.classList.remove('selected','good','bad'));root.querySelectorAll('.feedback').forEach(f=>{f.className='feedback';f.textContent='';});root.querySelectorAll('[data-next]').forEach(b=>b.disabled=true);show(0);});
+  function markChoice(name, correct){ const box=root.querySelector(`[data-choice="${name}"]`); box.querySelectorAll('.option').forEach(o=>{o.classList.toggle('good',o.dataset.value===correct); if(o.classList.contains('selected')&&o.dataset.value!==correct)o.classList.add('bad');}); }
+  function success(st,msg){ if(!solved[current]){score++;solved[current]=true;} setFeedback(st,true,msg); st.querySelector('[data-next]').disabled=false; update(); }
+  function fail(st,msg){ setFeedback(st,false,msg); update(); }
+  function checkStation(i){
+    current=i; const st=stations[i]; let ok=false;
+    if(i===0){ ok=selected('rule')==='c'; markChoice('rule','c'); ok?success(st,'Верно. Модуль правил включён.'):fail(st,'Пока неверно. Проверь правило для неизвестного уменьшаемого.'); }
+    if(i===1){ ok=selected('pair')==='8073+627' && norm(byId('sumAnswer').value)==='20000'; markChoice('pair','8073+627'); ok?success(st,'Верно. Удобная пара найдена, итог 20 000.'):fail(st,'Есть ошибка: нужна удобная пара и итоговый ответ.'); }
+    if(i===2){ ok=norm(byId('nAnswer').value)==='1876' && norm(byId('cAnswer').value)==='1500'; ok?success(st,'Верно. Неизвестные компоненты восстановлены.'):fail(st,'Проверь оба значения: система ждёт два правильных ответа.'); }
+    if(i===3){ ok=selected('step')==='240-24' && norm(byId('fifth').value)==='108' && norm(byId('fourth').value)==='132'; markChoice('step','240-24'); ok?success(st,'Верно. Архив классов восстановлен.'):fail(st,'Пока не всё совпало: проверь первый шаг и оба количества.'); }
+    if(i===4){ ok=selected('change')==='down500'; markChoice('change','down500'); ok?success(st,'Верно. +148 и −500 дают изменение суммы −352.'):fail(st,'Пока неверно. Нужно получить общее изменение −352.'); }
+  }
+  function finish(){
+    stations.forEach(s=>s.classList.remove('active')); byId('final').classList.add('active'); current=5; byId('progress').style.width='100%'; byId('where').textContent='Финиш'; byId('score').textContent=`Баллы: ${score}`; nodes.forEach((n,i)=>{n.classList.remove('active');n.classList.toggle('done',solved[i]);}); byId('finalScore').textContent=`${score} / 5`; byId('finalText').textContent=score===5?'Отлично: все станции пройдены без потерь.':score>=3?'Лаборатория работает, но есть станции для повторения.':'Нужно повторить правила и пройти игру ещё раз.';
+  }
   update();
 })();
 </script>
