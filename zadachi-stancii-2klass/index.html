@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Маршрут задач</title>
+<style>
+  :root{
+    --bg:#f6f8fb;
+    --card:#ffffff;
+    --ink:#223047;
+    --muted:#6b7483;
+    --line:#dce3ec;
+    --accent:#4c79d8;
+    --accent2:#7aa2ef;
+    --good:#23855f;
+    --bad:#bd4b4b;
+    --shadow:0 14px 35px rgba(33,48,71,.10);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 12% 12%, rgba(122,162,239,.18), transparent 28%),
+      radial-gradient(circle at 88% 85%, rgba(76,121,216,.12), transparent 30%),
+      var(--bg);
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:28px 18px 42px}
+  header{text-align:center;margin-bottom:20px}
+  h1{margin:0 0 8px;font-size:clamp(28px,5vw,44px);letter-spacing:.2px}
+  .sub{margin:0;color:var(--muted);font-size:18px}
+  .route{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+    margin:24px 0;
+  }
+  .station{
+    appearance:none;border:2px solid var(--line);background:#fff;color:var(--muted);
+    border-radius:16px;padding:12px 6px;font-weight:700;font-size:15px;
+    min-height:58px;cursor:default;transition:.2s;
+  }
+  .station.current{border-color:var(--accent);color:var(--accent);box-shadow:0 5px 14px rgba(76,121,216,.14)}
+  .station.done{border-color:#9fd6c1;background:#eefaf5;color:var(--good);cursor:pointer}
+  .station.locked{opacity:.58}
+  .card{
+    background:var(--card);border:1px solid #e8edf4;border-radius:24px;
+    box-shadow:var(--shadow);padding:clamp(22px,5vw,38px);
+  }
+  .label{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:14px}
+  .task{
+    font-size:clamp(22px,3.5vw,30px);
+    line-height:1.42;
+    font-weight:600;
+    min-height:170px;
+    display:flex;
+    align-items:center;
+  }
+  .answer-row{
+    display:flex;gap:12px;align-items:stretch;margin-top:18px;flex-wrap:wrap
+  }
+  input{
+    flex:1 1 220px;
+    min-width:0;
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:15px 16px;
+    font-size:22px;
+    outline:none;
+  }
+  input:focus{border-color:var(--accent2)}
+  button.action{
+    border:0;border-radius:14px;background:var(--accent);color:white;
+    font-size:19px;font-weight:700;padding:15px 24px;cursor:pointer;
+  }
+  button.action:hover{filter:brightness(.97)}
+  .feedback{min-height:34px;margin-top:15px;font-size:18px;font-weight:700}
+  .feedback.good{color:var(--good)}
+  .feedback.bad{color:var(--bad)}
+  .next{
+    display:none;
+    width:100%;
+    margin-top:10px;
+    border:0;border-radius:14px;padding:15px 20px;
+    background:#eef3ff;color:var(--accent);font-size:19px;font-weight:700;cursor:pointer;
+  }
+  .finish{text-align:center;padding:12px 0 4px}
+  .finish .big{font-size:58px;line-height:1;margin-bottom:12px}
+  .finish h2{font-size:30px;margin:0 0 10px}
+  .finish p{font-size:19px;color:var(--muted);margin:0 0 22px}
+  .reset{
+    border:2px solid var(--line);background:#fff;color:var(--ink);
+    border-radius:14px;padding:12px 18px;font-size:17px;font-weight:700;cursor:pointer;
+  }
+  .counter{text-align:right;color:var(--muted);font-size:15px;margin-top:12px}
+  @media(max-width:640px){
+    .route{grid-template-columns:repeat(4,1fr)}
+    .task{min-height:250px;font-size:22px}
+    button.action{width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Маршрут задач</h1>
+    <p class="sub">Пройди все 7 станций по порядку.</p>
+  </header>
+
+  <div class="route" id="route"></div>
+
+  <main class="card" id="card">
+    <div class="label" id="label"></div>
+    <div class="task" id="task"></div>
+    <div class="answer-row">
+      <input id="answer" type="number" inputmode="numeric" placeholder="Введи ответ" autocomplete="off">
+      <button class="action" id="checkBtn">Проверить</button>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <button class="next" id="nextBtn">Следующая станция →</button>
+    <div class="counter" id="counter"></div>
+  </main>
+</div>
+
+<script>
+const tasks = [
+  {
+    text: "Мама испекла 14 пирожков с мясом, а пирожков с картошкой — на 3 больше. Сколько пирожков с картошкой испекла мама?",
+    answer: 17
+  },
+  {
+    text: "Было 20 мотков шерсти. Из 12 мотков шерсти бабушка связала внуку свитер, а из 3 мотков — шарф. Сколько мотков шерсти пошло на свитер и шарф вместе?",
+    answer: 15
+  },
+  {
+    text: "На блузке 9 пуговиц. Это на 2 пуговицы меньше, чем на халате. Сколько пуговиц на халате?",
+    answer: 11
+  },
+  {
+    text: "На принтере распечатали 8 страниц. Это на 3 страницы меньше, чем осталось распечатать. Сколько страниц осталось распечатать?",
+    answer: 11
+  },
+  {
+    text: "У бабушки в шкатулке 14 больших пуговиц. Это на 5 пуговиц больше, чем маленьких. Сколько маленьких пуговиц в шкатулке?",
+    answer: 9
+  },
+  {
+    text: "В праздничном концерте ко Дню матери 14 октября приняли участие 7 октябрят. Это на 6 меньше, чем пионеров. Найди количество пионеров, которые выступили на концерте.",
+    answer: 13
+  },
+  {
+    text: "Было 9 бубликов, что на 6 меньше, чем ватрушек. Найди количество ватрушек.",
+    answer: 15
+  }
+];
+
+let current = 0;
+let completed = Array(tasks.length).fill(false);
+
+const route = document.getElementById("route");
+const card = document.getElementById("card");
+const label = document.getElementById("label");
+const task = document.getElementById("task");
+const answer = document.getElementById("answer");
+const checkBtn = document.getElementById("checkBtn");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const counter = document.getElementById("counter");
+
+function drawRoute(){
+  route.innerHTML = "";
+  tasks.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.className = "station";
+    b.textContent = "Станция " + (i + 1);
+    if(completed[i]) b.classList.add("done");
+    else if(i === current) b.classList.add("current");
+    else b.classList.add("locked");
+    if(completed[i]){
+      b.addEventListener("click", () => {
+        current = i;
+        renderTask();
+      });
+    }
+    route.appendChild(b);
+  });
+}
+
+function renderTask(){
+  drawRoute();
+  label.textContent = "Станция " + (current + 1);
+  task.textContent = tasks[current].text;
+  answer.value = "";
+  feedback.textContent = "";
+  feedback.className = "feedback";
+  nextBtn.style.display = "none";
+  answer.disabled = completed[current];
+  checkBtn.style.display = completed[current] ? "none" : "block";
+  counter.textContent = (current + 1) + " из " + tasks.length;
+  answer.focus();
+
+  if(completed[current]){
+    feedback.textContent = "✓ Станция пройдена";
+    feedback.classList.add("good");
+    if(current < tasks.length - 1){
+      nextBtn.textContent = "Следующая станция →";
+      nextBtn.style.display = "block";
+    }
+  }
+}
+
+function finish(){
+  route.innerHTML = tasks.map((_,i) => '<button class="station done">Станция '+(i+1)+'</button>').join("");
+  card.innerHTML = `
+    <div class="finish">
+      <div class="big">🏁</div>
+      <h2>Маршрут пройден!</h2>
+      <p>Все 7 станций выполнены верно.</p>
+      <button class="reset" onclick="location.reload()">Пройти ещё раз</button>
+    </div>`;
+}
+
+function check(){
+  const value = answer.value.trim();
+  if(value === ""){
+    feedback.textContent = "Введи ответ.";
+    feedback.className = "feedback bad";
+    return;
+  }
+  if(Number(value) === tasks[current].answer){
+    completed[current] = true;
+    feedback.textContent = "✓ Верно! Станция пройдена.";
+    feedback.className = "feedback good";
+    answer.disabled = true;
+    checkBtn.style.display = "none";
+    drawRoute();
+    nextBtn.style.display = "block";
+    nextBtn.textContent = current === tasks.length - 1 ? "Завершить маршрут" : "Следующая станция →";
+  } else {
+    feedback.textContent = "Проверь решение и попробуй ещё раз.";
+    feedback.className = "feedback bad";
+    answer.select();
+  }
+}
+
+checkBtn.addEventListener("click", check);
+answer.addEventListener("keydown", e => { if(e.key === "Enter") check(); });
+
+nextBtn.addEventListener("click", () => {
+  if(current === tasks.length - 1 && completed[current]){
+    finish();
+    return;
+  }
+  if(current < tasks.length - 1){
+    current++;
+    renderTask();
+  }
+});
+
+renderTask();
+</script>
+</body>
+</html>
