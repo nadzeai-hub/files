@@ -52,6 +52,8 @@ input[type=number]{font:inherit;font-size:20px;width:150px;max-width:100%;paddin
   <div class="chips" id="firstStep">
     <button class="choice" data-v="58">52 + 6</button><button class="choice" data-v="46">52 − 6</button><button class="choice" data-v="26">52 : 2</button><button class="choice" data-v="3">6 : 2</button>
   </div>
+  <div class="row"><button type="button" class="btn secondary" onclick="checkFirstStep()">Проверить первое действие</button></div>
+  <div class="feedback" id="fFirst" aria-live="polite"></div>
   <div class="grid2">
     <div class="mini"><strong>Пятиклассников (меньше):</strong><input id="g5" type="number" inputmode="numeric" placeholder="ответ"></div>
     <div class="mini"><strong>Четвероклассников:</strong><input id="g4" type="number" inputmode="numeric" placeholder="ответ"></div>
@@ -98,17 +100,26 @@ input[type=number]{font:inherit;font-size:20px;width:150px;max-width:100%;paddin
 </section>
 </main>
 <script>
-let picked=new Set(); let first=null;
+let picked=new Set(); let first=null; let firstVerified=false;
 const steps=[...document.querySelectorAll('.step')];
 function setProgress(n){steps.forEach((x,i)=>x.classList.toggle('on',i<n));}
 function toggleHint(n){document.getElementById('h'+n).classList.toggle('show');}
 document.querySelectorAll('#chips1 .chip').forEach(b=>b.addEventListener('click',()=>{const k=+b.dataset.key;if(picked.has(k)){picked.delete(k);b.classList.remove('selected')}else if(picked.size<2){picked.add(k);b.classList.add('selected')}}));
-document.querySelectorAll('#firstStep .choice').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#firstStep .choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');first=+b.dataset.v;}));
+document.querySelectorAll('#firstStep .choice').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#firstStep .choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');first=Number(b.dataset.v);firstVerified=false;document.getElementById('fFirst').textContent='';}));
 function msg(id,text,ok){const f=document.getElementById(id);f.textContent=text;f.className='feedback '+(ok?'ok':'no')}
 function next(cur,next,n){setTimeout(()=>{document.getElementById(cur).hidden=true;document.getElementById(next).hidden=false;setProgress(n);document.getElementById(next).scrollIntoView({behavior:'smooth',block:'start'});},650)}
 function checkSignals(){const ok=picked.size===2&&picked.has(1)&&picked.has(3);document.querySelectorAll('#chips1 .chip').forEach(b=>{const k=+b.dataset.key;b.classList.remove('good','bad');if(picked.has(k))b.classList.add(k===1||k===3?'good':'bad')});if(ok){msg('f1','Верно: 52 — общее количество, «на 6 меньше» — разница.',true);next('s1','s2',2)}else msg('f1','Нужны два математических сигнала: общее количество и разница.',false)}
-function checkCamp(){const ok=first===46 && +g5.value===23 && +g4.value===29;if(ok){msg('f2','Верно. 52 − 6 = 46; 46 : 2 = 23; 23 + 6 = 29.',true);next('s2','s3',3)}else msg('f2','Проверь: сначала нужно убрать разницу, затем разделить на две равные части.',false)}
-function checkOffice(){const ok=+phone.value===38&&+fax.value===143;if(ok){msg('f3','Верно: телефон 38 р., факс 143 р. Проверка: 38 + 143 = 181.',true);next('s3','s4',4)}else msg('f3','Не сходится. Определи меньшую стоимость после шага (181 − 105) : 2.',false)}
-function checkFilms(){const ok=+d2.value===246&&+d3.value===296&&+film1.value===2631&&+film2.value===2877&&+film3.value===2927;if(ok){msg('f4','Отлично. Проверка: 2631 + 2877 + 2927 = 8435.',true);setTimeout(()=>{document.getElementById('s4').hidden=true;document.getElementById('finish').hidden=false;document.getElementById('finish').scrollIntoView({behavior:'smooth'});},700)}else msg('f4','Проверь сравнение с первым фильмом: третий больше первого не на 50, а на 246 + 50.',false)}
+function checkFirstStep(){
+ const ok=first===46;
+ if(first===null){msg('fFirst','Сначала выбери выражение для первого действия.',false);return;}
+ msg('fFirst',ok?'Верно! 52 − 6 = 46 — убрали разницу. Теперь найди количество учеников.':'Попробуй ещё раз: чтобы получить две равные части, сначала убираем разницу 6.',ok);
+ firstVerified=ok;
+}
+function num(id){const e=document.getElementById(id);return e.value.trim()===''?NaN:Number(e.value);}
+function checkCamp(){
+ if(!firstVerified){msg('f2','Сначала выбери и проверь первое действие кнопкой выше.',false);return;}
+ const ok=first===46 && num('g5')===23 && num('g4')===29;if(ok){msg('f2','Верно. 52 − 6 = 46; 46 : 2 = 23; 23 + 6 = 29.',true);next('s2','s3',3)}else msg('f2','Проверь: сначала нужно убрать разницу, затем разделить на две равные части.',false)}
+function checkOffice(){const ok=num('phone')===38&&num('fax')===143;if(ok){msg('f3','Верно: телефон 38 р., факс 143 р. Проверка: 38 + 143 = 181.',true);next('s3','s4',4)}else msg('f3','Не сходится. Определи меньшую стоимость после шага (181 − 105) : 2.',false)}
+function checkFilms(){const ok=num('d2')===246&&num('d3')===296&&num('film1')===2631&&num('film2')===2877&&num('film3')===2927;if(ok){msg('f4','Отлично. Проверка: 2631 + 2877 + 2927 = 8435.',true);setTimeout(()=>{document.getElementById('s4').hidden=true;document.getElementById('finish').hidden=false;document.getElementById('finish').scrollIntoView({behavior:'smooth'});},700)}else msg('f4','Проверь сравнение с первым фильмом: третий больше первого не на 50, а на 246 + 50.',false)}
 </script>
 </body></html>
