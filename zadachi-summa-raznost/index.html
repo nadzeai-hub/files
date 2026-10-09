@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Маршрут задачи: сумма и разность</title>
+<style>
+:root{--ink:#24343b;--muted:#5d7078;--blue:#1f91c0;--blue2:#dff3fb;--pink:#d94f7a;--pink2:#ffe7ef;--green:#2e9b68;--green2:#e5f6ee;--line:#d8e8ee;--paper:#fff;--soft:#f6fafc;--warn:#9a6a16;}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:linear-gradient(#f8fbfd,#eef7fa);color:var(--ink);font-size:17px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding:22px 16px 48px}.hero{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 12px 30px rgba(45,79,92,.08)}
+h1{font-size:clamp(26px,4vw,40px);margin:0 0 8px}.sub{color:var(--muted);margin:0}.progress{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}.step{height:10px;border-radius:99px;background:#e4edf1}.step.on{background:var(--blue)}
+.card{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 8px 20px rgba(45,79,92,.05)}.card[hidden]{display:none}
+h2{font-size:24px;margin:0 0 10px}.lead{color:var(--muted);margin-top:0}.problem{font-size:18px;background:var(--soft);border-left:5px solid var(--blue);padding:16px 18px;border-radius:14px;margin:16px 0}
+.sig-total{background:var(--pink2);border-radius:7px;padding:1px 5px}.sig-diff{background:var(--blue2);border-radius:7px;padding:1px 5px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.chip,.choice,.btn{font:inherit;border:1.5px solid #c9dbe2;background:#fff;border-radius:14px;padding:11px 15px;cursor:pointer;color:var(--ink)}.chip:hover,.choice:hover{border-color:var(--blue)}.chip.selected{background:var(--blue2);border-color:var(--blue)}.chip.good{background:var(--green2);border-color:var(--green)}.chip.bad{background:#fff1f1;border-color:#d76868}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.mini{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:15px}.mini strong{display:block;margin-bottom:6px}
+input[type=number]{font:inherit;font-size:20px;width:150px;max-width:100%;padding:10px 12px;border:1.5px solid #b9ced6;border-radius:12px}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}.btn{background:var(--blue);color:#061d27;border-color:var(--blue);font-weight:750}.btn.secondary{background:#fff;color:var(--ink)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.feedback{min-height:30px;font-weight:700;margin-top:10px}.ok{color:#237c56}.no{color:#b34949}.hint{display:none;background:#fff9e9;border:1px solid #efd28d;border-radius:14px;padding:14px;margin-top:12px}.hint.show{display:block}.paperclip{float:right;border:1px solid var(--line);background:#fff;border-radius:14px;padding:8px 11px;cursor:pointer;font-size:16px}
+.algo{display:grid;gap:8px;margin:14px 0}.algo div{background:var(--soft);padding:10px 12px;border-radius:12px;border:1px solid var(--line)}.tag{display:inline-block;font-weight:750;border-radius:999px;padding:4px 10px;margin-right:6px}.tag.p{background:var(--pink2)}.tag.b{background:var(--blue2)}
+.finish{background:var(--green2);border-color:#bce8d3}.finish h2{font-size:28px}.small{font-size:15px;color:var(--muted)}
+@media(max-width:680px){body{font-size:16px}.grid2{grid-template-columns:1fr}.card,.hero{padding:18px}.problem{font-size:17px}.progress{gap:5px}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero">
+  <h1>Маршрут задачи: сумма и разность</h1>
+  <p class="sub">5 класс • тренируемся видеть сигнальные слова и выбирать ход решения</p>
+  <div class="progress" aria-label="Прогресс"><div class="step on"></div><div class="step"></div><div class="step"></div><div class="step"></div></div>
+</section>
+
+<section class="card" id="s1">
+  <button class="paperclip" onclick="toggleHint(1)">📎 Памятка</button>
+  <h2>Станция 1. Найди сигналы</h2>
+  <p class="lead">В условии важна не тема задачи, а математические отношения. Выбери <b>два фрагмента</b>, которые подсказывают алгоритм.</p>
+  <div class="problem">В школьном летнем военно-патриотическом лагере в прошлом году отдыхало 52 учащихся четвертых и пятых классов. Пятиклассников было на 6 меньше, чем учащихся четвертых классов. Сколько пятиклассников отдыхало в школьном лагере в прошлом году?</div>
+  <div class="chips" id="chips1">
+    <button class="chip" data-key="0">в прошлом году</button>
+    <button class="chip" data-key="1">52 учащихся</button>
+    <button class="chip" data-key="2">четвертых и пятых классов</button>
+    <button class="chip" data-key="3">на 6 меньше</button>
+  </div>
+  <button class="btn" onclick="checkSignals()">Проверить</button>
+  <div class="feedback" id="f1"></div>
+  <div class="hint" id="h1"><span class="tag p">ВСЕГО / сумма</span><span class="tag b">НА … больше / меньше</span><br>Если известны общее количество и разница: <b>вычти разницу из общего и раздели остаток на 2</b>.</div>
+</section>
+
+<section class="card" id="s2" hidden>
+  <button class="paperclip" onclick="toggleHint(2)">📎 Памятка</button>
+  <h2>Станция 2. Собери решение</h2>
+  <p class="lead">Продолжаем задачу про лагерь. Всего 52 ученика, пятиклассников на 6 меньше.</p>
+  <p><b>Что делаем первым?</b></p>
+  <div class="chips" id="firstStep">
+    <button class="choice" data-v="58">52 + 6</button><button class="choice" data-v="46">52 − 6</button><button class="choice" data-v="26">52 : 2</button><button class="choice" data-v="3">6 : 2</button>
+  </div>
+  <div class="grid2">
+    <div class="mini"><strong>Пятиклассников (меньше):</strong><input id="g5" type="number" inputmode="numeric" placeholder="ответ"></div>
+    <div class="mini"><strong>Четвероклассников:</strong><input id="g4" type="number" inputmode="numeric" placeholder="ответ"></div>
+  </div>
+  <div class="row"><button class="btn" onclick="checkCamp()">Проверить решение</button></div>
+  <div class="feedback" id="f2"></div>
+  <div class="hint" id="h2"><div class="algo"><div>1. 52 − 6 = 46 — убираем разницу.</div><div>2. 46 : 2 — получаем меньшее количество.</div><div>3. К меньшему прибавляем 6.</div></div></div>
+</section>
+
+<section class="card" id="s3" hidden>
+  <button class="paperclip" onclick="toggleHint(3)">📎 Памятка</button>
+  <h2>Станция 3. Та же схема — другой сюжет</h2>
+  <div class="problem">Для одной из фирм куплены телефон и факс на сумму <span class="sig-total">181 р.</span> Телефон стоил <span class="sig-diff">на 105 р. дешевле</span>, чем факс. Сколько стоил факс?</div>
+  <p>Впиши стоимость обоих предметов.</p>
+  <div class="grid2">
+    <div class="mini"><strong>Телефон:</strong><input id="phone" type="number" inputmode="numeric"> р.</div>
+    <div class="mini"><strong>Факс:</strong><input id="fax" type="number" inputmode="numeric"> р.</div>
+  </div>
+  <div class="row"><button class="btn" onclick="checkOffice()">Проверить</button></div>
+  <div class="feedback" id="f3"></div>
+  <div class="hint" id="h3">181 − 105 = 76. Это две одинаковые части. 76 : 2 = 38 — меньшая стоимость.</div>
+</section>
+
+<section class="card" id="s4" hidden>
+  <button class="paperclip" onclick="toggleHint(4)">📎 Памятка</button>
+  <h2>Станция 4. Усложнение: уже три величины</h2>
+  <div class="problem">Три фильма на компьютере занимают <span class="sig-total">8435 Мб</span> памяти; размер второго фильма <span class="sig-diff">на 246 Мб больше</span>, чем первого, а размер третьего фильма <span class="sig-diff">на 50 Мб больше</span>, чем второго. Сколько мегабайт занимает каждый фильм?</div>
+  <p class="lead">Здесь сохраняется идея «убрать лишнее и получить равные части». Сравни второй и третий фильм с первым.</p>
+  <div class="grid2">
+    <div class="mini"><strong>Второй относительно первого:</strong>x + <input id="d2" type="number" inputmode="numeric" style="width:110px"> Мб</div>
+    <div class="mini"><strong>Третий относительно первого:</strong>x + <input id="d3" type="number" inputmode="numeric" style="width:110px"> Мб</div>
+  </div>
+  <p><b>Теперь размеры:</b></p>
+  <div class="row"><label>1-й <input id="film1" type="number"></label><label>2-й <input id="film2" type="number"></label><label>3-й <input id="film3" type="number"></label></div>
+  <div class="row"><button class="btn" onclick="checkFilms()">Проверить</button></div>
+  <div class="feedback" id="f4"></div>
+  <div class="hint" id="h4">Относительно первого: второй = x + 246, третий = x + 296. Значит, из 8435 нужно убрать 246 + 296, а остаток разделить на 3.</div>
+</section>
+
+<section class="card finish" id="finish" hidden>
+  <h2>Маршрут пройден</h2>
+  <p>Ты использовал один и тот же принцип в разных сюжетах: <b>нашёл «всего», нашёл разницу, убрал разницу, разделил на равные части, восстановил большее значение.</b></p>
+  <button class="btn secondary" onclick="location.reload()">Пройти ещё раз</button>
+</section>
+</main>
+<script>
+let picked=new Set(); let first=null;
+const steps=[...document.querySelectorAll('.step')];
+function setProgress(n){steps.forEach((x,i)=>x.classList.toggle('on',i<n));}
+function toggleHint(n){document.getElementById('h'+n).classList.toggle('show');}
+document.querySelectorAll('#chips1 .chip').forEach(b=>b.addEventListener('click',()=>{const k=+b.dataset.key;if(picked.has(k)){picked.delete(k);b.classList.remove('selected')}else if(picked.size<2){picked.add(k);b.classList.add('selected')}}));
+document.querySelectorAll('#firstStep .choice').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#firstStep .choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');first=+b.dataset.v;}));
+function msg(id,text,ok){const f=document.getElementById(id);f.textContent=text;f.className='feedback '+(ok?'ok':'no')}
+function next(cur,next,n){setTimeout(()=>{document.getElementById(cur).hidden=true;document.getElementById(next).hidden=false;setProgress(n);document.getElementById(next).scrollIntoView({behavior:'smooth',block:'start'});},650)}
+function checkSignals(){const ok=picked.size===2&&picked.has(1)&&picked.has(3);document.querySelectorAll('#chips1 .chip').forEach(b=>{const k=+b.dataset.key;b.classList.remove('good','bad');if(picked.has(k))b.classList.add(k===1||k===3?'good':'bad')});if(ok){msg('f1','Верно: 52 — общее количество, «на 6 меньше» — разница.',true);next('s1','s2',2)}else msg('f1','Нужны два математических сигнала: общее количество и разница.',false)}
+function checkCamp(){const ok=first===46 && +g5.value===23 && +g4.value===29;if(ok){msg('f2','Верно. 52 − 6 = 46; 46 : 2 = 23; 23 + 6 = 29.',true);next('s2','s3',3)}else msg('f2','Проверь: сначала нужно убрать разницу, затем разделить на две равные части.',false)}
+function checkOffice(){const ok=+phone.value===38&&+fax.value===143;if(ok){msg('f3','Верно: телефон 38 р., факс 143 р. Проверка: 38 + 143 = 181.',true);next('s3','s4',4)}else msg('f3','Не сходится. Определи меньшую стоимость после шага (181 − 105) : 2.',false)}
+function checkFilms(){const ok=+d2.value===246&&+d3.value===296&&+film1.value===2631&&+film2.value===2877&&+film3.value===2927;if(ok){msg('f4','Отлично. Проверка: 2631 + 2877 + 2927 = 8435.',true);setTimeout(()=>{document.getElementById('s4').hidden=true;document.getElementById('finish').hidden=false;document.getElementById('finish').scrollIntoView({behavior:'smooth'});},700)}else msg('f4','Проверь сравнение с первым фильмом: третий больше первого не на 50, а на 246 + 50.',false)}
+</script>
+</body></html>
