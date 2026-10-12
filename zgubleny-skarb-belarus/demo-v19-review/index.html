@@ -338,7 +338,7 @@ $('s4Route1').onclick=()=>go('scene1');$('s4Route2').onclick=()=>go('scene2');$(
 $('levelSwitcher').addEventListener('click',()=>setTimeout(()=>{state.choice=null;$('s4VasylkaSpeech').hidden=true;render()},70));
 window.addEventListener('quest:replay',reset);window.addEventListener('quest:scene2-change',setNav);window.addEventListener('quest:scene3-change',render);
 // Existing scene 3 has its own saved state; observe completion and unlock scene 4 without page reload.
-const speech=$('speechScene3');new MutationObserver(()=>{setNav()}).observe(speech,{childList:true,characterData:true,subtree:true});
+const speech=$('speechScene3');new MutationObserver(()=>{render()}).observe(speech,{childList:true,characterData:true,subtree:true});
 setNav();render();
 })();
 </script><script id="scene5Engine">
