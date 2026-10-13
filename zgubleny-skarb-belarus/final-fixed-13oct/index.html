@@ -539,7 +539,7 @@ function unlocked(){const l=lvl(),s1=obj(K1),s2=obj(K2),s3=obj(K3),s4=obj(K4),s5
  const u1=!!s1.firstTreasure,u2=u1&&!!s2.complete,u3=u2&&!!s3.done,u4=u3&&!!s4.finished?.[l],u5=u4&&!!s5.done?.[l];
  return [true,u1,u2,u3,u4,u5]}
 let current=0;
-function currentStage(){let best=0,dist=Infinity;document.querySelectorAll('.stage-wrap').forEach((s,i)=>{const r=s.getBoundingClientRect();const d=Math.abs(r.top-90);if(r.bottom>80&&d<dist){best=i;dist=d}});return best}
+function currentStage(){const fin=$('questFinal');if(fin&&!fin.hidden){const r=fin.getBoundingClientRect();if(r.top<innerHeight*.55&&r.bottom>90)return 5}let best=0,dist=Infinity;document.querySelectorAll('.stage-wrap').forEach((s,i)=>{const r=s.getBoundingClientRect();const d=Math.abs(r.top-90);if(r.bottom>80&&d<dist){best=i;dist=d}});return best}
 function routes(){const allowed=unlocked();current=currentStage();for(const section of document.querySelectorAll('.stage-wrap')){
   for(const button of section.querySelectorAll('.side button.route')){
    const m=button.textContent.match(/\b([1-6])\./);if(!m)continue;const i=Number(m[1])-1;
