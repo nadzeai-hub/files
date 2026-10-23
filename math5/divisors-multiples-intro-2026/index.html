@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Лаборатория чисел — делители и кратные • 5 класс</title>
+<style>
+:root{--ink:#132738;--muted:#496473;--teal:#116d74;--tint:#e9f7f4;--mint:#cbf1e5;--orange:#d36f35;--line:#cbdbdc;--paper:#fffefa;--wrong:#9a3d36;--ok:#0b7354;--dark:#102a35}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 7% 0%,#e1f2ed 0,transparent 37%),radial-gradient(ellipse at 95% 22%,#fff1d9 0,transparent 32%),#f5f8f7;color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-size:20px;line-height:1.5}
+.container{max-width:1040px;margin:auto;padding:23px 24px 80px}.hero{background:#fdfefc;border:2px solid #d7e8e5;border-radius:28px;padding:24px 27px;display:grid;grid-template-columns:1fr 130px;gap:18px;box-shadow:0 12px 32px #284a3b12}.eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.14em;font-size:13px;color:var(--teal);text-transform:uppercase}.eyebrow::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--orange)}h1{margin:12px 0 4px;font-size:clamp(29px,4vw,45px);line-height:1.14;letter-spacing:-.04em}h1 span{color:var(--teal)}.hero p{color:var(--muted);margin:10px 0 0}.clippy{width:118px;height:135px;align-self:center}.note{background:#f0f8f6;border:1px solid #cfe8e1;border-radius:13px;padding:13px 16px;font-size:16px;max-width:650px;margin-top:16px;color:#244d50}.mainbar{position:sticky;top:0;z-index:10;background:#f5f8f7ef;backdrop-filter:blur(10px);border-bottom:1px solid #d6e4e2;padding:15px 0 12px}.barwrap{max-width:1040px;margin:auto;padding:0 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}.progress{flex:1;min-width:180px}.progress-head{display:flex;justify-content:space-between;font-size:14px;font-weight:800;margin-bottom:7px}.track{height:13px;background:#dfe9e7;border-radius:50px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#48b29e,#116d74);transition:width .3s}.reset{border:1px solid #b9cecf;background:#fff;border-radius:12px;padding:9px 13px;color:#34515a;cursor:pointer;font:inherit;font-size:15px;font-weight:700}.reset:hover{background:#eaf2f2}button:focus-visible,input:focus-visible{outline:3px solid #ec8e47;outline-offset:3px}
+.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0 14px}.tab{border:1.5px solid #b6ceca;border-radius:14px;background:white;padding:12px 14px;color:var(--muted);font:inherit;font-weight:750;font-size:15px;cursor:pointer}.tab[aria-selected="true"]{background:var(--dark);border-color:var(--dark);color:white}.tab .num{color:var(--teal);background:#e4f5f0;border-radius:8px;padding:2px 6px;margin-right:6px}.tab[aria-selected="true"] .num{color:var(--dark);background:#bce9dd}.intro{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:20px 0}.intro h2{font-size:29px;margin:0;line-height:1.2}.intro p{margin:7px 0 0;color:var(--muted);font-size:16px}.intro .count{white-space:nowrap;font-size:14px;color:var(--teal);font-weight:800}.questions{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#fff;border:1.8px solid #d9e5e4;border-radius:22px;padding:22px;box-shadow:0 7px 23px #2f535111;min-height:250px;display:flex;flex-direction:column}.card.solved{border-color:#80cbb4;background:#fcfffd}.qmeta{font-size:13px;color:var(--teal);font-weight:800;text-transform:uppercase;letter-spacing:.09em}.qtext{font-weight:750;font-size:21px;line-height:1.36;margin:11px 0 20px}.options{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}.choice{cursor:pointer;background:#fcfefd;border:1.5px solid #cbdbd9;border-radius:12px;color:var(--ink);min-height:46px;padding:9px 13px;text-align:left;font:inherit;font-size:20px;display:flex;gap:10px;align-items:center}.choice::before{content:'';display:block;width:18px;height:18px;flex:none;border:2px solid #9cb3b1;border-radius:50%}.card[data-multi="true"] .choice::before{border-radius:5px}.choice.selected{border-color:var(--teal);background:#e6f7f1}.choice.selected::before{background:var(--teal);border-color:var(--teal);box-shadow:inset 0 0 0 4px #e6f7f1}.choice:hover:not(:disabled){background:#eff8f6}.choice:disabled{cursor:default;opacity:.85}.inputAnswer{display:block;width:100%;border:1.8px solid #b8d0cc;border-radius:12px;background:#fdfffe;font:inherit;font-size:23px;max-width:225px;padding:11px 13px;margin-bottom:18px}.qfoot{margin-top:auto;display:flex;align-items:center;flex-wrap:wrap;gap:12px}.check{background:var(--teal);color:#fff;border:0;border-radius:12px;font:inherit;font-weight:800;font-size:19px;padding:12px 18px;cursor:pointer}.check:hover:not(:disabled){background:#0b5860}.check:disabled{background:#a6c8bc;cursor:default}.feedback{font-size:18px;font-weight:700;flex:1;min-width:160px}.feedback.bad{color:var(--wrong)}.feedback.good{color:var(--ok)}.feedback.neutral{color:var(--muted)}.status{padding:18px 20px;margin-top:18px;border:1px solid #cce1dc;border-radius:18px;background:#f5fffb;color:#264b4b;font-size:17px}.status strong{color:var(--teal)}.bottom{display:flex;gap:13px;flex-wrap:wrap;justify-content:space-between;margin-top:24px}.next{background:var(--orange);color:#fff;border:0;padding:13px 22px;font-size:17px;font-weight:800;border-radius:14px;cursor:pointer}.next:hover{background:#b95826}.smalltext{font-size:14px;color:#5c777b}.foot{margin-top:30px;color:#61767d;font-size:13px}.hidden{display:none!important}
+@media(max-width:720px){.container{padding:12px 12px 70px}.hero{padding:21px 17px;grid-template-columns:1fr 68px}.clippy{width:68px;height:95px}.questions{grid-template-columns:1fr}.barwrap{padding:0 12px}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab{font-size:14px;padding:10px 7px}.card{padding:18px;min-height:unset}.intro{align-items:start}.intro h2{font-size:24px}.qtext{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="container" style="padding-bottom:0">
+<div class="hero">
+ <div><span class="eyebrow">Математика • 5 класс</span><h1>Лаборатория <span>чисел</span></h1><p><strong>Делители и кратные.</strong> Четыре этапа проверки понимания.</p>
+ <div class="note">🔎 Здесь не нужно соревноваться в скорости. Можно считать сложением, делением или искать пары множителей. Главное — доказать свой ответ.</div></div>
+ <svg class="clippy" viewBox="0 0 130 160" role="img" aria-label="Скрепка-помощник">
+   <ellipse cx="68" cy="149" rx="37" ry="6" fill="#dfe5de"/>
+   <path d="M50 118 L39 58 Q30 12 62 14 Q91 13 89 47 L79 115 Q77 133 60 128 Q45 124 47 104 L56 48 Q58 37 68 39 Q78 42 74 55 L66 110" fill="none" stroke="#526a77" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+   <path d="M50 118 L39 58 Q30 12 62 14 Q91 13 89 47 L79 115 Q77 133 60 128 Q45 124 47 104 L56 48 Q58 37 68 39 Q78 42 74 55 L66 110" fill="none" stroke="#dbe5e8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+   <ellipse cx="48" cy="29" rx="18" ry="20" fill="white" stroke="#263843" stroke-width="3"/><ellipse cx="80" cy="28" rx="18" ry="20" fill="white" stroke="#263843" stroke-width="3"/>
+   <circle cx="54" cy="32" r="5" fill="#14232e"/><circle cx="85" cy="32" r="5" fill="#14232e"/>
+   <path d="M37 7 Q48 2 58 8 M70 6 Q81 0 92 7" stroke="#394b56" stroke-width="3" fill="none" stroke-linecap="round"/>
+ </svg>
+</div>
+</header>
+<div class="mainbar"><div class="barwrap"><div class="progress"><div class="progress-head"><span>Основная проверка</span><span id="progressText">0 из 12</span></div><div class="track"><div id="progressFill" class="fill"></div></div></div><button class="reset" id="reset" type="button">↺ Начать заново</button></div></div>
+<main class="container" style="padding-top:0">
+<nav id="tabs" class="tabs" role="tablist" aria-label="Этапы"> </nav>
+<div class="intro"><div><h2 id="stageTitle"></h2><p id="stageDesc"></p></div><div class="count" id="stageCount"></div></div>
+<section class="questions" id="questions" aria-live="off"></section>
+<div id="stageStatus" class="status" role="status" aria-live="polite"></div>
+<div class="bottom"><div class="smalltext">Кнопка «Проверить» есть в каждом задании.<br>Неверный ответ можно исправить и проверить снова.</div><button class="next" id="next" type="button">Следующий этап →</button></div>
+<div class="foot">Авторский учебный интерактив по теме § 12 учебника математики для 5 класса. Работает без интернета после скачивания HTML-файла. Результаты не отправляются на сервер.</div>
+</main>
+<script>
+'use strict';
+const stages=[
+ {title:'01. Делим без остатка',short:'Делитель',desc:'Находим числа, на которые делится данное число без остатка.'},
+ {title:'02. Считаем шагами',short:'Кратное',desc:'Ищем числа, которые делятся на данное число без остатка.'},
+ {title:'03. Не перепутай!',short:'Различаем',desc:'Сравниваем делители и кратные на одних и тех же числах.'},
+ {title:'04. Дополнительный уровень',short:'Резерв ★',desc:'Необязательное продолжение: общие делители и общие кратные.'}
+];
+const data=[
+ {id:1,stage:0,kind:'single',question:'12 : 3 = 4. Какое предложение верно?',options:['3 — делитель числа 12','12 — делитель числа 3','3 — кратное числа 12'],answer:['0'],why:'12 делится на 3 без остатка.'},
+ {id:2,stage:0,kind:'single',question:'Почему 5 НЕ является делителем числа 12?',options:['Потому что 12 : 5 делится с остатком','Потому что 5 меньше 12','Потому что 12 — чётное число'],answer:['0'],why:'Делитель должен делить число без остатка.'},
+ {id:3,stage:0,kind:'single',question:'Какое число является делителем числа 18?',options:['4','5','6','7'],answer:['2'],why:'18 : 6 = 3 без остатка.'},
+ {id:4,stage:0,kind:'multi',question:'Выбери ВСЕ делители числа 12.',options:['1','2','3','4','5','6','8'],answer:['0','1','2','3','5'],why:'12 делится без остатка на 1, 2, 3, 4, 6 и 12.'},
+ {id:5,stage:1,kind:'single',question:'Какое число кратно 6?',options:['20','22','24','25'],answer:['2'],why:'24 : 6 = 4 без остатка.'},
+ {id:6,stage:1,kind:'multi',question:'Выбери ВСЕ кратные числа 4.',options:['8','10','12','16','18','20'],answer:['0','2','3','5'],why:'8, 12, 16, 20 получаются шагами по 4.'},
+ {id:7,stage:1,kind:'number',question:'Кратные числа 6: 6, 12, 18, 24, ... Какое число дальше?',answer:'30',why:'Прибавляем 6: 24 + 6 = 30.'},
+ {id:8,stage:1,kind:'number',question:'Кратные числа 5: 5, 10, 15, ... Какое число пропущено перед 25?',answer:'20',why:'Прибавляем 5: 15 + 5 = 20.'},
+ {id:9,stage:2,kind:'single',question:'Как правильно сказать о числе 5 по отношению к 20?',options:['5 — делитель числа 20','5 — кратное числа 20'],answer:['0'],why:'20 делится на 5 без остатка.'},
+ {id:10,stage:2,kind:'single',question:'А как правильно сказать о числе 20 по отношению к 5?',options:['20 — делитель числа 5','20 — кратное числа 5'],answer:['1'],why:'20 : 5 = 4 без остатка.'},
+ {id:11,stage:2,kind:'single',question:'Верно ли: «6 — кратное числа 24»?',options:['Да, верно','Нет, неверно'],answer:['1'],why:'Наоборот: 6 — делитель числа 24, а 24 кратно 6.'},
+ {id:12,stage:2,kind:'single',question:'Верно ли: «7 — делитель числа 28»?',options:['Да, верно','Нет, неверно'],answer:['0'],why:'28 : 7 = 4 без остатка.'},
+ {id:13,stage:3,kind:'multi',question:'Найди все ОБЩИЕ делители чисел 12 и 18 среди вариантов.',options:['1','2','3','4','6','9'],answer:['0','1','2','4'],why:'Оба числа делятся на 1, 2, 3, 6.'},
+ {id:14,stage:3,kind:'number',question:'Какое первое положительное общее кратное чисел 4 и 6?',answer:'12',why:'Кратные 4: 4, 8, 12...; кратные 6: 6, 12...'},
+ {id:15,stage:3,kind:'single',question:'Правда ли, что у каждого натурального числа ровно два делителя?',options:['Правда','Неправда'],answer:['1'],why:'Например, у 6 четыре делителя: 1, 2, 3, 6.'},
+ {id:16,stage:3,kind:'single',question:'Сколько кратных у любого натурального числа?',options:['Одно','Два','Бесконечно много'],answer:['2'],why:'Всегда можно прибавить число ещё один раз.'}
+];
+let active=0;
+const picked={};const solved=new Set();
+const el=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+function selectStage(n){active=n;render();document.getElementById('tabs').scrollIntoView({block:'start',behavior:'smooth'});}
+function normalize(a){return [...a].map(String).sort((x,y)=>Number(x)-Number(y)).join('|');}
+function progress(){const count=[...solved].filter(id=>id<=12).length;el('progressText').textContent=count+' из 12';el('progressFill').style.width=(count/12*100)+'%';}
+function render(){
+ el('tabs').innerHTML=stages.map((s,i)=>`<button type="button" class="tab" data-tab="${i}" role="tab" aria-selected="${i===active}"><span class="num">${String(i+1).padStart(2,'0')}</span>${esc(s.short)}</button>`).join('');
+ el('stageTitle').textContent=stages[active].title;el('stageDesc').textContent=stages[active].desc;
+ const q=data.filter(a=>a.stage===active);const got=q.filter(a=>solved.has(a.id)).length;
+ el('stageCount').textContent=`Выполнено ${got} из ${q.length}`;
+ el('questions').innerHTML=q.map(a=>{
+    const answer=picked[a.id]||[];const done=solved.has(a.id);
+    let field=a.kind==='number'?`<input class="inputAnswer" type="text" inputmode="numeric" autocomplete="off" aria-label="Твой ответ" data-answer="${a.id}" value="${esc(answer[0]||'')}" ${done?'disabled':''} placeholder="Впиши число">`:
+      `<div class="options" role="group" aria-label="Варианты ответов">${a.options.map((v,i)=>`<button type="button" class="choice ${answer.includes(String(i))?'selected':''}" aria-pressed="${answer.includes(String(i))}" data-pick="${a.id}" data-index="${i}" ${done?'disabled':''}>${esc(v)}</button>`).join('')}</div>`;
+    return `<article class="card ${done?'solved':''}" id="q${a.id}" data-multi="${a.kind==='multi'}"><span class="qmeta">Задание ${String(a.id).padStart(2,'0')} ${a.kind==='multi'?'• Несколько ответов':''}</span><div class="qtext">${esc(a.question)}</div>${field}<div class="qfoot"><button type="button" class="check" data-check="${a.id}" ${done?'disabled':''}>${done?'✓ Проверено':'Проверить'}</button><div class="feedback ${done?'good':''}" role="status" aria-live="polite" id="msg${a.id}">${done?'Верно! '+esc(a.why):''}</div></div></article>`;
+ }).join('');
+ if(got===q.length){el('stageStatus').innerHTML=active===3?'<strong>Дополнительный уровень пройден!</strong> Отличная работа.':'<strong>Этап завершён!</strong> Можно переходить дальше. Не обязательно спешить.';}else{el('stageStatus').innerHTML=`Решено <strong>${got} из ${q.length}</strong>. Ошибки можно исправлять. Здесь важнее понимание, чем скорость.`;}
+ el('next').textContent=active===3?'Вернуться к первому этапу ↺':'Следующий этап →';
+ progress();
+}
+function choose(id,index){const a=data.find(x=>x.id===id);if(solved.has(id))return;
+ let v=picked[id]||[];index=String(index);
+ if(a.kind==='single')v=[index];else v=v.includes(index)?v.filter(x=>x!==index):[...v,index];
+ picked[id]=v;
+ const card=el('q'+id);card.querySelectorAll('[data-index]').forEach(b=>{const yes=v.includes(b.dataset.index);b.classList.toggle('selected',yes);b.setAttribute('aria-pressed',String(yes));});
+ el('msg'+id).textContent='';el('msg'+id).className='feedback';
+}
+function check(id){const a=data.find(x=>x.id===id);if(solved.has(id))return;
+ if(a.kind==='number'){const inp=document.querySelector(`[data-answer="${id}"]`);picked[id]=[inp.value.trim().replace(/\s/g,'')];}
+ const v=picked[id]||[];const feedback=el('msg'+id);
+ if(!v.length||!v[0]){feedback.textContent='Сначала выбери или впиши ответ.';feedback.className='feedback neutral';return;}
+ const isCorrect=a.kind==='number'?v[0]===a.answer:normalize(v)===normalize(a.answer);
+ if(isCorrect){solved.add(id);render();const node=el('q'+id);node.classList.add('solved');}
+ else{feedback.textContent='Пока неверно. Подумай и попробуй снова.';feedback.className='feedback bad';}
+}
+document.addEventListener('click',e=>{
+ const tab=e.target.closest('[data-tab]');if(tab){selectStage(Number(tab.dataset.tab));return;}
+ const pick=e.target.closest('[data-pick]');if(pick){choose(Number(pick.dataset.pick),pick.dataset.index);return;}
+ const chk=e.target.closest('[data-check]');if(chk){check(Number(chk.dataset.check));return;}
+});
+el('next').addEventListener('click',()=>selectStage((active+1)%stages.length));
+el('reset').addEventListener('click',()=>{if(!confirm('Сбросить все ответы и начать заново?'))return;for(const k of Object.keys(picked))delete picked[k];solved.clear();active=0;render();window.scrollTo({top:0,behavior:'smooth'});});
+render();
+</script>
+</body>
+</html>
