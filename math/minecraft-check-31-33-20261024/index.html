@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#70caff">
+<title>Проверь себя • Математика • Minecraft</title>
+<style>
+*{box-sizing:border-box}
+:root{--navy:#163c4d;--earth:#6a472d;--sky:#9be7ff;--grass:#79c94f;--paper:#fffef4;--green:#25873d;--red:#af3527}
+html{scroll-behavior:smooth}body{margin:0;color:var(--navy);font:600 18px/1.42 system-ui,"Segoe UI",Arial,sans-serif;background:linear-gradient(#70ccf3 0 320px,#b2eeff 320px 440px,#83cd5e 440px 100%) fixed}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;background-image:linear-gradient(90deg,#fff 2px,transparent 2px),linear-gradient(#fff 2px,transparent 2px);background-size:80px 80px}
+.wrap{max-width:920px;margin:auto;padding:16px 18px 70px;position:relative}
+.hero{display:grid;grid-template-columns:1fr 120px;gap:12px;align-items:center;background:#fbfaee;border:5px solid #643c1f;box-shadow:7px 7px 0 #3e2f21;border-radius:5px;padding:18px 24px;margin:20px 6px 26px}
+.eyebrow{color:#9c6428;font-size:15px;letter-spacing:1px;text-transform:uppercase}h1{margin:4px 0;color:#2d641f;font-size:clamp(30px,6vw,49px);line-height:1.12;letter-spacing:.5px;text-shadow:2px 2px 0 #c5e6b0}
+.hero p{margin:9px 0 0;font-weight:500;font-size:17px}
+.avatar{width:100%;filter:drop-shadow(5px 7px 0 #b0b5ad)}
+.progress{margin:0 6px 22px;padding:14px 18px;border:4px solid #315b2e;background:#ebffd8;box-shadow:5px 5px 0 #244529;border-radius:4px}
+.progress-top{display:flex;justify-content:space-between;gap:15px;align-items:center;font-weight:800}
+.track{height:23px;background:#d4e6d4;border:3px solid #52784a;margin-top:10px;overflow:hidden}
+.fill{height:100%;width:0;background:repeating-linear-gradient(90deg,#45bb48,#45bb48 25px,#63d75b 25px,#63d75b 30px);transition:width .35s}
+.mission{background:#fefcf3;border:4px solid #876040;border-radius:4px;box-shadow:6px 6px 0 #493722;padding:22px;margin:0 6px 24px;position:relative}
+.mission h2{font-size:clamp(21px,3.8vw,27px);line-height:1.25;margin:0 0 13px}
+.mission h2 span{display:inline-grid;place-items:center;background:#e2b565;border:3px solid #7b4b2d;color:#392814;min-width:41px;height:41px;margin-right:10px;font-size:21px;vertical-align:middle}
+.q{font-weight:600;margin:0 0 15px}
+.stick{display:inline-block;font-weight:900;padding:4px 9px;background:#e0f3fd;border-left:5px solid #3197d7;margin:0 0 14px}
+.line{margin:0 0 15px;max-width:490px;width:100%;height:42px}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.option{cursor:pointer;padding:14px 12px;text-align:left;color:#183a4b;background:#e6f5ff;border:3px solid #5a9cb9;box-shadow:3px 3px 0 #94bac8;border-radius:4px;font:700 17px/1.28 system-ui;min-height:68px}
+.option:hover:not(:disabled),.option:focus-visible{background:#d2eaff;outline:3px solid #ffca57;outline-offset:1px}
+.option.selected{background:#ffedaf;border-color:#bd892b}
+.option:disabled{cursor:default}
+.option.good{background:#caf0ba;border-color:#268338}
+.check{font:900 17px system-ui;color:#173513;background:#a8e87b;border:3px solid #387d37;box-shadow:4px 4px 0 #23512b;border-radius:3px;padding:11px 17px;margin:18px 5px 2px 0;cursor:pointer}
+.check:hover{filter:brightness(1.05)}.check:disabled{opacity:.55;cursor:default;box-shadow:none}
+.feedback{font-size:17px;margin-top:13px;padding:12px 14px;border-left:5px solid #c89a36;background:#fff3cc;font-weight:600;display:none}
+.feedback.show{display:block}.feedback.ok{border-color:#37a45a;background:#e5fbdc}.feedback.no{border-color:#da7b51;background:#fff0e7}
+.score-label{float:right;color:#477b39;font-weight:900;font-size:14px;white-space:nowrap}
+.mathrow{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,2fr) auto;gap:12px;align-items:center;padding:15px 0;border-top:2px dashed #dbc9a8}
+.mathrow:first-of-type{border-top:0}
+.math-expression{font-size:19px;font-weight:900;color:#314c22}
+.math-answer{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.math-answer input{width:63px;max-width:28vw;border:3px solid #539abd;background:#fff;font:900 19px system-ui;text-align:center;padding:9px 3px;border-radius:4px;color:#183a4b}
+.math-answer label{font-size:16px}
+.mathrow .check{margin:0;padding:9px 12px}
+.row-feedback{grid-column:1/-1;margin-top:-3px;font-size:16px;color:#ad4c1d}
+.row-feedback.ok{color:#267c34}
+.tips{margin:10px 0 15px;font-size:16px;color:#466a46;background:#e8f8e0;padding:10px}
+.trophy{display:none;text-align:center;background:#fff3a4;border:5px solid #b58930;box-shadow:6px 6px 0 #594323;padding:25px 14px;margin:25px 6px;font-size:21px}
+.trophy h2{margin:5px 0;color:#35702c;font-size:32px}
+.actions{text-align:center;margin:24px}
+.reset{font:700 16px system-ui;padding:9px 15px;color:#335576;background:#f4f9ff;border:2px solid #6ba4c5;border-radius:3px;cursor:pointer}
+footer{text-align:center;font-size:14px;padding:8px;color:#214d39}
+@media(max-width:680px){.wrap{padding:10px 10px 35px}.hero{grid-template-columns:1fr 85px;padding:13px}.mission{padding:15px;margin-bottom:18px}.options{grid-template-columns:1fr}.option{min-height:53px}.mathrow{grid-template-columns:1fr auto}.math-expression{grid-column:1/-1}.math-answer input{width:57px}.mathrow .check{font-size:15px;padding:9px}.hero p{font-size:15px}.score-label{float:none;display:block;margin:5px 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.fill{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="hero">
+<div><div class="eyebrow">Математика • уроки 31–33</div><h1>ПРОВЕРЬ СЕБЯ!</h1><p>Пройди 6 испытаний, проверь ответы и собери все алмазы. Ошибся? Попробуй снова!</p></div>
+<svg class="avatar" viewBox="0 0 110 155" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Весёлый блочный герой в синей толстовке">
+<path fill="#542e20" d="M27 12h58v65H22V23h5z"/><path fill="#91512f" d="M33 16h48v17H33z"/><path fill="#f1b977" d="M29 36h57v43H29z"/><path fill="#bd7a49" d="M29 36h12v9H29z"/><path fill="#3b2119" d="M27 24h57v19H73v-8H61v9H43v-8H27z"/><path fill="#fff" d="M37 49h15v17H37zm25 0h15v17H62z"/><path fill="#2f6796" d="M43 51h7v12h-7zm21 0h7v12h-7z"/><path fill="#953e34" d="M49 70h17v6H49z"/><path fill="#1b6db1" d="M18 83h77v42H18z"/><path fill="#56a8e1" d="M26 84h60v12H26z"/><path fill="#f1b977" d="M8 95h15v32H8zm84 0h13v30H92z"/><path fill="#1e5482" d="M36 125h18v27H36zm24 0h18v27H60z"/><path fill="#34474f" d="M33 146h25v8H33zm25 0h24v8H58z"/><path stroke="#fff" stroke-width="4" d="M49 88v22m17-22v22"/>
+</svg>
+</header>
+<section class="progress" aria-live="polite"><div class="progress-top"><span>💎 Собрано алмазов</span><span id="counter">0 из 6</span></div><div class="track" role="progressbar" aria-label="Прогресс игры" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="progress"><div class="fill" id="fill"></div></div></section>
+<div id="quiz"></div>
+<section class="mission" id="mission6">
+<h2><span>6</span> Мастерская времени <span class="score-label">4 примера</span></h2>
+<p class="q">Вычисли. Если в ответе нет полных лет или суток, поставь <b>0</b> в первое окошко.</p>
+<div class="tips">Подсказка: 1 год = 12 месяцев • 1 сутки = 24 часа</div>
+<div id="math"></div>
+<div class="feedback" id="feedback6" role="status"></div>
+</section>
+<section class="trophy" id="trophy" aria-live="polite"><div style="font-size:49px">🏆💎🎉</div><h2>Все 6 испытаний пройдены!</h2><p>Ты отлично справился с проверкой. Покажи этот экран педагогу!</p></section>
+<div class="actions"><button class="reset" type="button" id="reset">↻ Пройти заново</button></div>
+<footer>Самопроверка по заданиям учебника • Minecraft-inspired оформление</footer>
+</main>
+<script>
+"use strict";
+const questions=[
+{title:"Секрет отрезка",q:"Укажи, в каком случае НЕВЕРНО записана длина отрезка AB.",note:"Известно: AB = 115 мм",line:true,answers:["115 мм","10 см 5 мм","11 см 5 мм","1 дм 1 см 5 мм"],correct:1,hint:"Переведи все четыре длины в миллиметры. 1 см = 10 мм.",why:"10 см 5 мм = 105 мм, а отрезок имеет длину 115 мм."},
+{title:"Портал в прошлое",q:"К какому веку относится 587 год?",answers:["К пятому веку","К шестому веку","К четвёртому веку","К седьмому веку"],correct:1,hint:"Шестой век продолжается с 501-го по 600-й год.",why:"587 год лежит между 501 и 600, значит, это VI век."},
+{title:"Поймай ошибку",q:"В каком случае НЕВЕРНО найдено значение выражения?",answers:["6200 + 300 = 9200","6900 − 700 = 6200","8400 : 7 = 1200","6500 : 1300 = 5"],correct:0,hint:"Проверь сложение в первом выражении.",why:"6200 + 300 = 6500, а не 9200."},
+{title:"Построй прямоугольник",q:"Длина прямоугольника в 3 раза больше его ширины. Периметр — 1600 мм. Чему равна ширина?",answers:["800 мм","400 мм","600 мм","200 мм"],correct:3,hint:"Периметр — две длины и две ширины, то есть 8 одинаковых частей-ширин.",why:"Ширина = 1600 : 8 = 200 мм. Длина = 600 мм."},
+{title:"Жучка бежит!",q:"Ваня и Таня вышли одновременно навстречу друг другу со скоростями 4 км/ч и 3 км/ч и встретились через 2 часа. С Ваней выбежала собачка Жучка со скоростью 12 км/ч. Она бегала между ребятами до встречи. Сколько километров пробежала Жучка?",answers:["14 км","7 км","24 км","12 км"],correct:2,hint:"Жучка бегала все 2 часа. Умножь её скорость на время.",why:"12 км/ч × 2 ч = 24 км."}
+];
+const labels=["А","Б","В","Г"];
+const quiz=document.getElementById("quiz");
+const solved=new Set();
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
+function update(){let n=solved.size;document.getElementById("counter").textContent=n+" из 6";document.getElementById("fill").style.width=(n/6*100)+"%";document.getElementById("progress").setAttribute("aria-valuenow",n);document.getElementById("trophy").style.display=n===6?"block":"none"}
+questions.forEach(function(q,i){
+ const section=el("section","mission");section.id="mission"+(i+1);
+ const h=el("h2");const count=el("span","",String(i+1));h.append(count,document.createTextNode(" "+q.title));section.append(h);
+ section.append(el("p","q",q.q));
+ if(q.note)section.append(el("div","stick",q.note));
+ if(q.line){const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 490 42");svg.classList.add("line");svg.innerHTML='<text x="9" y="17" font-size="16" fill="#153a60">A</text><text x="466" y="17" font-size="16" fill="#153a60">B</text><path d="M20 30H474" stroke="#22549d" stroke-width="3"/><circle cx="20" cy="30" r="4" fill="#22549d"/><circle cx="474" cy="30" r="4" fill="#22549d"/>';section.append(svg)}
+ const opts=el("div","options");const buttons=[];
+ q.answers.forEach(function(answer,j){const b=el("button","option",labels[j]+". "+answer);b.type="button";b.setAttribute("aria-pressed","false");b.onclick=function(){if(solved.has(i+1))return;buttons.forEach(function(x){x.classList.remove("selected");x.setAttribute("aria-pressed","false")});b.classList.add("selected");b.setAttribute("aria-pressed","true");section.dataset.selected=j;};opts.append(b);buttons.push(b)});
+ section.append(opts);
+ const check=el("button","check","Проверить ответ");check.type="button";
+ const feedback=el("div","feedback");feedback.setAttribute("role","status");
+ check.onclick=function(){if(solved.has(i+1))return;const choice=section.dataset.selected;if(choice===undefined){feedback.className="feedback show no";feedback.textContent="Выбери один из ответов.";return}if(Number(choice)===q.correct){solved.add(i+1);buttons.forEach(function(b,j){b.disabled=true;if(j===q.correct)b.classList.add("good")});check.disabled=true;check.textContent="✓ Алмаз получен";feedback.className="feedback show ok";feedback.textContent="Верно! "+q.why;update()}else{feedback.className="feedback show no";feedback.textContent="Пока не получилось. Подсказка: "+q.hint+" Выбери другой вариант и проверь ещё раз."}};
+ section.append(check,feedback);quiz.append(section)
+});
+const calculations=[
+{expression:"2 г. 4 мес. : 7",u1:"г.",u2:"мес.",a1:0,a2:4,tip:"2 года 4 месяца = 28 месяцев. 28 : 7 = 4 месяца."},
+{expression:"1 г. 2 мес. · 4",u1:"г.",u2:"мес.",a1:4,a2:8,tip:"14 месяцев × 4 = 56 месяцев = 4 года 8 месяцев."},
+{expression:"1 сут. 6 ч · 3",u1:"сут.",u2:"ч",a1:3,a2:18,tip:"30 часов × 3 = 90 часов = 3 суток 18 часов."},
+{expression:"3 сут. 2 ч : 2",u1:"сут.",u2:"ч",a1:1,a2:13,tip:"74 часа : 2 = 37 часов = 1 сутки 13 часов."}
+];
+const math=document.getElementById("math");const done=new Set();
+calculations.forEach(function(c,i){
+ const row=el("div","mathrow");const title=el("div","math-expression",String(i+1)+") "+c.expression);const inputs=el("div","math-answer");const values=[];
+ [[c.u1,"первая единица"],[c.u2,"вторая единица"]].forEach(function(unit,j){const input=el("input");input.type="number";input.inputMode="numeric";input.min="0";input.max="999";input.placeholder="?";input.setAttribute("aria-label","Пример "+(i+1)+": "+unit[1]+" ("+unit[0]+")");const label=el("label","",unit[0]);inputs.append(input,label);values.push(input)});
+ const check=el("button","check","Проверить");check.type="button";const feedback=el("div","row-feedback");feedback.setAttribute("role","status");
+ check.onclick=function(){if(done.has(i))return;if(values.some(function(v){return v.value.trim()===""})){feedback.textContent="Заполни оба окошка (можно поставить 0).";return}if(Number(values[0].value)===c.a1&&Number(values[1].value)===c.a2){done.add(i);values.forEach(function(v){v.disabled=true;v.style.borderColor="#268338"});check.disabled=true;check.textContent="✓ Верно";feedback.className="row-feedback ok";feedback.textContent="Отлично! "+c.tip;if(done.size===4){solved.add(6);const feedback6=document.getElementById("feedback6");feedback6.className="feedback show ok";feedback6.textContent="💎 Мастерская времени пройдена! Все 4 примера решены.";update()}}else{feedback.className="row-feedback";feedback.textContent="Проверь перевод единиц. 1 год = 12 месяцев, 1 сутки = 24 часа. Попробуй ещё."}};
+ row.append(title,inputs,check,feedback);math.append(row);
+});
+document.getElementById("reset").onclick=function(){if(window.confirm("Начать проверку заново?"))window.location.reload()};
+update();
+</script>
+</body>
+</html>
