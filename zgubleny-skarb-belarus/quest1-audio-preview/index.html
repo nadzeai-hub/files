@@ -201,6 +201,7 @@ html,body{max-width:100%;overflow-x:clip}.top{flex-wrap:wrap}.top-right{flex-wra
   #scene2 .quest-helper > .quest-vasy-words{font-size:clamp(15px,4vw,18px)}
 }
 </style><style id="questAudioStyles">.quest-audio-controls{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 4px;max-width:100%;font:600 14px/1.3 system-ui,sans-serif}
+.quest-audio-controls[hidden]{display:none!important}
 .quest-audio-controls button{width:auto;min-height:40px;margin:0;padding:7px 10px;border:1px solid #a87637;border-radius:10px;background:#fff3d8;color:#4a2b12;font:700 14px/1.3 system-ui,sans-serif;box-shadow:none}
 .quest-audio-controls button:focus-visible{outline:3px solid #24768d;outline-offset:2px}
 .quest-audio-controls button:disabled{opacity:.5;cursor:default}
@@ -605,7 +606,7 @@ sync();
 const recordings=[{"text": "Прывітанне! Я Васілька. Абяры свой шлях — і пачнём расследаванне!", "file": "audio/s1-welcome.mp3"}, {"text": "Ці можна пакласці Радзіму ў куфэрак? Адчынім яго і даведаемся!", "file": "audio/s1-004.mp3"}, {"text": "У куфэрку знайшлася загадкавая запіска!", "file": "audio/s1-005.mp3"}, {"text": "Націсні на картку і падумай: што сапраўды змесціцца ў куфэрку?", "file": "audio/s1-card-instruction.mp3"}];
 const normalize=s=>s.replace(/\s+/g,' ').trim();
 const files=new Map(recordings.map(r=>[normalize(r.text),r.file]));
-const audio=new Audio();audio.preload='none';
+const audio=document.createElement('audio');audio.id='questNarration';audio.preload='none';audio.hidden=true;document.body.appendChild(audio);
 let active=null,epoch=0,queued=false;
 const controls=new Map();
 function status(c,t){if(c.status.textContent!==t)c.status.textContent=t}
@@ -614,6 +615,7 @@ function stop(){++epoch;audio.pause();try{audio.currentTime=0}catch{};if(active)
 function visible(el){return !!el?.isConnected&&!el.closest('[hidden],.hide')&&getComputedStyle(el).display!=='none'&&el.getClientRects().length>0}
 function play(c){
  stop();if(!visible(c.host)||normalize(c.host.textContent)!==c.text)return;
+ window.scrollTo({top:window.scrollY,left:window.scrollX,behavior:'instant'});
  const token=epoch;active=c;c.play.disabled=true;c.stop.disabled=false;c.repeat.disabled=false;status(c,'Загрузка…');
  audio.src=c.file;
  audio.play().then(()=>{if(token!==epoch)return;status(c,'Гучыць…')}).catch(()=>{
@@ -651,7 +653,7 @@ function sceneAtViewport(){
  const sections=[...document.querySelectorAll('#prologue,.stage-wrap,#questFinal')].filter(visible);
  return sections.find(el=>{const r=el.getBoundingClientRect();return r.top<=innerHeight*.4&&r.bottom>innerHeight*.4})||sections.find(el=>{const r=el.getBoundingClientRect();return r.top>=0&&r.top<innerHeight});
 }
-window.addEventListener('scroll',()=>{const next=sceneAtViewport();if(active){const owner=active.host.closest('#questFinal,.stage-wrap,#prologue'),r=active.host.getBoundingClientRect();if(next&&next!==owner&&(r.bottom<80||r.top>innerHeight))stop()}section=next},{passive:true});
+window.addEventListener('scroll',()=>{const next=sceneAtViewport();if(active){const owner=active.host.closest('#questFinal,.stage-wrap,#prologue'),r=owner?.getBoundingClientRect();if(next&&next!==owner&&r&&(r.bottom<80||r.top>innerHeight))stop()}section=next},{passive:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
 window.addEventListener('pagehide',stop);window.addEventListener('beforeunload',stop);
 for(const ev of ['quest:replay','quest:scene3-level','quest:scene3-reset','quest:scene4-complete'])window.addEventListener(ev,stop);
