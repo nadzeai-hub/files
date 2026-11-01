@@ -6,6 +6,7 @@ const frame=document.getElementById('game'),report=document.getElementById('repo
 document.querySelectorAll('[data-width]').forEach(b=>b.onclick=()=>{frame.style.width=b.dataset.width+'px';report.textContent='Ширина '+b.dataset.width});
 document.getElementById('inspect').onclick=()=>{
  const doc=frame.contentDocument,win=frame.contentWindow;
+ if(!doc?.getElementById("questNarration")){report.textContent="Квест загружается. Повторите проверку после загрузки.";return;}
  const shown=el=>el.getClientRects().length&&!el.closest('[hidden],.hide');
  const targets=[...doc.querySelectorAll('#speech,#speechScene2,#speechScene3,#s4Speech,#s5HeroBubble,#feedback,#compareInfo,#s2Feedback,#s3Discovery,#s3VasylkaSpeech,#s4Feedback,#s4VasylkaSpeech,.stage-wrap p,#prologue p,#questFinal p')].filter(shown);
  const missing=targets.filter(el=>el.textContent.trim()&&el.nextElementSibling?.className!=='quest-audio-controls').map(el=>({id:el.id,text:el.textContent.trim()}));
