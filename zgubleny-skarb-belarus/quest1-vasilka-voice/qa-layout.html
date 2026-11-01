@@ -1,0 +1,19 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Проверка озвученной копии</title>
+<style>body{margin:0;font:15px system-ui;background:#ddd}header{position:sticky;top:0;z-index:4;background:white;padding:8px;display:flex;flex-wrap:wrap;gap:5px}button{padding:8px}iframe{display:block;border:0;height:820px;background:white}pre{white-space:pre-wrap;max-height:220px;overflow:auto;margin:4px}</style>
+<header><span>Ширина:</span><button data-width="375">375</button><button data-width="430">430</button><button data-width="768">768</button><button data-width="1366">1366</button><button id="inspect">Проверить видимый текст и размеры</button><button id="fail">Следующий звук — ошибка</button><button id="missing">Следующий звук — 404</button><button id="restore">Обычный звук</button></header><pre id="report"></pre><iframe id="game" title="Проверяемый квест" src="index.html?audio-check=full-v1" style="width:1366px"></iframe>
+<script>
+const frame=document.getElementById('game'),report=document.getElementById('report');let nativePlay;
+document.querySelectorAll('[data-width]').forEach(b=>b.onclick=()=>{frame.style.width=b.dataset.width+'px';report.textContent='Ширина '+b.dataset.width});
+document.getElementById('inspect').onclick=()=>{
+ const doc=frame.contentDocument,win=frame.contentWindow;
+ const shown=el=>el.getClientRects().length&&!el.closest('[hidden],.hide');
+ const targets=[...doc.querySelectorAll('#speech,#speechScene2,#speechScene3,#s4Speech,#s5HeroBubble,#feedback,#compareInfo,#s2Feedback,#s3Discovery,#s3VasylkaSpeech,#s4Feedback,#s4VasylkaSpeech,.stage-wrap p,#prologue p,#questFinal p')].filter(shown);
+ const missing=targets.filter(el=>el.textContent.trim()&&el.nextElementSibling?.className!=='quest-audio-controls').map(el=>({id:el.id,text:el.textContent.trim()}));
+ const player=doc.getElementById('questNarration');
+ report.textContent=JSON.stringify({viewport:win.innerWidth,document:doc.documentElement.scrollWidth,players:doc.querySelectorAll('audio').length,paused:player.paused,time:player.currentTime,src:player.getAttribute('src'),controls:[...doc.querySelectorAll('.quest-audio-controls')].filter(shown).length,buttons:[...doc.querySelectorAll('.quest-audio-controls button')].filter(shown).map(b=>b.getBoundingClientRect().height),missing},null,2);
+};
+function original(){const audio=frame.contentDocument.getElementById('questNarration');nativePlay=nativePlay||audio.play;audio.play=nativePlay;return audio}
+document.getElementById('fail').onclick=()=>{const audio=original();audio.play=function(){this.play=nativePlay;return Promise.reject(new Error('QA simulated playback rejection'))};report.textContent='Однократная ошибка play() включена'};
+document.getElementById('missing').onclick=()=>{const audio=original();audio.play=function(){this.play=nativePlay;this.src='audio/QA-missing-file.mp3';return nativePlay.call(this)};report.textContent='Однократная проверка 404 включена'};
+document.getElementById('restore').onclick=()=>{original();report.textContent='Обычный звук восстановлен'};
+</script></html>
