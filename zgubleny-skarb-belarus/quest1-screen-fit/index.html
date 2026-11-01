@@ -211,7 +211,7 @@ html,body{max-width:100%;overflow-x:clip}.top{flex-wrap:wrap}.top-right{flex-wra
 .quest-audio-text{flex:1;min-width:0}.s5-character{align-items:flex-start}
 </style><style id="questScreenFitStyles">/* Presentation only. Original quest handlers and text are retained. */
 :root{--quest-top:60px;--quest-view:calc(100svh - var(--quest-top))}
-html{scroll-padding-top:var(--quest-top);scroll-snap-type:y proximity}
+html{scroll-padding-top:0;scroll-snap-type:y mandatory}
 body>.top{position:sticky;top:0;padding:7px 16px;gap:8px;min-height:50px}
 .top .brand{font-size:16px}.top .top-right{gap:6px}.top .top-right button{min-height:38px;padding:7px 11px;font-size:13px}
 #prologue{height:var(--quest-view);min-height:0;padding:18px clamp(20px,5vw,72px);justify-content:center;overflow:auto;scroll-snap-align:start}
