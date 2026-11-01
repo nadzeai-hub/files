@@ -1,0 +1,1548 @@
+{
+  "voice": "Brian — ElevenLabs",
+  "license": "Free generated audio: noncommercial only; not for sales or promotional demo",
+  "source_sha256": "7fd1e88a7ad61cce8c79b49377f30358917602c9b280e893ce972710233ad68d",
+  "records": [
+    {
+      "id": "s1-001",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "не шукай толькі тое, што можна трымаць у руках.",
+      "file": "audio/s1-001.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-002",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Скарб можа жыць у словах, знаках і памяці.",
+      "file": "audio/s1-002.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-003",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Прывітанне! Я Васілька. Абяры свой шлях — і пачнём расследаванне!",
+      "file": "audio/s1-welcome.mp3",
+      "status": "recorded-free-noncommercial"
+    },
+    {
+      "id": "s1-004",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Ці можна пакласці Радзіму ў куфэрак? Адчынім яго і даведаемся!",
+      "file": "audio/s1-004.mp3",
+      "status": "recorded-free-noncommercial"
+    },
+    {
+      "id": "s1-005",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "У куфэрку знайшлася загадкавая запіска!",
+      "file": "audio/s1-005.mp3",
+      "status": "recorded-free-noncommercial"
+    },
+    {
+      "id": "s1-006",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "У запісцы ёсць падказка. Паглядзім!",
+      "file": "audio/s1-006.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-007",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Часткі запіскі пераблытаны. Складзі іх і правер, што атрымалася.",
+      "file": "audio/s1-007.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-008",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Здаецца, не ўсе часткі на месцы. Дадай астатнія.",
+      "file": "audio/s1-008.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-009",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Атрымалася цэлая думка! Прачытай яе і працягвай расследаванне.",
+      "file": "audio/s1-009.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-010",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Прачытай складзены тэкст у полі «Твая запіска».",
+      "file": "audio/s1-010.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-011",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Прасачы за пачаткам і працягам думкі. Можа, варта змяніць парадак?",
+      "file": "audio/s1-011.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-012",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Ці можна пакласці Радзіму ў куфэрак? Што ты пакладзеш у яго першым?",
+      "file": "audio/s1-012.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-013",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Спачатку абяры сваю першую знаходку.",
+      "file": "audio/s1-013.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-014",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Ты абраў знаходку. Цяпер падумай, чаму яна важная.",
+      "file": "audio/s1-014.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-015",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Не ўсё можна трымаць у руках. Але многае можна захаваць у памяці і ў куфэрку знаходак.",
+      "file": "audio/s1-015.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-016",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Чаму гэтая знаходка можа быць важнай? Абяры найбольш дакладнае тлумачэнне.",
+      "file": "audio/s1-016.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-017",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Манета можа расказаць пра жыццё людзей у мінулым.",
+      "file": "audio/s1-017.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-018",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Кожная залатая манета абавязкова чароўная.",
+      "file": "audio/s1-018.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-019",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Поле валошак нагадвае пра прыроду Беларусі.",
+      "file": "audio/s1-019.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-020",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Валошкі растуць толькі ў Беларусі.",
+      "file": "audio/s1-020.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-021",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Калыханка захоўвае любоў, словы і сямейныя традыцыі.",
+      "file": "audio/s1-021.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-022",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Калыханка — гэта прадмет з дрэва.",
+      "file": "audio/s1-022.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-023",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Калыханкі спяваюць толькі ў музеі.",
+      "file": "audio/s1-023.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-024",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Казкі захоўваюць словы і гісторыі.",
+      "file": "audio/s1-024.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-025",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Усё з казак адбылося насамрэч.",
+      "file": "audio/s1-025.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-026",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Кнігі патрэбныя толькі для ўпрыгожвання.",
+      "file": "audio/s1-026.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-027",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "У гэтым тлумачэнні ёсць сувязь з гісторыяй, прыродай або культурай. Можам захаваць знаходку.",
+      "file": "audio/s1-027.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-028",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Падумай, ці можна пацвердзіць гэтыя словы. Што нам сапраўды расказвае знаходка?",
+      "file": "audio/s1-028.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-029",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Не ўсё можна трымаць у руках. Але многае можна захаваць у памяці і ў куфэрку знаходак. Твая першая знаходка ўжо тут! Наперадзе яшчэ дзесяць знаходак…",
+      "file": "audio/s1-029.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-030",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Твая першая знаходка ў куфэрку! Да яе вернемся ў канцы расследавання. Але наперадзе яшчэ дзесяць загадкавых знаходак…",
+      "file": "audio/s1-030.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-031",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Першая сцэна завершана. Далей — «Дзесяць знаходак».",
+      "file": "audio/s1-031.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-032",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Націсні на картку і падумай: што сапраўды змесціцца ў куфэрку?",
+      "file": "audio/s1-card-instruction.mp3",
+      "status": "recorded-free-noncommercial"
+    },
+    {
+      "id": "s1-033",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Манета невялікая — яна змесціцца ў куфэрку.",
+      "file": "audio/s1-033.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-034",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Цэлае поле ў куфэрак не пакладзеш. Але можна памятаць яго прыгажосць.",
+      "file": "audio/s1-034.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-035",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Маміну песню нельга ўзяць у рукі, але можна захаваць у памяці.",
+      "file": "audio/s1-035.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-036",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Кніга змесціцца ў куфэрку, а гісторыі з яе можна памятаць і пераказваць.",
+      "file": "audio/s1-036.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-037",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "У куфэрку пакуль няма знаходак. Працягвай расследаванне!",
+      "file": "audio/s1-037.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-038",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Ты можаш выбраць любы ўзровень і працягнуць расследаванне.",
+      "file": "audio/s1-038.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-039",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Твая захаваная знаходка застаецца ў куфэрку.",
+      "file": "audio/s1-039.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-040",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Пачаць расследаванне нанова? Захаваная знаходка будзе выдалена толькі з гэтай дэма-версіі.",
+      "file": "audio/s1-040.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-041",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Паглядзі, з якіх слоў пачынаецца запіска.",
+      "file": "audio/s1-041.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-042",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Адрознівай прадмет і тое, што нельга ўзяць у рукі.",
+      "file": "audio/s1-042.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-043",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Тут няма аднаго правільнага выбару. Абяры сваю знаходку.",
+      "file": "audio/s1-043.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-044",
+      "scenes": [
+        1
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Паспрабуй адкрыць куфэрак і паглядзець на знаходкі.",
+      "file": "audio/s1-044.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-045",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Зірні: у гэтай расліны блакітныя кветкі. З лёну людзі рабілі тканіну.",
+      "file": "audio/s2-045.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-046",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Лён вырошчвалі ў Беларусі, а з яго валакна пралі ніткі і ткалі палатно. Гэта частка традыцыйнага майстэрства.",
+      "file": "audio/s2-046.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-047",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "На гэтым ручніку вышыты ўзоры. Такія ручнікі рабілі беларускія майстрыхі.",
+      "file": "audio/s2-047.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-048",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Вышыты ручнік — частка беларускіх сямейных і абрадавых традыцый. Арнамент утвараецца з паўтору геаметрычных элементаў.",
+      "file": "audio/s2-048.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-049",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Бачыш літару «Ў»? Яна ёсць у беларускім алфавіце.",
+      "file": "audio/s2-049.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-050",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Літара «Ў» — пазнавальная асаблівасць беларускага пісьма. Яна сустракаецца, напрыклад, у словах «воўк», «поўня», «краўчыха».",
+      "file": "audio/s2-050.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-051",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Казкі могуць жыць у кнігах і ў памяці людзей.",
+      "file": "audio/s2-051.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-052",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Беларускія народныя казкі перадаваліся ад пакалення да пакалення. У іх захоўваюцца вобразы, словы і народная мудрасць.",
+      "file": "audio/s2-052.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-053",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Бусла можна ўбачыць каля вёсак і на лугах. Ён — адзін з сімвалаў Беларусі.",
+      "file": "audio/s2-053.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-054",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Белы бусел — вядомы вобраз беларускай прыроды і культуры. Пра яго існуе шмат павер’яў і народных назіранняў.",
+      "file": "audio/s2-054.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-055",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Манета блішчыць. Але мы пакуль не ведаем, адкуль яна.",
+      "file": "audio/s2-055.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-056",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Манеты сапраўды могуць быць гістарычнымі сведкамі, але ў гэтай картцы няма звестак, якія звязваюць яе з Беларуссю.",
+      "file": "audio/s2-056.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-057",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Гэта стары ключ. Ад якіх дзвярэй ён? Мы пакуль не ведаем.",
+      "file": "audio/s2-057.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-058",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Ключ можа захоўваць сямейную гісторыю, але тут няма падказкі, да якога месца або часу ён належыць.",
+      "file": "audio/s2-058.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-059",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Карона прыгожая. Але каму яна належала?",
+      "file": "audio/s2-059.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-060",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Карона можа быць гістарычным прадметам. Аднак у нашай архіўнай картцы не ўказана сувязь менавіта з Беларуссю.",
+      "file": "audio/s2-060.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-061",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Келіх прыгожы і далікатны. Хто ім карыстаўся?",
+      "file": "audio/s2-061.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-062",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Крышталёвы келіх можа мець сваю гісторыю, але нам пакуль невядома, дзе і кім ён быў зроблены.",
+      "file": "audio/s2-062.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-063",
+      "scenes": [
+        2
+      ],
+      "branch": "young",
+      "kind": "speech/instruction/feedback",
+      "text": "Смартфон можа захоўваць фота, песні і казкі. Але што запісана ў гэтым?",
+      "file": "audio/s2-063.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-064",
+      "scenes": [
+        2
+      ],
+      "branch": "advanced",
+      "kind": "speech/instruction/feedback",
+      "text": "Смартфон можа захоўваць беларускую мову і сямейныя гісторыі. Але ў гэтай картцы няма інфармацыі пра тое, што ў ім захавана.",
+      "file": "audio/s2-064.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-065",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Гэтая знаходка ўжо ў тваім куфэрку.",
+      "file": "audio/s2-065.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-066",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Пяць знаходак ужо выбрана. Правер іх або змяні свой выбар.",
+      "file": "audio/s2-066.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-067",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Знаходка ў куфэрку. Можаш даследаваць наступную картку.",
+      "file": "audio/s2-067.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-068",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Картка пакуль застаецца ў архіве. Да яе можна вярнуцца.",
+      "file": "audio/s2-068.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-069",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "У нас пяць знаходак! Але паміж імі хаваюцца невідочныя сувязі.",
+      "file": "audio/s2-069.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-070",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Мы знайшлі пяць падказак! Што іх можа звязваць?",
+      "file": "audio/s2-070.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-071",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Пяць знаходак сабраны. Наперадзе новая таямніца.",
+      "file": "audio/s2-071.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-072",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "з 5 знаходак. Паглядзі, якія яшчэ могуць расказаць пра Беларусь.",
+      "file": "audio/s2-072.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-073",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Некаторыя знаходкі могуць быць каштоўнымі самі па сабе. Але ў нашым архіве трэба знайсці пяць падказак пра прыроду, мову і традыцыі Беларусі. Паглядзі яшчэ раз на",
+      "file": "audio/s2-073.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-074",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Дзесяць знаходак чакаюць новага даследавання.",
+      "file": "audio/s2-074.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-075",
+      "scenes": [
+        2
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "У архіве дзесяць знаходак. Пяць з іх дапамогуць нам адкрыць Беларусь.",
+      "file": "audio/s2-075.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-076",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Абедзве знаходкі зроблены з золата.",
+      "file": "audio/s3-076.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-077",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "З лёну можна зрабіць ніткі і палатно, а з палатна — ручнік.",
+      "file": "audio/s3-077.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-078",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Літара патрэбная, каб складаць словы, а са слоў атрымліваюцца казкі.",
+      "file": "audio/s3-078.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-079",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Кніга і літара маюць аднолькавы колер.",
+      "file": "audio/s3-079.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-080",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Казкі могуць жыць толькі ў старых кнігах.",
+      "file": "audio/s3-080.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-081",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Гэтая залатая нітачка ўжо знойдзена. Пашукай другую.",
+      "file": "audio/s3-081.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-082",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Спачатку выберы тлумачэнне сувязі, якую ты знайшоў.",
+      "file": "audio/s3-082.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-083",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Першая знаходка выбрана. Якая другая можа быць з ёй звязаная?",
+      "file": "audio/s3-083.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-084",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Выбар зняты. Выберы іншую знаходку.",
+      "file": "audio/s3-084.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-085",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Бусел пакуль хавае сваю таямніцу. Пашукай сувязі паміж іншымі знаходкамі.",
+      "file": "audio/s3-085.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-086",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Пакуль нітачка не засвяцілася. Падумай, як адна знаходка можа дапамагчы з’явіцца другой.",
+      "file": "audio/s3-086.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-087",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Ты знайшоў магчымую пару! Цяпер растлумач, што яе аб’ядноўвае.",
+      "file": "audio/s3-087.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-088",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Лён → ніткі → палатно → ручнік! Расліна стала часткай традыцыйнага майстэрства.",
+      "file": "audio/s3-088.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-089",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Літара → слова → казка! Мова дапамагае захоўваць і перадаваць гісторыі.",
+      "file": "audio/s3-089.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-090",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Цудоўна! Дзве нябачныя нітачкі ўжо знойдзены. А бусел чакае сваёй гісторыі…",
+      "file": "audio/s3-090.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-091",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Падумай яшчэ: якая сувязь паказвае, як з аднаго ўзнікае другое? Пара застаецца выбранай.",
+      "file": "audio/s3-091.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-092",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Націсні на першую картку, а потым на другую. Калі знаходкі звязаныя, паміж імі заззяе залатая нітачка.",
+      "file": "audio/s3-092.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-093",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Выберы дзве звязаныя знаходкі, а потым растлумач, як узнікла гэтая сувязь.",
+      "file": "audio/s3-093.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-094",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Пачні пошук нябачных сувязяў зноў.",
+      "file": "audio/s3-094.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-095",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Выбар зняты. Выберы дзве карткі зноў.",
+      "file": "audio/s3-095.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-096",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Усе нітачкі знойдзены! Бусел яшчэ хавае сваю таямніцу.",
+      "file": "audio/s3-096.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-097",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Успомні: што робяць з лёну? Як з асобных літар атрымліваюцца гісторыі?",
+      "file": "audio/s3-097.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-098",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Паглядзі на лён і падумай: што можна зрабіць з яго валакна?",
+      "file": "audio/s3-098.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-099",
+      "scenes": [
+        3
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Паспрабуй уявіць шлях ад адной літары да цэлай казкі.",
+      "file": "audio/s3-099.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-100",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Паглядзі: знак паварочваецца ўверх, управа, уніз, улева. Куды ён павернецца пасля «ўверх»?",
+      "file": "audio/s4-100.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-101",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Знайдзі фрагмент, які дакладна паўтарае ўзор злева. Прыгледзься да маленькай рысачкі зверху.",
+      "file": "audio/s4-101.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-102",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Звярні ўвагу на кірунак маленькай рысачкі. Знайдзі правіла і працягні арнамент.",
+      "file": "audio/s4-102.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-103",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Прыгледзься да першага знака. Які кавалачак павінен быць на месцы пытальніка?",
+      "file": "audio/s4-103.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-104",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Фрагмент выбраны. Націсні «Праверыць».",
+      "file": "audio/s4-104.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-105",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Васілька: Ты аднавіў арнамент! Знак зноў на сваім месцы.",
+      "file": "audio/s4-105.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-106",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Узор адноўлены! Але на ручніку ёсць яшчэ адна маленькая загадка…",
+      "file": "audio/s4-106.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-107",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Васілька: Пакуль не супадае. Паспрабуй яшчэ! Націсні на мяне, калі патрэбная падказка.",
+      "file": "audio/s4-107.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-108",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Цудоўна! Ты ўбачыў правіла і вярнуў знак на месца.",
+      "file": "audio/s4-108.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-109",
+      "scenes": [
+        4
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Выберы фрагмент, каб аднавіць узор.",
+      "file": "audio/s4-109.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-110",
+      "scenes": [
+        5
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Тваю першую знаходку можна паглядзець у куфэрку пасля першай сцэны.",
+      "file": "audio/s5-110.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-111",
+      "scenes": [
+        5
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Твая першая асабістая знаходка захавалася!",
+      "file": "audio/s5-111.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-112",
+      "scenes": [
+        5
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Падумай яшчэ. Гэта не той сімвал, які захоўвае памяць пра Радзіму.",
+      "file": "audio/s5-112.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-113",
+      "scenes": [
+        5
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Мы адчынілі тайнік! Галоўнае слова нашага расследавання — СПАДЧЫНА.",
+      "file": "audio/s5-113.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-114",
+      "scenes": [
+        5
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Мы знайшлі тайнік! Каб яго адчыніць, націсні на тры сімвалы, якія дапамагаюць захоўваць памяць аб Радзіме.",
+      "file": "audio/s5-114.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-115",
+      "scenes": [
+        5
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Спадчына — гэта тое, што прыйшло да нас ад папярэдніх пакаленняў і што мы павінны захоўваць далей.",
+      "file": "audio/s5-115.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-116",
+      "scenes": [
+        5
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Гэта ўсё важнае, што трэба берагчы: казкі, мову, памяць і традыцыі.",
+      "file": "audio/s5-116.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-117",
+      "scenes": [
+        5
+      ],
+      "branch": "both; conditional step",
+      "kind": "speech/instruction/feedback",
+      "text": "Прыгледзься да бусла, літары «Ў» і ручніка — яны нагадваюць пра Беларусь.",
+      "file": "audio/s5-117.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s0-118",
+      "scenes": [
+        0
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "У таямнічым архіве Васілька знайшоў стары куфэрак. Кажуць, тут павінен захоўвацца скарб. Але што гэта за скарб?",
+      "file": "audio/s0-118.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s0-119",
+      "scenes": [
+        0
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Васілька: «Прывітанне! Я Васілька. Давай разам даведаемся, ці можна пакласці Радзіму ў куфэрак!»",
+      "file": "audio/s0-119.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s1-120",
+      "scenes": [
+        1,
+        6
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Ці можна пакласці Радзіму ў куфэрак?",
+      "file": "audio/s1-120.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-121",
+      "scenes": [
+        2
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "У архіве дзесяць знаходак. Пяць з іх дапамогуць нам адкрыць Беларусь. Знойдзем іх?",
+      "file": "audio/s2-121.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s2-122",
+      "scenes": [
+        2
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Націсні на любую картку — Васілька раскажа, што на ёй схавана.",
+      "file": "audio/s2-122.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-123",
+      "scenes": [
+        3
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Мы сабралі пяць знаходак. А цяпер пашукаем паміж імі нябачныя нітачкі!",
+      "file": "audio/s3-123.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-124",
+      "scenes": [
+        3
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Знайдзі і правер пяць картак у сцэне «Дзесяць знаходак».",
+      "file": "audio/s3-124.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-125",
+      "scenes": [
+        3
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Націсні на адну картку, а потым на другую, каб злучыць іх залацістай нітачкай.",
+      "file": "audio/s3-125.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-126",
+      "scenes": [
+        3
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Націсні на мяне — я падкажу, калі спатрэбіцца.",
+      "file": "audio/s3-126.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-127",
+      "scenes": [
+        3
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Абяры дзве знаходкі. Думай не пра падабенства малюнкаў, а пра тое, што іх аб'ядноўвае.",
+      "file": "audio/s3-127.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s3-128",
+      "scenes": [
+        3
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Лён і ручнік нагадалі нам пра майстэрства, а літара «Ў» і кніга казак — пра мову і гісторыі. Бусел пакуль хавае сваю загадку…",
+      "file": "audio/s3-128.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-129",
+      "scenes": [
+        4
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Паглядзі! На ручніку знік кавалачак арнаменту. Ці зможам яго аднавіць?",
+      "file": "audio/s4-129.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-130",
+      "scenes": [
+        4
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Спачатку знайдзі дзве нябачныя сувязі ў папярэдняй сцэне.",
+      "file": "audio/s4-130.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-131",
+      "scenes": [
+        4
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Націсні на мяне, каб атрымаць падказку.",
+      "file": "audio/s4-131.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-132",
+      "scenes": [
+        4
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Цудоўна! Ты аднавіў арнамент! Знак зноў на сваім месцы.",
+      "file": "audio/s4-132.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s4-133",
+      "scenes": [
+        4
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Васілька знаходзіць на адваротным баку ручніка маленькі надпіс…",
+      "file": "audio/s4-133.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-134",
+      "scenes": [
+        5
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Спачатку дапамажы Васільку аднавіць арнамент у чацвёртай сцэне.",
+      "file": "audio/s5-134.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-135",
+      "scenes": [
+        5
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Выберы тры выявы, якія дапамагаюць захоўваць памяць пра Беларусь.",
+      "file": "audio/s5-135.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s5-136",
+      "scenes": [
+        5
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Мы адчынілі тайнік! Галоўнае слова нашага расследавання —",
+      "file": "audio/s5-136.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s6-137",
+      "scenes": [
+        6
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "У куфэрак нельга пакласці ўсю Беларусь. Але можна захаваць тое, што дапамагае яе адчуваць, любіць і памятаць.",
+      "file": "audio/s6-137.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s6-138",
+      "scenes": [
+        6
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Васілька: «Паглядзі, што ты паклаў у куфэрак першым. Гэта таксама частка твайго скарбу!»",
+      "file": "audio/s6-138.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s6-139",
+      "scenes": [
+        6
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Васілька: «Пачакай… Чаму бусел глядзіць у бок старога дрэва? Здаецца, там хаваецца новая гісторыя…»",
+      "file": "audio/s6-139.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "s6-140",
+      "scenes": [
+        6
+      ],
+      "branch": "both",
+      "kind": "static speech/instruction",
+      "text": "Працяг будзе ў наступным квесце.",
+      "file": "audio/s6-140.mp3",
+      "status": "pending"
+    }
+  ]
+}

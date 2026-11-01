@@ -602,7 +602,7 @@ setInterval(sync,450);
 sync();
 })();
 </script><script id="questAudioController">(()=>{'use strict';
-const recordings=[{"text":"Прывітанне! Я Васілька. Абяры свой шлях — і пачнём расследаванне!","file":"audio/s1-welcome.mp3"},{"text":"Націсні на картку і падумай: што сапраўды змесціцца ў куфэрку?","file":"audio/s1-card-instruction.mp3"}];
+const recordings=[{"text": "Прывітанне! Я Васілька. Абяры свой шлях — і пачнём расследаванне!", "file": "audio/s1-welcome.mp3"}, {"text": "Ці можна пакласці Радзіму ў куфэрак? Адчынім яго і даведаемся!", "file": "audio/s1-004.mp3"}, {"text": "У куфэрку знайшлася загадкавая запіска!", "file": "audio/s1-005.mp3"}, {"text": "Націсні на картку і падумай: што сапраўды змесціцца ў куфэрку?", "file": "audio/s1-card-instruction.mp3"}];
 const normalize=s=>s.replace(/\s+/g,' ').trim();
 const files=new Map(recordings.map(r=>[normalize(r.text),r.file]));
 const audio=new Audio();audio.preload='none';
@@ -651,7 +651,7 @@ function sceneAtViewport(){
  const sections=[...document.querySelectorAll('#prologue,.stage-wrap,#questFinal')].filter(visible);
  return sections.find(el=>{const r=el.getBoundingClientRect();return r.top<=innerHeight*.4&&r.bottom>innerHeight*.4})||sections.find(el=>{const r=el.getBoundingClientRect();return r.top>=0&&r.top<innerHeight});
 }
-window.addEventListener('scroll',()=>{const next=sceneAtViewport();if(section&&next!==section)stop();section=next},{passive:true});
+window.addEventListener('scroll',()=>{const next=sceneAtViewport();if(active){const owner=active.host.closest('#questFinal,.stage-wrap,#prologue'),r=active.host.getBoundingClientRect();if(next&&next!==owner&&(r.bottom<80||r.top>innerHeight))stop()}section=next},{passive:true});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
 window.addEventListener('pagehide',stop);window.addEventListener('beforeunload',stop);
 for(const ev of ['quest:replay','quest:scene3-level','quest:scene3-reset','quest:scene4-complete'])window.addEventListener(ev,stop);
