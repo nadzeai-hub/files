@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#8bd8fa">
+<title>Minecraft • Самостоятельная по математике • Площадь</title>
+<style>
+:root{--ink:#1b3746;--forest:#26632e;--grass:#70bd4d;--sky:#8bd8fa;--wood:#a97642;--woodborder:#604024;--cream:#fffdf2;--light:#e8f6df;--blue:#277db5;--red:#b34b39}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#8bd8fa 0,#d4f5ff 300px,#80bb60 300px,#bde69c 100%) fixed;color:var(--ink);font:500 18px/1.48 system-ui,"Segoe UI",Arial,sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background:linear-gradient(90deg,transparent 96%,#f5ffff 96%) 0 0/80px 80px,linear-gradient(transparent 96%,#f5ffff 96%) 0 0/80px 80px}
+.shell{max-width:940px;margin:auto;padding:20px 18px 80px;position:relative}
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 135px;gap:15px;align-items:center;background:#fffbe7;border:5px solid var(--woodborder);box-shadow:8px 8px 0 #4e6e33;margin:10px 8px 24px;padding:24px 22px;outline:5px solid #d6a46e;outline-offset:-13px}
+.eyebrow{color:#97601d;font-size:16px;font-weight:900;letter-spacing:.6px}
+h1{margin:2px 0 10px;font-size:clamp(30px,6vw,47px);line-height:1.13;color:#306b29;text-shadow:2px 2px 0 #c8e6b5}
+.lead{margin:0;font-size:18px}
+.avatar{width:125px;max-width:100%;filter:drop-shadow(5px 5px 0 rgba(38,78,32,.22))}
+.titlebar{display:flex;align-items:center;gap:12px;background:#deba76;border:4px solid #79502c;border-radius:4px;box-shadow:4px 4px 0 #644e36;padding:10px 15px;margin-bottom:14px;color:#322c1e;font-weight:900}
+.titlebar small{margin-left:auto;color:#73512b;font-size:13px;white-space:nowrap}
+.tile{height:31px;width:31px;background:linear-gradient(#70be45 0 29%,#96623e 30% 100%);border:3px solid #6b442b;flex-shrink:0;box-shadow:inset 2px 2px 0 #d7e5ae}
+.card{background:var(--cream);border:4px solid #886340;box-shadow:6px 6px 0 #554432;margin:0 8px 27px;padding:20px 24px;position:relative}
+.card p{margin:10px 0}
+.missiontitle{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin:0 0 12px;font-size:clamp(22px,3.6vw,29px);line-height:1.22;color:#284a23;font-weight:900}
+.num{display:grid;place-items:center;width:46px;height:46px;color:#302919;background:#f8d578;border:4px solid #8e5b2b;flex-shrink:0}
+.source{font-size:14px;color:#5b7b8b;font-weight:700;margin:0 0 9px}
+.hintintro{background:#e7f4dc;border-left:6px solid #459f45;padding:11px 15px;font-size:16px;margin:12px 0}
+.figure-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:19px 0}
+.figure{padding:13px 8px 16px;background:#f1f9fc;border:3px solid #c3dfe9;text-align:center}
+.figure-name{font-weight:900;margin-bottom:12px}
+.pixels{display:grid;grid-template-columns:repeat(var(--cols),29px);grid-auto-rows:29px;gap:0;justify-content:center;align-content:end;height:93px;margin:0 auto 14px}
+.pixel{width:29px;height:29px;border:1.5px solid #4f6c62}
+.pixel.empty{border-color:transparent;background:transparent}
+.pixel.blue{background:#6ac5ed;border-color:#1582c3}
+.pixel.pink{background:#f6a8ca;border-color:#cb5696}
+.pixel.green{background:#b7dc7a;border-color:#759c2e}
+.answer{display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:16px;font-weight:750}
+.answer input{width:108px;max-width:60vw;padding:9px 10px;background:white;border:3px solid #75a6be;border-radius:4px;font-size:20px;font-weight:800;color:#163d55;text-align:center}
+.answer input:focus-visible{outline:3px solid #f5bc42;outline-offset:2px}
+.answer input.right{background:#e4fadd;border-color:#358d3f}
+.answer input.wrong{background:#fff0e9;border-color:#d77950}
+.answer input:disabled{opacity:1;color:#173b4a}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.field{background:#f2f8f1;border:2px solid #d4e5ca;padding:13px}
+.field label{display:block;font-weight:700;font-size:16px;margin-bottom:9px;min-height:44px}
+.field.full{grid-column:1/-1}
+.units{font-weight:900;color:#506d41;font-size:17px}
+.feedback{display:none;margin-top:16px;border-left:6px solid #57ad65;background:#e7f7e1;padding:12px 15px;font-size:16px;white-space:normal}
+.feedback.visible{display:block}
+.feedback.error{background:#fff0e5;border-color:#d58144}
+.checkmark{color:#258641;font-weight:900;margin-right:6px}
+.result{display:none;background:#fcf4c8;border:5px solid #aa7938;box-shadow:8px 8px 0 #684825;padding:23px;margin:20px 8px 30px;text-align:center}
+.result.visible{display:block}
+.result h2{font-size:31px;color:#356c30;margin:0 0 10px}
+.result .total{font-size:46px;font-weight:950;color:#246a3c;margin:8px}
+.controls{text-align:center;margin:22px 0 10px}
+.btn{cursor:pointer;font:900 19px system-ui;padding:16px 23px;border:4px solid #225b2d;background:#77cd61;color:#143b1d;box-shadow:5px 5px 0 #2e6131;margin:7px}
+.btn:hover{filter:brightness(1.07)}
+.btn:focus-visible{outline:3px solid #ffb535;outline-offset:3px}
+.btn.secondary{background:#f9e2ae;border-color:#9c6c38;color:#54371e;box-shadow:5px 5px 0 #73522b}
+.note{font-size:15px;color:#3d5b47;margin:12px 8px}
+footer{text-align:center;font-size:14px;color:#2e5a38;margin:28px 0}
+@media(max-width:700px){body{font-size:16px}.shell{padding:12px 10px 46px}.hero{grid-template-columns:minmax(0,1fr) 75px;padding:17px 14px;margin:9px 5px 23px}.hero .lead{font-size:15px}.avatar{width:77px}.card{margin:0 5px 21px;padding:17px 13px}.titlebar{margin-left:5px;margin-right:5px}.figure-row{grid-template-columns:1fr;gap:9px}.figure{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4px}.figure-name{grid-column:1/-1;margin:0}.pixels{margin:auto;height:90px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.field label{min-height:0}.answer input{width:98px}.missiontitle{font-size:23px}.num{width:39px;height:39px}.result .total{font-size:38px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header class="hero">
+<div>
+<div class="eyebrow">МАТЕМАТИКА • 4 КЛАСС</div>
+<h1>СТРОИТЕЛЬНАЯ ИНСПЕКЦИЯ</h1>
+<p class="lead">Самостоятельная работа «Квадратные единицы площади». Пройди 5 испытаний. Ответы проверятся <strong>в самом конце</strong>.</p>
+</div>
+<svg class="avatar" viewBox="0 0 112 154" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Весёлый блочный герой в синей толстовке">
+<path fill="#563526" d="M21 13h66v72H21z"/><path fill="#9b5f36" d="M28 12h52v24H28z"/><path fill="#f1b980" d="M25 32h62v50H25z"/><path fill="#3e271c" d="M23 26h64v14H76V31H56v12H41v-8H23z"/><path fill="#f3f9ff" d="M34 49h16v18H34zm26 0h16v18H60z"/><path fill="#3679b2" d="M40 51h8v13h-8zm22 0h8v13h-8z"/><path fill="#9c5143" d="M48 71h17v6H48z"/><path fill="#1a75b7" d="M19 82h74v43H19z"/><path fill="#61aee0" d="M29 83h53v12H29z"/><path fill="#f1b980" d="M6 96h15v29H6zm88 0h14v29H94z"/><path fill="#175781" d="M31 124h25v28H31zm28 0h24v28H59z"/><path fill="#3b4850" d="M30 144h28v10H30zm28 0h28v10H58z"/><path stroke="#f5f7ff" stroke-width="4" d="M47 88v20m17-20v20"/>
+</svg>
+</header>
+<div class="titlebar"><span class="tile"></span><span>МИССИИ ПО ПЛОЩАДИ</span><small>5 заданий • 13 ответов</small></div>
+
+<form id="work" novalidate autocomplete="off">
+<section class="card" data-stage="1">
+<h2 class="missiontitle"><span class="num">1</span> Разметка участка</h2>
+<div class="source">Учебник, с. 70, № 1</div>
+<p>Вычисли площади трёх фигур. Каждая маленькая клетка — квадрат со стороной <b>1 м</b>.</p>
+<div class="figure-row">
+<div class="figure">
+<div class="figure-name">Голубая фигура</div><div class="pixels" data-figure="blue" aria-label="Голубая фигура из квадратов"></div>
+<label class="answer"><input type="number" inputmode="numeric" min="0" step="1" data-id="blue" data-answer="11" aria-label="Площадь голубой фигуры"> м²</label>
+</div>
+<div class="figure">
+<div class="figure-name">Розовая фигура</div><div class="pixels" data-figure="pink" aria-label="Розовая фигура из квадратов"></div>
+<label class="answer"><input type="number" inputmode="numeric" min="0" step="1" data-id="pink" data-answer="6" aria-label="Площадь розовой фигуры"> м²</label>
+</div>
+<div class="figure">
+<div class="figure-name">Зелёная фигура</div><div class="pixels" data-figure="green" aria-label="Зелёная фигура из квадратов"></div>
+<label class="answer"><input type="number" inputmode="numeric" min="0" step="1" data-id="green" data-answer="8" aria-label="Площадь зелёной фигуры"> м²</label>
+</div>
+</div>
+<div class="feedback" aria-live="polite"></div>
+</section>
+
+<section class="card" data-stage="2">
+<h2 class="missiontitle"><span class="num">2</span> Паркетная мастерская</h2>
+<div class="source">Учебник, с. 68, № 2</div>
+<p>Площадь пола комнаты — <b>2400 дм²</b>. Сначала паркетом покрыли <b>четвёртую часть</b> пола, а потом — <b>половину оставшейся части</b>.</p>
+<p><strong>Сколько квадратных дециметров пола покрыли паркетом всего?</strong></p>
+<div class="fields">
+<div class="field"><label for="par1">Покрыли сначала:</label><span class="answer"><input id="par1" type="number" inputmode="numeric" min="0" step="1" data-id="par1" data-answer="600"> <span class="units">дм²</span></span></div>
+<div class="field"><label for="par2">Покрыли затем:</label><span class="answer"><input id="par2" type="number" inputmode="numeric" min="0" step="1" data-id="par2" data-answer="900"> <span class="units">дм²</span></span></div>
+<div class="field full"><label for="par3">Всего покрыли паркетом:</label><span class="answer"><input id="par3" type="number" inputmode="numeric" min="0" step="1" data-id="par3" data-answer="1500"> <span class="units">дм²</span></span></div>
+</div>
+<div class="feedback" aria-live="polite"></div>
+</section>
+
+<section class="card" data-stage="3">
+<h2 class="missiontitle"><span class="num">3</span> Газонокосилка</h2>
+<div class="source">Учебник, с. 71, № 7</div>
+<p>За <b>20 мин</b> на газонокосилке можно скосить <b>60 м²</b> газона. Сколько квадратных метров газона можно скосить за <b>четверть часа</b> работы?</p>
+<div class="hintintro">Учти: четверть часа — это часть часа, а не 25 минут.</div>
+<label class="answer">Ответ: <input type="number" inputmode="numeric" min="0" step="1" data-id="mower" data-answer="45" aria-label="Площадь газона"> <span class="units">м²</span></label>
+<div class="feedback" aria-live="polite"></div>
+</section>
+
+<section class="card" data-stage="4">
+<h2 class="missiontitle"><span class="num">4</span> Сад и огород</h2>
+<div class="source">Учебник, с. 71, домашнее задание № 2</div>
+<p>Площадь огорода равна <b>150 м²</b>. Она составляет <b>половину площади сада</b>. Найди площадь участка земли, занятого огородом и садом.</p>
+<div class="fields">
+<div class="field"><label for="garden">Площадь сада:</label><span class="answer"><input id="garden" type="number" inputmode="numeric" min="0" step="1" data-id="garden" data-answer="300"> <span class="units">м²</span></span></div>
+<div class="field"><label for="all">Общая площадь:</label><span class="answer"><input id="all" type="number" inputmode="numeric" min="0" step="1" data-id="all" data-answer="450"> <span class="units">м²</span></span></div>
+</div>
+<div class="feedback" aria-live="polite"></div>
+</section>
+
+<section class="card" data-stage="5">
+<h2 class="missiontitle"><span class="num">5</span> Портал квадратных единиц</h2>
+<div class="source">Учебник, с. 72, № 1–2</div>
+<p>Переведи величины. Впиши <b>только число</b> — единицы уже указаны.</p>
+<div class="fields">
+<div class="field"><label for="conv1">7 дм² = … см²</label><span class="answer"><input id="conv1" type="number" inputmode="numeric" min="0" step="1" data-id="conv1" data-answer="700"> <span class="units">см²</span></span></div>
+<div class="field"><label for="conv2">260 дм² = … см²</label><span class="answer"><input id="conv2" type="number" inputmode="numeric" min="0" step="1" data-id="conv2" data-answer="26000"> <span class="units">см²</span></span></div>
+<div class="field"><label for="conv3">4 м² = … дм²</label><span class="answer"><input id="conv3" type="number" inputmode="numeric" min="0" step="1" data-id="conv3" data-answer="400"> <span class="units">дм²</span></span></div>
+<div class="field"><label for="conv4">61 м² = … дм²</label><span class="answer"><input id="conv4" type="number" inputmode="numeric" min="0" step="1" data-id="conv4" data-answer="6100"> <span class="units">дм²</span></span></div>
+</div>
+<div class="feedback" aria-live="polite"></div>
+</section>
+
+<div class="controls"><button id="submit" type="submit" class="btn">💎 Завершить и проверить</button></div>
+<p class="note">При проверке увидишь свои верные ответы, ошибки и небольшие объяснения. Ответы отправлять никуда не нужно — покажи итоговый экран учителю.</p>
+</form>
+<section class="result" id="result" aria-live="polite" tabindex="-1">
+<div style="font-size:45px">💎🏆</div>
+<h2>Результат инспекции</h2>
+<div class="total" id="score">0 / 13</div>
+<p id="message"></p>
+<button type="button" id="retry" class="btn secondary">↻ Попробовать ещё раз</button>
+</section>
+<footer>Учебник: Г. Л. Муравьёва, М. А. Урбан • Математика, 4 класс, ч. 1 • с. 68–72</footer>
+</main>
+<script>
+(function(){
+"use strict";
+const patterns={
+ blue:["10101","10101","11111"],
+ pink:["001100","010010","100001"],
+ green:["1000","1101","1111"]
+};
+Object.entries(patterns).forEach(function(pair){
+ const name=pair[0], rows=pair[1], holder=document.querySelector('[data-figure="'+name+'"]');
+ holder.style.setProperty("--cols",rows[0].length);
+ rows.forEach(function(line){
+  line.split("").forEach(function(on){
+   const block=document.createElement("span");
+   block.className="pixel "+(on==="1"?name:"empty");
+   block.setAttribute("aria-hidden","true");
+   holder.appendChild(block);
+  });
+ });
+});
+const form=document.getElementById("work");
+const result=document.getElementById("result");
+const fields=Array.from(document.querySelectorAll("[data-answer]"));
+const explanations={
+ 1:"Голубая фигура: 11 квадратов. Розовая: 6 квадратов. Зелёная: 8 квадратов. Один квадратик занимает 1 м².",
+ 2:"Сначала: 2400 : 4 = 600 дм². Осталось: 2400 − 600 = 1800 дм². Потом: 1800 : 2 = 900 дм². Всего: 600 + 900 = 1500 дм².",
+ 3:"Четверть часа = 15 мин. За 1 мин: 60 : 20 = 3 м². За 15 мин: 3 × 15 = 45 м².",
+ 4:"Сад вдвое больше огорода: 150 × 2 = 300 м². Вместе: 150 + 300 = 450 м².",
+ 5:"При переводе дм² в см² и м² в дм² умножаем на 100: 7 → 700, 260 → 26 000, 4 → 400, 61 → 6100."
+};
+form.addEventListener("submit",function(e){
+ e.preventDefault();
+ let score=0;
+ fields.forEach(function(input){
+  const raw=input.value.trim();
+  const ok=raw!==""&&Number.isFinite(Number(raw))&&Number(raw)===Number(input.dataset.answer);
+  input.classList.remove("right","wrong");
+  input.classList.add(ok?"right":"wrong");
+  if(ok)score++;
+  input.disabled=true;
+ });
+ document.querySelectorAll("[data-stage]").forEach(function(stage){
+  const all=Array.from(stage.querySelectorAll("[data-answer]"));
+  const successes=all.filter(function(x){return x.classList.contains("right")}).length;
+  const feedback=stage.querySelector(".feedback");
+  feedback.className="feedback visible"+(successes===all.length?"":" error");
+  const prefix=successes===all.length?"✓ Верно! ":"Правильно: "+successes+" из "+all.length+". ";
+  feedback.textContent=prefix+explanations[Number(stage.dataset.stage)];
+ });
+ document.getElementById("score").textContent=score+" / "+fields.length;
+ document.getElementById("message").textContent=score===fields.length
+  ?"Отлично! Все ответы верны. Ты освоил квадратные единицы площади."
+  :score>=10?"Очень хороший результат! Посмотри объяснения, чтобы исправить неточности."
+  :score>=6?"Часть задач уже получается! Разбери решения и попробуй ещё раз."
+  :"Посмотри объяснения и повтори перевод квадратных единиц. Потом пройди работу снова.";
+ form.querySelectorAll("input").forEach(function(input){input.disabled=true});
+ document.getElementById("submit").disabled=true;
+ document.getElementById("submit").textContent="✓ Проверка завершена";
+ result.classList.add("visible");
+ result.focus();
+ result.scrollIntoView({behavior:"smooth",block:"start"});
+});
+document.getElementById("retry").addEventListener("click",function(){
+ fields.forEach(function(input){input.disabled=false;input.value="";input.classList.remove("right","wrong")});
+ document.querySelectorAll(".feedback").forEach(function(item){item.className="feedback";item.textContent=""});
+ document.getElementById("submit").disabled=false;
+ document.getElementById("submit").textContent="💎 Завершить и проверить";
+ result.classList.remove("visible");
+ window.scrollTo({top:0,behavior:"smooth"});
+});
+})();
+</script>
+</body>
+</html>
