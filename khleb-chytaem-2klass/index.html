@@ -46,3 +46,5 @@ function teacher(){modal(`<h2>Урок «Сакрэт святочнага ст�
 function resetModal(){modal('<h2>Пачаць урок спачатку?</h2><p>Прагрэс гэтага ўрока ў гэтым браузеры будзе ачышчаны.</p><button class="primary" id="confirmreset">Пачаць спачатку</button>');$('#confirmreset').onclick=()=>{state={started:false,stage:0,index:0,done:[],flipped:[],vocabReady:false,finished:false};save();closeModal();map()}}
 $('#brandart').innerHTML=art('bread');$('#home').onclick=map;$('#dictionary').onclick=dict;$('#text').onclick=showText;$('#teacher').onclick=teacher;$('#full').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.().catch(()=>{});else document.documentElement.requestFullscreen?.().catch(()=>{})};window.addEventListener('pagehide',save);map();
 </script></body></html>
+
+<!-- Publication retry: 2026-11-04. Lesson content unchanged. -->
