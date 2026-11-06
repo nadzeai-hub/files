@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ловушки Глитча — приведение к единице</title>
+<style>
+  :root{
+    --bg1:#0f1024;
+    --bg2:#17193a;
+    --panel:#1f224b;
+    --panel-soft:#252a59;
+    --line:#6ee7ff;
+    --line2:#a855f7;
+    --ok:#67e8a5;
+    --warn:#ffd166;
+    --bad:#ff7aa2;
+    --text:#eef5ff;
+    --muted:#bdd2f8;
+    --accent:#8ef0ff;
+    --lime:#b8ff64;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(168,85,247,.18), transparent 18%),
+      radial-gradient(circle at 80% 10%, rgba(110,231,255,.15), transparent 18%),
+      linear-gradient(180deg, #11132b 0%, #0a0b18 100%);
+    color:var(--text);
+  }
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px;
+  }
+  .hero{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg, rgba(108,44,188,.95), rgba(25,36,92,.95));
+    border:3px solid rgba(110,231,255,.45);
+    border-radius:28px;
+    padding:24px;
+    box-shadow:0 0 0 3px rgba(255,255,255,.03) inset, 0 0 24px rgba(110,231,255,.18);
+    margin-bottom:18px;
+  }
+  .hero::before,
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:auto;
+    width:180px;height:180px;
+    background:radial-gradient(circle, rgba(110,231,255,.25), transparent 65%);
+    pointer-events:none;
+  }
+  .hero::before{top:-50px; right:-30px}
+  .hero::after{bottom:-70px; left:-50px}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.35fr .75fr;
+    gap:18px;
+    align-items:center;
+  }
+  .label{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:999px;
+    background:rgba(255,255,255,.12);
+    color:#fff8cb;
+    font-weight:700;
+    letter-spacing:.5px;
+    margin-bottom:10px;
+    border:1px solid rgba(255,255,255,.16);
+  }
+  h1{
+    margin:0 0 10px;
+    font-size:clamp(30px,5vw,52px);
+    line-height:1.05;
+    color:#ffffff;
+    text-shadow:0 2px 0 rgba(0,0,0,.15), 0 0 15px rgba(110,231,255,.25);
+  }
+  .sub{
+    font-size:20px;
+    line-height:1.5;
+    color:#ebf6ff;
+    margin:0 0 16px;
+  }
+  .goalbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:12px;
+  }
+  .chip{
+    background:rgba(8,12,32,.42);
+    border:1px solid rgba(110,231,255,.24);
+    border-radius:16px;
+    padding:10px 12px;
+    font-size:15px;
+    color:var(--muted);
+  }
+  .glitch-box{
+    background:rgba(7,10,27,.45);
+    border:2px solid rgba(168,85,247,.45);
+    border-radius:22px;
+    padding:16px;
+    text-align:center;
+    box-shadow:0 0 18px rgba(168,85,247,.2) inset;
+  }
+  .villain{
+    font-size:76px;
+    line-height:1;
+    filter:drop-shadow(0 0 12px rgba(168,85,247,.35));
+  }
+  .bubble{
+    margin-top:10px;
+    background:rgba(255,255,255,.1);
+    border-radius:18px;
+    padding:12px;
+    font-size:16px;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .hud{
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    gap:12px;
+    align-items:center;
+    margin:18px 0;
+  }
+  .progress{
+    background:#0c1028;
+    border-radius:999px;
+    height:18px;
+    overflow:hidden;
+    border:1px solid rgba(110,231,255,.22);
+  }
+  .bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, #62e9ff, #8f7cff, #c3ff4f);
+    transition:width .35s ease;
+  }
+  .score,.done{
+    background:var(--panel);
+    border-radius:16px;
+    padding:10px 14px;
+    border:1px solid rgba(255,255,255,.08);
+    font-weight:700;
+  }
+  .section-title{
+    display:flex; align-items:center; gap:12px;
+    margin:28px 0 12px;
+  }
+  .section-title h2{
+    margin:0;
+    font-size:28px;
+  }
+  .section-title .icon{
+    width:46px;height:46px;border-radius:14px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,#3de2ff,#6d7cff);
+    color:#081126;font-size:26px;font-weight:700;
+  }
+  .cards{
+    display:grid;
+    gap:16px;
+  }
+  .card{
+    background:linear-gradient(180deg, rgba(32,38,82,.95), rgba(24,28,61,.96));
+    border:2px solid rgba(110,231,255,.18);
+    border-radius:24px;
+    padding:18px;
+    box-shadow:0 0 0 2px rgba(255,255,255,.02) inset;
+  }
+  .card.locked{opacity:.48; filter:grayscale(.15); pointer-events:none; user-select:none}
+  .card-head{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+    margin-bottom:14px;
+  }
+  .task-name{
+    font-size:23px; font-weight:800; color:#fff;
+  }
+  .task-tag{
+    background:rgba(190,255,100,.14);
+    color:#dcffb3;
+    border:1px solid rgba(184,255,100,.3);
+    border-radius:999px;
+    padding:6px 10px;
+    font-size:13px;
+    font-weight:700;
+  }
+  .story{
+    color:var(--muted);
+    line-height:1.5;
+    font-size:18px;
+    margin-bottom:10px;
+  }
+  .mini-steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:14px 0;
+  }
+  .mini-step{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:12px;
+    text-align:center;
+    font-weight:700;
+    color:#dff8ff;
+    min-height:86px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .qa{display:grid; gap:14px; margin-top:12px;}
+  .row{
+    display:grid;
+    grid-template-columns:1.3fr .6fr 1fr;
+    gap:12px;
+    align-items:center;
+    background:rgba(7,10,27,.28);
+    padding:12px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.06);
+  }
+  .row.compact{grid-template-columns:1.5fr .7fr}
+  .row.four{grid-template-columns:1.35fr 1.1fr .7fr .7fr}
+  .prompt{font-size:18px; line-height:1.45; color:#fff}
+  .equation{
+    font-size:22px;
+    font-weight:800;
+    color:#fff6b8;
+  }
+  select,input{
+    width:100%;
+    padding:12px 14px;
+    background:#0e1434;
+    color:#fff;
+    border:2px solid #33407a;
+    border-radius:14px;
+    font-size:17px;
+    outline:none;
+  }
+  input::placeholder{color:#a6b7e5}
+  select:focus,input:focus{border-color:#6ee7ff; box-shadow:0 0 0 3px rgba(110,231,255,.15)}
+  .actions{
+    display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;
+  }
+  button{
+    cursor:pointer;
+    border:0;
+    border-radius:16px;
+    padding:13px 18px;
+    font-size:17px;
+    font-weight:800;
+    transition:transform .12s ease, filter .12s ease;
+  }
+  button:hover{transform:translateY(-1px)}
+  .check{background:linear-gradient(135deg,#68f4ff,#6e84ff); color:#081227}
+  .hint{background:linear-gradient(135deg,#ffe26c,#ffb347); color:#4d2a00}
+  .next{background:linear-gradient(135deg,#c8ff66,#64ffb8); color:#082518; display:none}
+  .reset{background:linear-gradient(135deg,#ff8db2,#ffb36b); color:#441321}
+  .msg{
+    margin-top:14px;
+    padding:12px 14px;
+    border-radius:16px;
+    font-size:17px;
+    display:none;
+    line-height:1.5;
+  }
+  .msg.ok{display:block; background:rgba(103,232,165,.12); border:1px solid rgba(103,232,165,.34); color:#d9ffea}
+  .msg.bad{display:block; background:rgba(255,122,162,.12); border:1px solid rgba(255,122,162,.34); color:#ffe0ea}
+  .msg.hintbox{display:block; background:rgba(255,209,102,.12); border:1px solid rgba(255,209,102,.35); color:#fff5cf}
+  .solved-seal{
+    display:none;
+    margin-left:auto;
+    padding:7px 12px;
+    border-radius:999px;
+    background:rgba(103,232,165,.16);
+    border:1px solid rgba(103,232,165,.3);
+    color:#d8ffe9;
+    font-size:14px;
+    font-weight:800;
+  }
+  .card.solved .solved-seal{display:inline-block}
+  .card.solved{border-color:rgba(103,232,165,.35)}
+  .grid-two{
+    display:grid; grid-template-columns:1fr 1fr; gap:14px;
+  }
+  .example-box{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(110,231,255,.14);
+    border-radius:18px;
+    padding:14px;
+  }
+  .footer-card{
+    margin-top:20px;
+    text-align:center;
+    background:linear-gradient(135deg, rgba(37,90,61,.95), rgba(18,43,63,.95));
+    border:2px solid rgba(184,255,100,.28);
+    border-radius:28px;
+    padding:24px;
+  }
+  .key{font-size:54px; margin-bottom:10px}
+  .big{font-size:32px; font-weight:900; margin:0 0 8px}
+  .small{font-size:19px; color:#eef7ff; margin:0}
+  .hidden{display:none}
+  .choice-line{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  @media (max-width:900px){
+    .hero-grid,.grid-two,.choice-line,.row,.row.compact,.row.four,.mini-steps,.hud{grid-template-columns:1fr}
+    .villain{font-size:58px}
+    .task-name{font-size:20px}
+    h1{font-size:34px}
+    .sub{font-size:18px}
+    .prompt,.story{font-size:17px}
+    .equation{font-size:20px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="label">🚀 ПРИКЛЮЧЕНИЕ С ГЛИТЧЕМ</div>
+        <h1>ЛОВУШКИ ГЛИТЧА:<br>ПРИВЕДЕНИЕ К ЕДИНИЦЕ</h1>
+        <p class="sub">Интерактив для проверки понимания и тренировки задач. Сначала надо понять, <b>что узнаём про 1 предмет</b>, а потом — <b>как получить ответ для нужного количества</b>.</p>
+        <div class="goalbar">
+          <div class="chip">✅ понять порядок действий</div>
+          <div class="chip">✅ выбрать подписи к действиям</div>
+          <div class="chip">✅ решить задачи</div>
+          <div class="chip">✅ победить Доктора Глитча</div>
+        </div>
+      </div>
+      <div class="glitch-box">
+        <div class="villain">👾</div>
+        <div class="bubble">«Ха-ха! Я всё перепутал! Сможешь понять, когда делить, а когда умножать?»</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hud">
+    <div class="progress"><div class="bar" id="progressBar"></div></div>
+    <div class="score">Очки: <span id="score">0</span>/8</div>
+    <div class="done">Пройдено: <span id="done">0</span>/8</div>
+  </div>
+
+  <div class="section-title">
+    <div class="icon">⚡</div>
+    <h2>Испытания</h2>
+  </div>
+
+  <div class="cards" id="cards">
+
+    <div class="card" id="task1" data-task="1">
+      <div class="card-head">
+        <div>
+          <div class="task-name">Сектор 1. Расшифруй правило</div>
+          <div class="story">Глитч стёр план решения. Восстанови правильный порядок шагов в задачах на приведение к единице.</div>
+        </div>
+        <div class="task-tag">Понимание</div>
+        <div class="solved-seal">✔ Сектор очищен</div>
+      </div>
+      <div class="mini-steps">
+        <div class="mini-step">A. Получаем ответ</div>
+        <div class="mini-step">B. Узнаём, сколько приходится на 1 предмет</div>
+        <div class="mini-step">C. Делим всё на количество</div>
+        <div class="mini-step">D. Умножаем на нужное количество</div>
+      </div>
+      <div class="qa">
+        <div class="row compact">
+          <div class="prompt">Запиши правильный порядок букв через запятую.</div>
+          <input id="t1order" placeholder="Укажи последовательность букв" />
+        </div>
+      </div>
+      <div class="actions">
+        <button class="check" onclick="checkTask(1)">Проверить</button>
+        <button class="hint" onclick="showHint(1)">Подсказка</button>
+        <button class="next" id="next1" onclick="unlockNext(1)">Дальше ➜</button>
+      </div>
+      <div class="msg" id="msg1"></div>
+    </div>
+
+    <div class="card locked" id="task2" data-task="2">
+      <div class="card-head">
+        <div>
+          <div class="task-name">Сектор 2. Что узнаём сначала?</div>
+          <div class="story">В 6 одинаковых коробках было 18 карандашей. Глитч хочет, чтобы ты сразу умножал. Но сначала нужно понять, что узнаём первым.</div>
+        </div>
+        <div class="task-tag">Выбор действия</div>
+        <div class="solved-seal">✔ Сектор очищен</div>
+      </div>
+      <div class="choice-line">
+        <div class="row compact"><div class="prompt">Сначала выполняем действие:</div>
+          <select id="t2action">
+            <option value="">Выбери</option>
+            <option value="plus">сложение</option>
+            <option value="minus">вычитание</option>
+            <option value="divide">деление</option>
+            <option value="multiply">умножение</option>
+          </select>
+        </div>
+        <div class="row compact"><div class="prompt">Потому что сначала нужно узнать:</div>
+          <select id="t2idea">
+            <option value="">Выбери</option>
+            <option value="all">сколько всего карандашей</option>
+            <option value="one">сколько карандашей в 1 коробке</option>
+            <option value="need">сколько карандашей в 3 коробках</option>
+          </select>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="check" onclick="checkTask(2)">Проверить</button>
+        <button class="hint" onclick="showHint(2)">Подсказка</button>
+        <button class="next" id="next2" onclick="unlockNext(2)">Дальше ➜</button>
+      </div>
+      <div class="msg" id="msg2"></div>
+    </div>
+
+    <div class="card locked" id="task3" data-task="3">
+      <div class="card-head">
+        <div>
+          <div class="task-name">Сектор 3. Подбери подписи</div>
+          <div class="story">У Глитча есть задача: в 7 пакетах 14 л сока. Купили 3 таких пакета. Подбери подписи к действиям.</div>
+        </div>
+        <div class="task-tag">Подписи</div>
+        <div class="solved-seal">✔ Сектор очищен</div>
+      </div>
+      <div class="qa">
+        <div class="row">
+          <div class="equation">1) 14 : 7 = 2 (л)</div>
+          <select id="t3label1">
+            <option value="">Подпись к действию</option>
+            <option value="bought">узнаю, сколько литров купили</option>
+            <option value="onepack">узнаю, сколько литров в 1 пакете</option>
+            <option value="all">узнаю, сколько литров было всего</option>
+          </select>
+          <input id="t3ans1" placeholder="Число" />
+        </div>
+        <div class="row">
+          <div class="equation">2) 2 × 3 = 6 (л)</div>
+          <select id="t3label2">
+            <option value="">Подпись к действию</option>
+            <option value="onepack">узнаю, сколько литров в 1 пакете</option>
+            <option value="bought">узнаю, сколько литров купили</option>
+            <option value="count">узнаю, сколько пакетов было</option>
+          </select>
+          <input id="t3ans2" placeholder="Число" />
+        </div>
+      </div>
+      <div class="actions">
+        <button class="check" onclick="checkTask(3)">Проверить</button>
+        <button class="hint" onclick="showHint(3)">Подсказка</button>
+        <button class="next" id="next3" onclick="unlockNext(3)">Дальше ➜</button>
+      </div>
+      <div class="msg" id="msg3"></div>
+    </div>
+
+    <div class="card locked" id="task4" data-task="4">
+      <div class="card-head">
+        <div>
+          <div class="task-name">Сектор 4. Платья и ткань</div>
+          <div class="story">На 4 платья израсходовали 12 м ткани. Сколько метров ткани понадобится на 6 таких же платьев?</div>
+        </div>
+        <div class="task-tag">Задача</div>
+        <div class="solved-seal">✔ Сектор очищен</div>
+      </div>
+      <div class="qa">
+        <div class="row">
+          <div class="equation">1) 12 : 4 = ___ (м)</div>
+          <select id="t4label1">
+            <option value="">Подпись</option>
+            <option value="onedress">узнаю, сколько метров на 1 платье</option>
+            <option value="alldress">узнаю, сколько метров на 6 платьев</option>
+            <option value="countdress">узнаю, сколько было платьев</option>
+          </select>
+          <input id="t4ans1" placeholder="Ответ" />
+        </div>
+        <div class="row four">
+          <div class="equation">2) ___ × 6 = ___ (м)</div>
+          <select id="t4label2">
+            <option value="">Подпись</option>
+            <option value="alldress">узнаю, сколько метров на 6 платьев</option>
+            <option value="onedress">узнаю, сколько метров на 1 платье</option>
+            <option value="all">узнаю, сколько ткани было всего</option>
+          </select>
+          <input id="t4ans2a" placeholder="Первое число" />
+          <input id="t4ans2b" placeholder="Ответ" />
+        </div>
+      </div>
+      <div class="actions">
+        <button class="check" onclick="checkTask(4)">Проверить</button>
+        <button class="hint" onclick="showHint(4)">Подсказка</button>
+        <button class="next" id="next4" onclick="unlockNext(4)">Дальше ➜</button>
+      </div>
+      <div class="msg" id="msg4"></div>
+    </div>
+
+    <div class="card locked" id="task5" data-task="5">
+      <div class="card-head">
+        <div>
+          <div class="task-name">Сектор 5. Яблоки в пакетах</div>
+          <div class="story">В нескольких одинаковых пакетах лежало 36 яблок. В каждом пакете по 9 яблок. Сколько было пакетов?</div>
+        </div>
+        <div class="task-tag">Понимание типа</div>
+        <div class="solved-seal">✔ Сектор очищен</div>
+      </div>
+      <div class="grid-two">
+        <div class="example-box">
+          <div class="prompt">Это задача на приведение к единице?</div>
+          <select id="t5kind">
+            <option value="">Выбери</option>
+            <option value="no">нет</option>
+            <option value="yes">да</option>
+          </select>
+        </div>
+        <div class="example-box">
+          <div class="prompt">Какое действие нужно выполнить?</div>
+          <select id="t5action">
+            <option value="">Выбери</option>
+            <option value="36:9">36 : 9</option>
+            <option value="9:36">9 : 36</option>
+            <option value="36+9">36 + 9</option>
+          </select>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="check" onclick="checkTask(5)">Проверить</button>
+        <button class="hint" onclick="showHint(5)">Подсказка</button>
+        <button class="next" id="next5" onclick="unlockNext(5)">Дальше ➜</button>
+      </div>
+      <div class="msg" id="msg5"></div>
+    </div>
+
+    <div class="card locked" id="task6" data-task="6">
+      <div class="card-head">
+        <div>
+          <div class="task-name">Сектор 6. Коробки с печеньем</div>
+          <div class="story">В 5 одинаковых коробках 20 печений. Сколько печений будет в 8 таких же коробках?</div>
+        </div>
+        <div class="task-tag">Задача</div>
+        <div class="solved-seal">✔ Сектор очищен</div>
+      </div>
+      <div class="qa">
+        <div class="row">
+          <div class="equation">1) 20 : 5 = ___</div>
+          <select id="t6label1">
+            <option value="">Подпись</option>
+            <option value="onebox">узнаю, сколько печений в 1 коробке</option>
+            <option value="needboxes">узнаю, сколько печений в 8 коробках</option>
+            <option value="allboxes">узнаю, сколько коробок было всего</option>
+          </select>
+          <input id="t6ans1" placeholder="Ответ" />
+        </div>
+        <div class="row four">
+          <div class="equation">2) ___ × 8 = ___</div>
+          <select id="t6label2">
+            <option value="">Подпись</option>
+            <option value="needboxes">узнаю, сколько печений в 8 коробках</option>
+            <option value="onebox">узнаю, сколько печений в 1 коробке</option>
+            <option value="all">узнаю, сколько было всего</option>
+          </select>
+          <input id="t6ans2a" placeholder="Первое число" />
+          <input id="t6ans2b" placeholder="Ответ" />
+        </div>
+      </div>
+      <div class="actions">
+        <button class="check" onclick="checkTask(6)">Проверить</button>
+        <button class="hint" onclick="showHint(6)">Подсказка</button>
+        <button class="next" id="next6" onclick="unlockNext(6)">Дальше ➜</button>
+      </div>
+      <div class="msg" id="msg6"></div>
+    </div>
+
+    <div class="card locked" id="task7" data-task="7">
+      <div class="card-head">
+        <div>
+          <div class="task-name">Сектор 7. Найди верные подписи</div>
+          <div class="story">Выбери правильную подпись к каждому действию. Глитч подставил лишние варианты.</div>
+        </div>
+        <div class="task-tag">Подписи</div>
+        <div class="solved-seal">✔ Сектор очищен</div>
+      </div>
+      <div class="qa">
+        <div class="row compact">
+          <div class="prompt">1) 18 : 6 = 3 — это значит:</div>
+          <select id="t7a">
+            <option value="">Выбери</option>
+            <option value="one">узнаю, сколько приходится на 1 предмет</option>
+            <option value="need">узнаю, сколько будет для нужного количества</option>
+            <option value="all">узнаю, сколько всего было</option>
+          </select>
+        </div>
+        <div class="row compact">
+          <div class="prompt">2) 3 × 4 = 12 — это значит:</div>
+          <select id="t7b">
+            <option value="">Выбери</option>
+            <option value="all">узнаю, сколько было всего сначала</option>
+            <option value="need">узнаю, сколько будет для нужного количества</option>
+            <option value="one">узнаю, сколько приходится на 1 предмет</option>
+          </select>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="check" onclick="checkTask(7)">Проверить</button>
+        <button class="hint" onclick="showHint(7)">Подсказка</button>
+        <button class="next" id="next7" onclick="unlockNext(7)">Дальше ➜</button>
+      </div>
+      <div class="msg" id="msg7"></div>
+    </div>
+
+    <div class="card locked" id="task8" data-task="8">
+      <div class="card-head">
+        <div>
+          <div class="task-name">Сектор 8. Главная ловушка Глитча</div>
+          <div class="story">На 3 одинаковые банки варенья ушло 9 кг ягод. Сколько килограммов ягод понадобится на 7 таких же банок? Реши и подпиши действия.</div>
+        </div>
+        <div class="task-tag">Финал</div>
+        <div class="solved-seal">✔ Сектор очищен</div>
+      </div>
+      <div class="qa">
+        <div class="row">
+          <div class="equation">1) 9 : 3 = ___ (кг)</div>
+          <select id="t8label1">
+            <option value="">Подпись</option>
+            <option value="onejar">узнаю, сколько кг ягод на 1 банку</option>
+            <option value="needjar">узнаю, сколько кг ягод на 7 банок</option>
+            <option value="alljar">узнаю, сколько банок было</option>
+          </select>
+          <input id="t8ans1" placeholder="Ответ" />
+        </div>
+        <div class="row four">
+          <div class="equation">2) ___ × 7 = ___ (кг)</div>
+          <select id="t8label2">
+            <option value="">Подпись</option>
+            <option value="onejar">узнаю, сколько кг ягод на 1 банку</option>
+            <option value="needjar">узнаю, сколько кг ягод на 7 банок</option>
+            <option value="all">узнаю, сколько кг было всего</option>
+          </select>
+          <input id="t8ans2a" placeholder="Первое число" />
+          <input id="t8ans2b" placeholder="Ответ" />
+        </div>
+      </div>
+      <div class="actions">
+        <button class="check" onclick="checkTask(8)">Проверить</button>
+        <button class="hint" onclick="showHint(8)">Подсказка</button>
+      </div>
+      <div class="msg" id="msg8"></div>
+    </div>
+  </div>
+
+  <div class="footer-card hidden" id="finalCard">
+    <div class="key">🏆🔑</div>
+    <p class="big">Глитч побеждён!</p>
+    <p class="small" id="finalText">Ты прошёл все испытания и понял задачи на приведение к единице.</p>
+    <div class="actions" style="justify-content:center; margin-top:16px;">
+      <button class="reset" onclick="restartAll()">Пройти ещё раз</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const progressKey='glitch_unit_rate_adventure_v1';
+  let saved=[];
+  try{const data=JSON.parse(localStorage.getItem(progressKey)||'[]');if(Array.isArray(data))saved=data.filter(n=>Number.isInteger(n)&&n>=1&&n<=8)}catch(e){}
+  const solved = new Set(saved);
+  let score = solved.size;
+
+  const hints = {
+    1:'Сначала в таких задачах узнают, сколько приходится на <b>1 предмет</b>. Чтобы это узнать, обычно <b>делят всё на количество</b>. Потом уже находят ответ для нужного количества.',
+    2:'Если известно, сколько всего в нескольких одинаковых коробках, сначала надо узнать, сколько в <b>одной</b> коробке.',
+    3:'Первое действие отвечает на вопрос: <b>сколько в 1 пакете?</b> Второе: <b>сколько купили?</b>',
+    4:'Сначала узнаём, сколько ткани уходит на <b>1 платье</b>. Потом умножаем на <b>6</b>.',
+    5:'Подумай: здесь не нужно сначала находить, сколько на 1 предмет для другого количества. Нужно просто найти число пакетов, если известно, сколько в одном пакете.',
+    6:'Сначала узнаём, сколько печений в <b>1 коробке</b>. Потом — сколько будет в <b>8 коробках</b>.',
+    7:'Если делим всё на количество одинаковых предметов — узнаём, сколько на <b>1 предмет</b>. Если умножаем — узнаём, сколько для <b>нужного количества</b>.',
+    8:'Это такая же схема: <b>всё : количество = на 1</b>, потом <b>на 1 × нужное количество = ответ</b>.'
+  };
+
+  function setMessage(n, type, html){
+    const box = document.getElementById('msg'+n);
+    box.className = 'msg ' + type;
+    box.innerHTML = html;
+  }
+
+  function markSolved(n){
+    if(solved.has(n)) return;
+    solved.add(n);
+    score = solved.size;
+    document.getElementById('score').textContent = score;
+    document.getElementById('done').textContent = solved.size;
+    document.getElementById('progressBar').style.width = (solved.size / 8 * 100) + '%';
+    const card = document.getElementById('task'+n);
+    card.classList.add('solved');
+    const nextBtn = document.getElementById('next'+n);
+    if(nextBtn) nextBtn.style.display = 'inline-block';
+    try{localStorage.setItem(progressKey,JSON.stringify([...solved]))}catch(e){}
+    if(n===8) showFinal();
+  }
+
+  function unlockNext(n){
+    const next = document.getElementById('task'+(n+1));
+    if(next){
+      next.classList.remove('locked');
+      next.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+  function showHint(n){ if(document.getElementById('task'+n).classList.contains('locked')) return; setMessage(n, 'hintbox', '💡 ' + hints[n]); }
+
+  function clean(s){ return String(s||'').trim().toLowerCase().replace(/\s+/g,''); }
+
+  function checkTask(n){
+    if(document.getElementById('task'+n).classList.contains('locked')) return;
+    if(n===1){
+      const ok = clean(document.getElementById('t1order').value).replace(/[,;.]/g,'') === 'cbda';
+      if(ok){ setMessage(1,'ok','Верно! Сначала узнаём, сколько приходится на <b>1 предмет</b>, затем находим ответ для нужного количества.'); markSolved(1); }
+      else setMessage(1,'bad','Пока нет. Вспомни: сначала — <b>на 1 предмет</b>.');
+    }
+    if(n===2){
+      const a = document.getElementById('t2action').value==='divide';
+      const b = document.getElementById('t2idea').value==='one';
+      if(a&&b){ setMessage(2,'ok','Отлично! Сначала делим, потому что надо узнать, сколько карандашей в <b>1 коробке</b>.'); markSolved(2); }
+      else setMessage(2,'bad','Подумай ещё: прежде чем узнать про 3 коробки, надо разобраться с <b>одной</b>.');
+    }
+    if(n===3){
+      const ok = document.getElementById('t3label1').value==='onepack' && document.getElementById('t3label2').value==='bought' && clean(document.getElementById('t3ans1').value)==='2' && clean(document.getElementById('t3ans2').value)==='6';
+      if(ok){ setMessage(3,'ok','Супер! Ты правильно подписал оба действия и нашёл ответ: <b>6 л</b>.'); markSolved(3); }
+      else setMessage(3,'bad','Проверь подписи и числа. Первое действие — про <b>1 пакет</b>.');
+    }
+    if(n===4){
+      const ok = document.getElementById('t4label1').value==='onedress' && clean(document.getElementById('t4ans1').value)==='3' && document.getElementById('t4label2').value==='alldress' && clean(document.getElementById('t4ans2a').value)==='3' && clean(document.getElementById('t4ans2b').value)==='18';
+      if(ok){ setMessage(4,'ok','Верно! На 1 платье идёт <b>3 м</b>, а на 6 платьев — <b>18 м</b>.'); markSolved(4); }
+      else setMessage(4,'bad','Не спеши. Сначала найди, сколько ткани уходит на <b>1 платье</b>.');
+    }
+    if(n===5){
+      const ok = document.getElementById('t5kind').value==='no' && document.getElementById('t5action').value==='36:9';
+      if(ok){ setMessage(5,'ok','Да! Это <b>не</b> задача на приведение к единице. Здесь сразу известно, сколько в 1 пакете, поэтому нужно только разделить <b>36 : 9</b>.'); markSolved(5); }
+      else setMessage(5,'bad','Подумай: когда количество в одном уже известно, приведение к единице не нужно.');
+    }
+    if(n===6){
+      const ok = document.getElementById('t6label1').value==='onebox' && clean(document.getElementById('t6ans1').value)==='4' && document.getElementById('t6label2').value==='needboxes' && clean(document.getElementById('t6ans2a').value)==='4' && clean(document.getElementById('t6ans2b').value)==='32';
+      if(ok){ setMessage(6,'ok','Отлично! В 1 коробке <b>4 печенья</b>, в 8 коробках — <b>32</b>.'); markSolved(6); }
+      else setMessage(6,'bad','Проверь оба шага: сначала находим, сколько в <b>1 коробке</b>.');
+    }
+    if(n===7){
+      const ok = document.getElementById('t7a').value==='one' && document.getElementById('t7b').value==='need';
+      if(ok){ setMessage(7,'ok','Да! Деление помогает узнать, сколько приходится на <b>1 предмет</b>, а умножение — сколько получится для <b>нужного количества</b>.'); markSolved(7); }
+      else setMessage(7,'bad','Подумай: какое действие ведёт к ответу "на 1 предмет"?');
+    }
+    if(n===8){
+      const ok = document.getElementById('t8label1').value==='onejar' && clean(document.getElementById('t8ans1').value)==='3' && document.getElementById('t8label2').value==='needjar' && clean(document.getElementById('t8ans2a').value)==='3' && clean(document.getElementById('t8ans2b').value)==='21';
+      if(ok){ setMessage(8,'ok','Финальная ловушка обезврежена! На 1 банку нужно <b>3 кг</b> ягод, а на 7 банок — <b>21 кг</b>.'); markSolved(8); }
+      else setMessage(8,'bad','Финал рядом. Вспомни схему: всё : количество = на 1, затем на 1 × нужное количество.');
+    }
+  }
+
+  function showFinal(){
+    const final = document.getElementById('finalCard');
+    final.classList.remove('hidden');
+    document.getElementById('finalText').innerHTML = 'Все 8 испытаний пройдены — Глитч побеждён!<br><b>Главное правило:</b> сначала находим, сколько приходится на 1 предмет, потом — сколько будет для нужного количества.';
+    final.scrollIntoView({behavior:'smooth'});
+  }
+
+  function restartAll(){
+    try{localStorage.removeItem(progressKey)}catch(e){}
+    location.reload();
+  }
+
+  function restoreProgress(){
+    document.getElementById('score').textContent=score;
+    document.getElementById('done').textContent=solved.size;
+    document.getElementById('progressBar').style.width=(100*solved.size/8)+'%';
+    for(let n=1;n<=8;n++){
+      const card=document.getElementById('task'+n);
+      if(solved.has(n)){card.classList.add('solved'); if(n<8)document.getElementById('next'+n).style.display='inline-block'}
+      if(n===1||solved.has(n-1))card.classList.remove('locked');
+    }
+    if(solved.size===8)showFinal();
+  }
+  restoreProgress();
+</script>
+</body>
+</html>
