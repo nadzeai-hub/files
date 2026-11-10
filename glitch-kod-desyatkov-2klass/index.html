@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10132a">
+<title>Глитч · Код десятков</title>
+<style>
+:root{color-scheme:dark;--bg:#10132a;--panel:#191d37;--card:#222746;--line:#3b4269;--text:#f7f7fe;--muted:#bec6e5;--mint:#a6ffdc;--purple:#c5b3ff;--yellow:#ffd493;--pink:#ffb9ca;--radius:23px;font:17px/1.5 system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 12% 0%,#282251,transparent 54%),var(--bg);color:var(--text)}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}[hidden]{display:none!important}
+.wrap{width:min(1120px,calc(100% - 36px));margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:24px 0 18px}.brand{display:flex;align-items:center;gap:12px;font-weight:850}.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--purple);color:#171532;font-size:22px}.eyebrow{color:var(--mint);font-size:.77rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.muted{color:var(--muted)}.edition{font-size:.8rem;color:var(--muted);text-align:right}
+.hero,.work,.finish{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}.hero{display:grid;grid-template-columns:1.25fr 1fr;min-height:435px;overflow:hidden}.intro{padding:clamp(24px,5vw,55px);align-self:center}.hero h1,.finish h1{font-size:clamp(2.6rem,7vw,5rem);line-height:.98;letter-spacing:-.065em;margin:.26em 0 .27em}.intro p{max-width:36ch;margin:0 0 22px;color:var(--muted)}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.tag{font-size:.81rem;padding:4px 11px;border:1px solid var(--line);border-radius:100px;color:var(--purple)}
+.art{position:relative;min-height:310px;display:grid;place-items:center;background:radial-gradient(ellipse at center,#534289,transparent 71%),linear-gradient(145deg,#222644,#161a30);isolation:isolate}.art::before{content:'';position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#8b8bcc22 1px,transparent 1px),linear-gradient(90deg,#8b8bcc22 1px,transparent 1px);background-size:29px 29px;mask-image:linear-gradient(transparent,#000,transparent)}.art svg{width:min(360px,90%);height:auto}.pixel{fill:var(--purple)}
+.primary,.quiet,.choice,.key{min-height:48px;border-radius:13px;font-weight:750}.primary{border:0;background:var(--mint);color:#112924;padding:10px 20px}.primary:hover{background:#c7ffe9}.primary:disabled{opacity:.48}.quiet{background:transparent;color:var(--text);border:1px solid var(--line);padding:8px 14px}.quiet:hover{background:var(--card)}.stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:12px 0 24px}.stage{display:flex;gap:11px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:15px;background:var(--panel);font-size:.85rem;font-weight:750}.stage b{min-width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:var(--card);color:var(--purple)}.stage.active{border-color:var(--mint)}.stage.active b{background:var(--mint);color:#142c28}.stage.done b{color:var(--mint)}
+.progress{height:7px;background:var(--card);border-radius:10px;overflow:hidden;margin-bottom:12px}.progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--mint));transition:width .25s}.work{padding:clamp(17px,4vw,38px);max-width:850px;margin:0 auto 20px}.meta{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.step{font-size:.85rem;color:var(--muted)}.work h1{font-size:clamp(1.43rem,4vw,2.25rem);line-height:1.2;margin:14px 0 10px;letter-spacing:-.022em;outline:0}.bodycopy{font-size:clamp(1rem,2.6vw,1.22rem);max-width:57ch;margin:0 0 14px;white-space:pre-line}.formula{display:inline-block;margin:8px 0 15px;background:#141831;border:1px solid var(--line);border-radius:15px;padding:8px 16px;font-size:clamp(1.3rem,6vw,2.22rem);font-weight:850;letter-spacing:.03em;white-space:pre-wrap}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}.choice{color:var(--text);background:var(--card);border:1px solid var(--line);text-align:left;padding:11px 14px}.choice:hover:not(:disabled),.key:hover{border-color:var(--purple)}.choice[aria-pressed=true]{border:2px solid var(--purple);padding:10px 13px;background:#382f5d}.choice.correct{border-color:var(--mint);color:var(--mint)}.choice.wrong{border-color:var(--pink)}.feedback{padding:11px 14px;margin:13px 0 0;border-radius:12px;background:#302641;color:#ffd6e5}.feedback.good{background:#183b38;color:#c7ffea}.feedback.hint{background:#33304d;color:#f4e8ff}.controls{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:15px}.controls .primary{margin-left:auto}.number-label{display:block;color:var(--muted);margin-bottom:5px}.number{width:100px;background:#12162d;border:2px solid var(--line);border-radius:12px;color:var(--text);text-align:center;padding:6px;font-size:1.55rem;font-weight:800}.keypad{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;max-width:405px;margin-top:9px}.key{border:1px solid var(--line);background:var(--card);color:var(--text);min-height:43px;padding:3px}.key.erase{grid-column:span 2;font-size:.83rem}.model{display:flex;align-items:flex-end;gap:16px;margin:12px 0 19px;padding:12px;background:#141831;border-radius:13px;width:fit-content;max-width:100%}.bundle,.ones{display:flex;gap:5px;align-items:flex-end;flex-wrap:wrap}.ten{width:13px;height:52px;border:1px solid #b5ffe1;border-radius:4px;background:repeating-linear-gradient(0deg,#6cdbbe 0 4px,#2a7166 4px 5px)}.one{width:13px;height:11px;background:#ffd493;border:1px solid #fff0bb;border-radius:3px}
+.finish{padding:clamp(19px,5vw,48px);margin:0 auto 20px;max-width:850px}.finish h1{font-size:clamp(2rem,6vw,3.7rem)}.report{display:grid;gap:7px;margin:16px 0}.result-row{display:flex;justify-content:space-between;gap:12px;padding:9px 13px;border-radius:11px;background:var(--card)}.result-row span:last-child{color:var(--mint);white-space:nowrap}.foot{color:var(--muted);font-size:.78rem;padding:8px 0 24px}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.art{min-height:210px;order:-1}.art svg{width:min(244px,72%)}.top{padding-top:14px}.stage-grid{grid-template-columns:repeat(2,1fr);gap:6px;margin:10px 0 14px}.stage{padding:7px;gap:6px;font-size:.76rem}.stage b{height:23px;min-width:23px}.wrap{width:calc(100% - 24px)}}
+@media(max-width:420px){.choices{grid-template-columns:1fr}.work{padding:14px}.edition{font-size:.7rem}.brand{font-size:.88rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><span class="mark" aria-hidden="true">▦</span> ГЛИТЧ · МАТЕМАТИКА</div><div class="edition">2 класс · часть 1<br>страницы 78–83</div></header>
+<main id="app"></main>
+<footer class="foot">Числа до 100 · десятки и единицы</footer>
+</div>
+<script>
+'use strict';
+const stages = ['Разряды', 'Примеры', 'Задачи', 'Ловушки'];
+const cards = [
+  {t:'Собери число по рисунку', p:'В каждой высокой полоске 10 клеток. Маленькая клетка — одна единица.', model:[3,4], o:['43','34','7','30'], a:1, h:'Сначала сосчитай десятки, потом отдельные единицы.', e:'3 десятка — это 30. Ещё 4 единицы. Получается 34.'},
+  {t:'Какое число получилось?', f:'6 дес.  7 ед.', n:67, h:'Запиши цифру десятков слева, цифру единиц справа.', e:'6 десятков — это 60, а 7 единиц — это 7. Получилось 67.'},
+  {t:'Разбери число 72', p:'Выбери его разрядный состав.', o:['7 дес. и 2 ед.','2 дес. и 7 ед.','7 дес. и 0 ед.','0 дес. и 2 ед.'], a:0, h:'Десятки стоят слева, единицы справа.', e:'В числе 72 цифра 7 показывает десятки, а цифра 2 — единицы.'},
+  {t:'Ноль тоже на своём месте', p:'Какое число содержит 8 десятков и 0 единиц?', o:['8','80','18','88'], a:1, h:'Отдельных единиц нет. Какая цифра нужна справа?', e:'80 — это 8 десятков и 0 единиц. Ноль стоит в разряде единиц.'},
+  {t:'Что обозначает цифра 6?', p:'Посмотри на число 64. Какое значение имеет в нём цифра 6?', o:['6','60','4','40'], a:1, h:'Определи, в каком разряде стоит 6.', e:'6 стоит в разряде десятков и обозначает 60.'},
+  {t:'Найди цифру первого разряда', p:'Какая цифра стоит в первом разряде числа 47?', o:['4','7','40','47'], a:1, h:'Разряды считают справа налево. Первый — единицы.', e:'Первая справа цифра — 7. В числе 47 семь единиц первого разряда.'},
+
+  {t:'Сравни выражения', f:'30 + 50  □  100 − 30', o:['<','=','>'], a:2, h:'Посчитай значение выражения слева и справа. Потом сравни.', e:'30 + 50 = 80, а 100 − 30 = 70. Значит, слева больше.'},
+  {t:'Считай десятками', f:'20 + 60 − 30 = ?', n:50, h:'Сложи 2 и 6 десятков. Затем убери 3 десятка.', e:'2 + 6 − 3 = 5 десятков, то есть 50.'},
+  {t:'Шаг назад от ста', f:'100 − 1 + 0 = ?', o:['90','99','100','98'], a:1, h:'Назови число перед 100. Прибавление нуля его не изменит.', e:'Перед 100 стоит 99. Если прибавить 0, останется 99.'},
+  {t:'Перейди к новому десятку', f:'79 + 1 − 10 = ?', n:70, h:'Сначала найди следующее за 79 число, затем убери десяток.', e:'79 + 1 = 80. Убираем один десяток и получаем 70.'},
+  {t:'Сделай два шага назад', f:'80 − 1 − 1 = ?', o:['79','78','70','82'], a:1, h:'Назови два числа, которые идут перед 80, двигаясь назад по одному.', e:'80 − 1 = 79. Ещё на 1 меньше — 78.'},
+  {t:'Сложи десятки', p:'Какое число получится?', f:'4 дес. + 2 дес.', o:['6','42','60','24'], a:2, h:'Узнай число десятков. Затем запиши, сколько это единиц всего.', e:'4 десятка и 2 десятка дают 6 десятков, то есть 60.'},
+  {t:'Восстанови ряд', f:'58  ·  59  ·  □  ·  61', n:60, h:'Каждое следующее число на один больше предыдущего.', e:'После 59 идёт 60, а после 60 — 61.'},
+
+  {t:'Карандаши в коробках', p:'У Веры 3 коробки по 10 карандашей и ещё 5 отдельных карандашей. Сколько всего карандашей?', o:['35','53','8','30'], a:0, h:'Каждая коробка — один десяток. Добавь отдельные карандаши.', e:'В коробках 30 карандашей. 30 + 5 = 35.'},
+  {t:'Фишки для игры', p:'Дети сделали 2 десятка синих фишек и 5 десятков зелёных. Сколько всего фишек они сделали?', n:70, h:'Сложи десятки, а затем запиши число фишек.', e:'20 + 50 = 70 фишек. Это 7 десятков.'},
+  {t:'Сколько фишек осталось?', p:'Дети сделали 70 фишек и разложили 50 из них по конвертам. Сколько фишек ещё осталось разложить?', o:['20','30','60','50'], a:0, h:'От общего числа фишек отними те, которые уже в конвертах.', e:'70 − 50 = 20 фишек. Из 7 десятков убрали 5, осталось 2.'},
+  {t:'У кого меньше наклеек?', p:'У Лены 60 наклеек. Это на 20 больше, чем у Саши. Как узнать, сколько наклеек у Саши?', o:['60 + 20 = 80','60 − 20 = 40','60 − 40 = 20','20 + 20 = 40'], a:1, h:'У кого наклеек меньше? Как получить число, которое на 20 меньше 60?', e:'У Саши меньше, чем у Лены. Отнимаем 20 от 60 и получаем 40 наклеек.'},
+  {t:'Лишняя игрушка в чеке', p:'За мишку и двух зайчиков заплатили 60 рублей. За такого же мишку и одного зайчика — 50 рублей. Сколько стоит один зайчик?', o:['10 рублей','20 рублей','50 рублей','60 рублей'], a:0, h:'Сравни покупки. Что есть в первой покупке сверх второй?', e:'Первая покупка отличается одним зайчиком. 60 − 50 = 10 рублей — цена зайчика.'},
+  {t:'Сколько лент получилось?', p:'Для игры взяли 13 красных и 7 жёлтых лент. Сколько всего лент?', n:20, h:'В числе 13 один десяток и 3 единицы. Что получится из 3 и 7 единиц?', e:'13 + 7 = 20. Из 3 и 7 единиц получился ещё один десяток. Всего 2 десятка.'},
+
+  {t:'Глитч перепутал цифры', p:'Глитч записал 4 дес. и 9 ед. числом 94. Какое число нужно записать?', o:['94','49','13','90'], a:1, h:'Что должно стоять в разряде десятков, а что в разряде единиц?', e:'Цифра 4 должна стоять слева, цифра 9 справа. Получается 49.'},
+  {t:'Два числа из одних цифр', p:'Почему 75 больше, чем 57?', o:['В числе 75 больше десятков.','В числе 75 больше единиц.','В обоих числах есть цифра 7.'], a:0, h:'Сравни цифры слева. Они показывают число десятков.', e:'В 75 семь десятков, а в 57 пять десятков. Поэтому 75 > 57.'},
+  {t:'Найди число без отдельных единиц', p:'В каком двузначном числе 0 единиц первого разряда?', o:['9','79','90','99'], a:2, h:'Первый разряд — справа. Какая цифра там должна быть?', e:'В 90 девять десятков и ноль отдельных единиц.'},
+  {t:'Добавь один десяток', p:'В числе 43 увеличили число десятков на один. Единицы оставили как были. Какое число получилось?', n:53, h:'К 4 десяткам прибавь один десяток. Цифра справа не меняется.', e:'Было 4 десятка и 3 единицы, стало 5 десятков и 3 единицы. Это 53.'},
+  {t:'Последний код', p:'В числе 5 десятков. Единиц на 3 больше, чем десятков. Какое это число?', o:['85','53','58','50'], a:2, h:'Узнай число единиц. Для этого прибавь 3 к 5.', e:'Единиц 5 + 3 = 8. Число из 5 десятков и 8 единиц — 58.'}
+];
+const starts = [0,6,13,19,24];
+const STORAGE = 'glitch-tens-grade2-v1';
+const app = document.querySelector('#app');
+const fresh = () => ({index:0, results:[], started:false});
+let progress = fresh();
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE));
+  if (saved && Number.isInteger(saved.index) && saved.index >= 0 && saved.index <= cards.length &&
+      Array.isArray(saved.results) && saved.results.length === saved.index &&
+      saved.results.every(result => typeof result === 'boolean')) progress = saved;
+} catch {}
+let hadError = false;
+let selected = null;
+let solved = false;
+let activeCard = null;
+const save = () => { try { localStorage.setItem(STORAGE, JSON.stringify(progress)); } catch {} };
+function showHome() {
+  app.innerHTML = `<section class="hero"><div class="intro"><div class="eyebrow">Математическая проверка</div><h1>Код<br>десятков</h1><p>Глитч перемешал цифры и десятки. Восстанови числа, реши задачи и проверь, где он спрятал ошибку.</p><div class="tags"><span class="tag">24 задания</span><span class="tag">≈ 30 минут</span><span class="tag">Проверка после каждого ответа</span></div><button class="primary" id="start">${progress.index === cards.length ? 'Посмотреть результат' : progress.started ? 'Продолжить →' : 'Начать →'}</button></div><div class="art" aria-hidden="true">
+  <svg viewBox="0 0 320 280" fill="none">
+  <path d="M28 216h264M51 231h218" stroke="#c5b3ff" opacity=".22" stroke-width="3"/>
+  <path d="M160 64V37" stroke="#c5b3ff" stroke-width="8" stroke-linecap="round"/><circle cx="160" cy="29" r="10" fill="#a6ffdc"/>
+  <rect x="67" y="67" width="186" height="128" rx="36" fill="#ad90f6"/><rect x="82" y="82" width="156" height="94" rx="23" fill="#181a35"/>
+  <path d="M62 116v34m196-34v34" stroke="#d9cdff" stroke-width="14" stroke-linecap="round"/>
+  <rect x="106" y="106" width="33" height="27" rx="8" fill="#a6ffdc"/><rect x="181" y="106" width="33" height="27" rx="8" fill="#a6ffdc"/>
+  <path d="M144 149q16 14 32 0" stroke="#a6ffdc" stroke-width="6" stroke-linecap="round"/>
+  <path d="M113 195l-6 21m99-21 7 21" stroke="#ad90f6" stroke-width="13" stroke-linecap="round"/>
+  <path d="M27 73h13m-7-7v13m234 117h13m-7-7v13" stroke="#ffd493" stroke-width="3" stroke-linecap="round"/>
+  <rect x="19" y="156" width="17" height="17" rx="4" fill="#a6ffdc" opacity=".55"/><rect x="274" y="62" width="13" height="13" rx="3" fill="#c5b3ff" opacity=".55"/>
+  <text x="160" y="256" text-anchor="middle" fill="#a6ffdc" font-size="18" font-family="system-ui" font-weight="700" letter-spacing="3">ДЕС.  /  ЕД.</text></svg></div></section>
+  <div class="stage-grid">${stages.map((name,i) => `<div class="stage"><b>${i+1}</b>${name}</div>`).join('')}</div>`;
+  document.querySelector('#start').onclick = () => { progress.started = true; save(); showCard(); };
+}
+function showCard() {
+  const i = progress.index;
+  if (i === cards.length) { showFinish(); return; }
+  hadError = false;
+  selected = null;
+  solved = false;
+  activeCard = cards[i];
+  const q = activeCard;
+  const stage = starts.findIndex((start, j) => i >= start && i < starts[j+1]);
+  const model = q.model ? `<div class="model" role="img" aria-label="Пучки из десяти клеток: ${q.model[0]}. Отдельные клетки: ${q.model[1]}"><div class="bundle">${'<span class="ten"></span>'.repeat(q.model[0])}</div><div class="ones">${'<span class="one"></span>'.repeat(q.model[1])}</div></div>` : '';
+  const answers = q.o ? `<div class="choices" role="group" aria-label="Варианты ответа">${q.o.map((o,j) => `<button type="button" class="choice" data-choice="${j}" aria-pressed="false">${o === '<' ? '&lt;' : o}</button>`).join('')}</div>` :
+    `<label class="number-label" for="number">Ответ числом</label><input id="number" class="number" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off"><div class="keypad" role="group" aria-label="Кнопки с цифрами">${Array.from({length:10},(_,j) => `<button type="button" class="key" data-key="${j}">${j}</button>`).join('')}<button type="button" class="key erase" data-key="erase">⌫ Стереть</button></div>`;
+  app.innerHTML = `<div class="progress" role="progressbar" aria-label="Пройдено заданий" aria-valuemin="0" aria-valuemax="${cards.length}" aria-valuenow="${i}"><span style="width:${i/cards.length*100}%"></span></div>
+    <nav class="stage-grid" aria-label="Этапы">${stages.map((name,j) => `<div class="stage ${j === stage ? 'active' : j < stage ? 'done' : ''}" ${j === stage ? 'aria-current="step"' : ''}><b>${j<stage?'✓':j+1}</b>${name}</div>`).join('')}</nav>
+    <section class="work"><div class="meta"><span class="eyebrow">${stages[stage]}</span><span class="step">Задание ${i+1} из ${cards.length}</span></div>
+    <h1 tabindex="-1" id="question">${q.t}</h1>${q.p ? `<p class="bodycopy">${q.p}</p>` : ''}${q.f ? `<div class="formula">${q.f}</div>` : ''}${model}
+    <form id="answer" novalidate>${answers}
+    <div id="feedback" class="feedback" role="status" hidden></div>
+    <div class="controls"><button class="quiet" type="button" id="hint">Подсказка</button><button class="primary" type="submit" id="check">Проверить</button></div></form></section>`;
+  document.querySelector('#question').focus();
+  app.querySelectorAll('[data-choice]').forEach(btn => {btn.onclick = () => {
+    selected = Number(btn.dataset.choice);
+    app.querySelectorAll('[data-choice]').forEach(other => {
+      other.setAttribute('aria-pressed', String(other === btn));
+      other.classList.remove('wrong');
+    });
+    clearFeedback();
+  };});
+  const input = document.querySelector('#number');
+  if (input) {
+    input.oninput = () => {input.value = input.value.replace(/[^0-9]/g,'').slice(0,3); clearFeedback();};
+    app.querySelectorAll('[data-key]').forEach(btn => {btn.onclick = () => {
+      const key = btn.dataset.key;
+      if (key === 'erase') input.value = input.value.slice(0,-1);
+      else if (input.value.length < 3) input.value += key;
+      clearFeedback();
+    };});
+  }
+  document.querySelector('#hint').onclick = () => feedback(q.h,'hint');
+  document.querySelector('#answer').onsubmit = event => { event.preventDefault(); check(); };
+}
+function clearFeedback() {
+  const box = document.querySelector('#feedback');
+  box.hidden = true;
+  box.textContent = '';
+}
+function feedback(message, type) {
+  const box = document.querySelector('#feedback');
+  box.className = 'feedback ' + type;
+  box.hidden = false;
+  box.textContent = message;
+}
+function check() {
+  if (solved) {
+    progress.results.push(!hadError);
+    progress.index++;
+    save();
+    showCard();
+    return;
+  }
+  const q = activeCard;
+  const input = document.querySelector('#number');
+  const value = input ? input.value : selected;
+  if (value === null || value === '') {
+    feedback(input ? 'Введи число или нажми кнопки с цифрами.' : 'Сначала выбери ответ.', 'hint');
+    return;
+  }
+  if (Number(value) !== (q.o ? q.a : q.n)) {
+    hadError = true;
+    if (q.o) app.querySelector('[data-choice="'+selected+'"]').classList.add('wrong');
+    feedback('Попробуй ещё. ' + q.h, '');
+    return;
+  }
+  solved = true;
+  if (q.o) app.querySelector('[data-choice="'+selected+'"]').classList.add('correct');
+  app.querySelectorAll('[data-choice], [data-key], #number').forEach(el => { el.disabled = true; });
+  document.querySelector('#hint').hidden = true;
+  const checkButton = document.querySelector('#check');
+  checkButton.textContent = progress.index === cards.length - 1 ? 'Итог →' : 'Дальше →';
+  feedback('Верно! ' + q.e, 'good');
+  checkButton.focus();
+}
+function showFinish() {
+  const first = progress.results.filter(Boolean).length;
+  app.innerHTML = `<section class="finish"><div class="eyebrow">Проверка завершена</div><h1 tabindex="-1" id="finish-title">Код восстановлен!</h1>
+    <p>Пройдено заданий: <b>${cards.length} из ${cards.length}</b>. С первой попытки: <b>${first} из ${cards.length}</b>.</p>
+    <div class="report" aria-label="Верно с первой попытки по темам">${stages.map((name,j) => `<div class="result-row"><span>${name}</span><span>${progress.results.slice(starts[j],starts[j+1]).filter(Boolean).length} из ${starts[j+1]-starts[j]} с первой попытки</span></div>`).join('')}</div>
+    <button class="quiet" id="restart">Пройти заново</button></section>`;
+  document.querySelector('#finish-title').focus();
+  document.querySelector('#restart').onclick = () => { progress = fresh(); save(); showHome(); };
+}
+showHome();
+</script>
+</body>
+</html>
