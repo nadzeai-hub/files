@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#132d53">
+<title>Код выражения — устный интерактив, 5 класс</title>
+<style>
+:root {color-scheme:light; --navy:#132d53; --ink:#182945; --muted:#506582; --blue:#087eb6; --cyan:#19b1d2; --violet:#7052bd; --line:#c6d9ed; --paper:#fff; --pale:#eff7fd; --good:#11744e; --bad:#a73540;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);font-size:20px;line-height:1.5;background: radial-gradient(circle at 12% 15%,#d4f5ff 0,transparent 30%),radial-gradient(circle at 85% 9%,#f0e5ff 0,transparent 28%),linear-gradient(#edf5ff,#f8fcff);}
+.site{max-width:1080px;margin:auto;padding:20px 22px 56px}
+.header{border:2px solid #c8dff3;border-radius:28px;background:linear-gradient(120deg,#fff,#f1f8ff);box-shadow:0 10px 32px #153f6b17;padding:22px 26px 19px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;right:-50px;top:-70px;width:230px;height:230px;border:22px solid #e1effd;border-radius:50%;opacity:.65}
+.eyebrow{font-size:15px;font-weight:850;letter-spacing:.09em;color:var(--blue);text-transform:uppercase}
+h1{font-size:clamp(32px,4.6vw,50px);line-height:1.08;letter-spacing:-.045em;margin:7px 0 9px;color:var(--navy)}
+.subtitle{max-width:680px;font-size:19px;color:#3a5471;margin:0}
+.header-flex{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:1}
+.clippy{flex:0 0 120px;filter:drop-shadow(0 7px 5px #5b84ac38)}
+.instructions{margin-top:14px;padding:13px 18px;background:#e9f7fc;border:1px solid #b8e1ed;border-radius:17px;max-width:760px;font-size:17px;font-weight:600;color:#244d68}
+.hud{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;margin:18px 0}
+.stat{border:1px solid #c9ddf0;background:white;border-radius:17px;padding:12px 17px;flex:1 1 170px;min-height:74px}
+.stat small{display:block;font-size:14px;color:var(--muted);font-weight:750;letter-spacing:.025em}
+.stat strong{font-size:26px;color:var(--navy)}
+.meter{height:14px;border:1px solid #b5d1e8;background:#dce9f4;border-radius:99px;overflow:hidden;margin:8px 0 4px}
+.meter>div{height:100%;width:0%;background:linear-gradient(90deg,#4ce5c4,#56b3fa);border-radius:99px;transition:width .4s ease}
+.main{border:2px solid #c9dcee;background:#fff;border-radius:26px;box-shadow:0 13px 35px #1a466918;overflow:hidden}
+.missionbar{padding:19px 26px;display:flex;align-items:center;gap:14px;background:linear-gradient(100deg,#162e59,#244779);color:#fff}
+.mission-number{font-weight:900;font-size:23px;background:#2c5c97;border:1px solid #719cca;padding:7px 15px;border-radius:12px;white-space:nowrap}
+.missiontype{font-size:17px;font-weight:650;color:#d2eefa}
+.missionbar strong{display:block;font-size:24px;line-height:1.2}
+.qarea{padding:25px 27px 30px}
+.source{font-size:15px;font-weight:800;color:#576f8d;letter-spacing:.02em;margin:0 0 8px}
+.q{font-size:clamp(22px,3vw,30px);line-height:1.28;color:#152d53;font-weight:750;margin:0 0 12px}
+.math{display:block;text-align:center;background:#f0f7ff;border:2px dashed #b9d2ef;border-radius:17px;padding:15px;font-size:clamp(25px,4vw,38px);font-weight:800;letter-spacing:.006em;color:#153b6d;margin:14px 0 20px;font-variant-numeric:tabular-nums}
+.micro{font-size:17px;color:#4c6582;margin:-2px 0 16px}
+.options{display:grid;grid-template-columns:1fr;gap:11px;margin:20px 0 13px}
+.choice{text-align:left;display:flex;gap:13px;align-items:center;min-height:66px;border:2px solid #c7daef;background:#fcfeff;border-radius:16px;padding:13px 16px;font:650 21px/1.35 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#20395c;cursor:pointer;transition:.15s}
+.choice:hover:enabled{border-color:#4d9cc7;background:#eff9ff;transform:translateY(-1px)}
+.choice:focus-visible,.btn:focus-visible{outline:4px solid #e9b842;outline-offset:2px}
+.choice.active{border-color:#1282be;background:#e5f7ff;box-shadow:inset 0 0 0 1px #168abb}
+.choice.right{background:#ebfff5;border-color:#1b9471;color:#0e5c43}
+.choice.wrong{background:#fff3f4;border-color:#c56b72;color:#873339}
+.choice:disabled{cursor:default;opacity:1}
+.optlabel{flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;border:1px solid #aac5e5;border-radius:10px;background:#eaf4ff;color:#21446c;font-size:17px;font-weight:900}
+.feedback{margin:16px 0 14px;border:1px solid #cadced;border-radius:14px;display:none;padding:13px 16px;font-weight:650;font-size:18px}
+.feedback.show{display:block}.feedback.ok{background:#eafbf2;border-color:#8dceb0;color:#0f674a}.feedback.no{background:#fff1f1;border-color:#e6abae;color:#903a43}
+.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{border:0;border-radius:13px;padding:15px 26px;min-height:54px;font:850 20px/1.2 system-ui,sans-serif;cursor:pointer;background:#136ca7;color:#fff;box-shadow:0 4px 0 #0c4972}
+.btn:hover:enabled{background:#0c5e92}.btn:active:enabled{transform:translateY(2px);box-shadow:0 2px 0 #0c4972}
+.btn:disabled{background:#adc6d8;color:#36516e;box-shadow:none;cursor:not-allowed}
+.btn.next{background:#13805f;box-shadow:0 4px 0 #0b583f}.btn.next:hover:enabled{background:#086d50}
+.btn.reset{background:transparent;color:#476585;border:1px solid #bad0e3;box-shadow:none;font-size:16px;font-weight:650;padding:10px 17px;min-height:44px}
+.footer{font-size:15px;color:#56718c;text-align:center;padding-top:18px}
+.finish{display:none;text-align:center;padding:32px 27px 39px}.finish h2{font-size:40px;margin:8px 0;color:#0d4c80}.finish p{font-size:22px;max-width:670px;margin:12px auto 19px}.finish .stars{font-size:54px}
+@media(min-width:740px){.options{grid-template-columns:repeat(2,minmax(0,1fr))}.choice:last-child:nth-child(odd){grid-column:1/-1}.header .subtitle{max-width:770px}}
+@media(max-width:620px){body{font-size:18px}.site{padding:10px 10px 28px}.header{padding:20px 17px}.header-flex{align-items:flex-start}.clippy{flex-basis:72px;width:72px}.instructions{font-size:16px}.missionbar{padding:15px;gap:10px}.missionbar strong{font-size:20px}.missiontype{font-size:14px}.mission-number{font-size:18px;padding:6px 9px}.qarea{padding:18px 16px 22px}.choice{font-size:19px;padding:12px;min-height:62px}.btn{width:100%}.btn.reset{width:auto}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main class="site">
+<header class="header">
+ <div class="header-flex"><div>
+  <div class="eyebrow">Математика · 5 класс · § 15</div>
+  <h1>КОД ВЫРАЖЕНИЯ</h1>
+  <p class="subtitle">Устная миссия: разгадываем порядок действий, составляем выражения и решаем короткие задачи.</p>
+ </div>
+ <svg class="clippy" viewBox="0 0 110 140" width="120" height="152" role="img" aria-label="Скрепка — помощник">
+ <path d="M78 15C48 -9 15 19 19 52L22 102C23 121 45 135 65 125C77 119 82 105 82 86V46C82 17 44 17 44 46V99C44 111 61 110 62 98V55" fill="none" stroke="#597593" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M78 15C48 -9 15 19 19 52L22 102C23 121 45 135 65 125C77 119 82 105 82 86V46C82 17 44 17 44 46V99C44 111 61 110 62 98V55" fill="none" stroke="#cfdfec" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+ <ellipse cx="37" cy="45" rx="14" ry="19" fill="white" stroke="#2e5072" stroke-width="2"/><ellipse cx="68" cy="45" rx="14" ry="19" fill="white" stroke="#2e5072" stroke-width="2"/>
+ <circle cx="40" cy="48" r="6" fill="#152c46"/><circle cx="66" cy="48" r="6" fill="#152c46"/><path d="M40 71Q54 85 67 70" fill="none" stroke="#263e55" stroke-width="3" stroke-linecap="round"/>
+ </svg>
+ </div>
+ <div class="instructions">Как играть: <b>выбери один ответ → нажми «Проверить» → после верного ответа откроется «Следующий код».</b> Устно объясняй свой выбор. Прогресс сохраняется автоматически на этом устройстве.</div>
+</header>
+<div class="hud" aria-label="Прогресс миссии">
+ <div class="stat"><small>ЭТАП</small><strong id="level">1 из 10</strong></div>
+ <div class="stat"><small>ЭНЕРГОКРИСТАЛЛЫ</small><strong><span aria-hidden="true">✦ </span><span id="crystals">0</span> / 10</strong></div>
+ <div class="stat" style="flex:2 1 245px"><small>ПРОГРЕСС ПОЛЁТА</small><div class="meter"><div id="meterFill"></div></div><small id="meterText">0% завершено</small></div>
+</div>
+<section class="main" aria-live="polite">
+ <div id="quiz">
+  <div class="missionbar"><div class="mission-number" id="missionNumber">01</div><div><div class="missiontype" id="kind">Сканирование выражения</div><strong id="missionName">Миссия</strong></div></div>
+  <div class="qarea"><p class="source" id="source"></p><h2 class="q" id="question"></h2><div class="math" id="math" hidden></div><p class="micro" id="micro"></p><div class="options" id="options" role="group" aria-label="Варианты ответа"></div><div class="feedback" role="status" id="feedback"></div><div class="actions"><button class="btn" id="check" type="button" disabled>Проверить</button><button class="btn next" id="next" type="button" hidden>Следующий код →</button></div></div>
+ </div>
+ <div class="finish" id="finish"><div class="stars">✦ ✦ ✦</div><h2>Миссия выполнена!</h2><p>10 энергокристаллов собраны. Ты научился замечать главное действие, составлять выражения и проверять простые задачи.</p><button class="btn reset" id="retry" type="button">Пройти заново</button></div>
+</section>
+<div style="display:flex;justify-content:end;margin-top:12px"><button class="btn reset" id="reset" type="button">Начать заново</button></div>
+<div class="footer">По упражнениям § 15, № 315–317, 319–320. Учебник «Математика», 5 класс, ч. 1 (2025). Тренажёр для устной работы; без печати и без регистрации.</div>
+</main>
+<script>
+(()=>{'use strict';
+ const STORAGE='math5_expr_oral_par15_v1';
+ const tasks=[
+ {kind:'Порядок действий',name:'Найди последнее действие',src:'№ 315 (а), стр. 109',q:'Какое действие выполняется последним?',math:'(22 + 8) − 13',options:['Сложение','Вычитание','Умножение'],answer:1,hint:'Сначала вычисли выражение в скобках. Что останется выполнить?',explain:'Сначала сложение в скобках, затем вычитание.'},
+ {kind:'Порядок действий',name:'Выбери финальное действие',src:'№ 315 (б), стр. 109',q:'Какое действие выполняется последним?',math:'(18 + 4) · 2',options:['Умножение','Сложение','Деление'],answer:0,hint:'Действие в скобках всегда выполняем раньше.',explain:'Сначала находим сумму 18 и 4, затем умножаем на 2.'},
+ {kind:'Чтение выражения',name:'Прочитай код',src:'№ 315 (в), стр. 109',q:'Как правильно прочитать выражение?',math:'45 : (11 − 2)',options:['Частное числа 45 и разности чисел 11 и 2','Разность частного чисел 45 и 11 и числа 2','Частное разности чисел 45 и 11 и числа 2'],answer:0,hint:'Последнее действие — деление. Поэтому чтение начинаем со слова «частное».',explain:'Это частное числа 45 и разности чисел 11 и 2.'},
+ {kind:'Чтение выражения',name:'Что называют разностью?',src:'№ 315 (д), стр. 109',q:'Выбери верное чтение выражения.',math:'12 · 5 − 60 : 15',options:['Разность произведения чисел 12 и 5 и частного чисел 60 и 15','Частное разности чисел 12 и 5 и произведения чисел 60 и 15','Разность числа 12 и произведения чисел 5 и 60'],answer:0,hint:'Сначала умножение и деление. Вычитание — последнее действие.',explain:'Последнее действие — вычитание двух результатов: произведения и частного.'},
+ {kind:'Составление выражения',name:'Поставь скобки',src:'№ 316 (а), стр. 109',q:'Произведение числа 200 и суммы чисел 7 и 6. Какую запись выберешь?',math:'?',options:['200 · 7 + 6','200 · (7 + 6)','(200 + 7) · 6'],answer:1,hint:'Нужно умножить 200 на всю сумму, а не только на 7.',explain:'Сумму 7 + 6 выделяем скобками: 200 · (7 + 6).'},
+ {kind:'Составление выражения',name:'Составь частное',src:'№ 316 (б), стр. 109',q:'Частное суммы чисел 36 и 22 и числа 5. Какая запись верна?',math:'?',options:['36 + 22 : 5','(36 + 22) · 5','(36 + 22) : 5'],answer:2,hint:'Делим всю сумму на 5. Где нужно поставить скобки?',explain:'Сумму чисел 36 и 22 помещаем в скобки и делим на 5.'},
+ {kind:'Устный счёт',name:'Разность и произведение',src:'№ 317 (а), стр. 110',q:'Найди произведение разности чисел 47 и 32 и числа 1000.',math:'(47 − 32) · 1000 = ?',options:['15 000','47 000','79 000'],answer:0,hint:'Сначала 47 − 32, потом умножение на 1000.',explain:'47 − 32 = 15, затем 15 · 1000 = 15 000.'},
+ {kind:'Устный счёт',name:'Частное и скобки',src:'№ 317 (б), стр. 110',q:'Найди частное числа 72 и разности чисел 56 и 47.',math:'72 : (56 − 47) = ?',options:['9','8','72'],answer:1,hint:'Посчитай разность 56 − 47, потом найди частное.',explain:'56 − 47 = 9, 72 : 9 = 8.'},
+ {kind:'Задача за 30 секунд',name:'Две книги',src:'№ 319, стр. 110',q:'В первой книге 224 страницы, во второй — в 4 раза меньше. На сколько страниц в первой книге больше?',math:'224 страницы  ·  в 4 раза меньше',options:['56','168','228'],answer:1,hint:'Сначала узнай, сколько страниц во второй книге. Потом сравни.',explain:'224 : 4 = 56; 224 − 56 = 168 страниц.'},
+ {kind:'Задача за 30 секунд',name:'Пассажиры электрички',src:'№ 320, стр. 110',q:'В электричке 520 пассажиров. На остановке вышло 216 человек, вошло 106. Сколько пассажиров стало?',math:'520 → вышло 216 → вошло 106',options:['410','630','304'],answer:0,hint:'Когда пассажиры выходят — вычитаем, когда входят — прибавляем.',explain:'520 − 216 + 106 = 410 пассажиров.'}
+ ];
+ const $=id=>document.getElementById(id);
+ const els={level:$('level'),crystals:$('crystals'),meterFill:$('meterFill'),meterText:$('meterText'),quiz:$('quiz'),finish:$('finish'),missionNumber:$('missionNumber'),kind:$('kind'),missionName:$('missionName'),source:$('source'),question:$('question'),math:$('math'),micro:$('micro'),options:$('options'),feedback:$('feedback'),check:$('check'),next:$('next')};
+ let state={completed:0,ready:false};let choice=null;let justCorrect=false;let attempts=0;
+ function load(){try{const data=JSON.parse(localStorage.getItem(STORAGE));if(data&&Number.isInteger(data.completed)&&data.completed>=0&&data.completed<=tasks.length)state={completed:data.completed,ready:!!data.ready};}catch(_){state={completed:0,ready:false};}}
+ function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));}catch(_){}}
+ function progress(){els.level.textContent=state.completed>=tasks.length?'10 из 10':' '+(state.completed+1)+' из '+tasks.length;els.crystals.textContent=state.completed;const pct=Math.round(state.completed/tasks.length*100);els.meterFill.style.width=pct+'%';els.meterText.textContent=pct+'% завершено';}
+ function feedback(text,isCorrect){els.feedback.textContent=text;els.feedback.className='feedback show '+(isCorrect?'ok':'no');}
+ function show(){progress();window.scrollTo({top:0,behavior:'smooth'});if(state.completed>=tasks.length){els.quiz.style.display='none';els.finish.style.display='block';return;}
+  els.quiz.style.display='block';els.finish.style.display='none';const t=tasks[state.completed];choice=null;attempts=0;justCorrect=false;
+  els.missionNumber.textContent=String(state.completed+1).padStart(2,'0');els.kind.textContent=t.kind;els.missionName.textContent=t.name;els.source.textContent=t.src;els.question.textContent=t.q;
+  els.math.hidden=!t.math;els.math.textContent=t.math||'';els.micro.textContent='Ответ выбери кнопкой. Сначала объясни решение вслух.';
+  els.options.replaceChildren();t.options.forEach((opt,i)=>{const b=document.createElement('button');b.type='button';b.className='choice';b.setAttribute('aria-pressed','false');const lab=document.createElement('span');lab.className='optlabel';lab.textContent=String.fromCharCode(1040+i);const val=document.createElement('span');val.textContent=opt;b.append(lab,val);b.addEventListener('click',()=>select(i));els.options.append(b);});
+  els.feedback.className='feedback';els.feedback.textContent='';els.check.disabled=true;els.check.hidden=false;els.next.hidden=true;els.next.textContent=state.completed===tasks.length-1?'Завершить экспедицию →':'Следующий код →';
+  if(state.ready){const a=t.answer;justCorrect=true;choice=a;Array.from(els.options.children).forEach((b,j)=>{b.disabled=true;b.classList.toggle('right',j===a);});feedback('✓ Код принят! '+t.explain,true);els.check.hidden=true;els.next.hidden=false;}
+
+ }
+ function select(i){if(justCorrect)return;choice=i;Array.from(els.options.children).forEach((b,j)=>{b.classList.toggle('active',j===i);b.classList.remove('wrong');b.setAttribute('aria-pressed',String(j===i));});els.check.disabled=false;els.feedback.className='feedback';}
+ function check(){if(choice===null||justCorrect)return;const t=tasks[state.completed];if(choice===t.answer){justCorrect=true;state.ready=true;save();Array.from(els.options.children).forEach((b,j)=>{b.disabled=true;b.classList.toggle('right',j===t.answer);b.classList.remove('active','wrong');});feedback('✓ Код принят! '+t.explain,true);els.check.hidden=true;els.next.hidden=false;els.next.focus();}else{attempts+=1;const selected=els.options.children[choice];if(selected)selected.classList.add('wrong');feedback('✕ Пока не совпало. '+t.hint+' Выбери другой ответ и проверь снова.',false);els.check.disabled=true;choice=null;}}
+ function advance(){if(!justCorrect)return;state.completed+=1;state.ready=false;save();show();}
+ function reset(){if(!window.confirm('Сбросить весь прогресс и начать с первого задания?'))return;state={completed:0,ready:false};save();show();}
+ els.check.addEventListener('click',check);els.next.addEventListener('click',advance);$('reset').addEventListener('click',reset);$('retry').addEventListener('click',reset);
+ load();show();
+})();
+</script>
+</body>
+</html>
