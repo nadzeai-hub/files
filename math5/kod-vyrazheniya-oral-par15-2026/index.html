@@ -74,7 +74,7 @@ h1{font-size:clamp(32px,4.6vw,50px);line-height:1.08;letter-spacing:-.045em;marg
  <circle cx="40" cy="48" r="6" fill="#152c46"/><circle cx="66" cy="48" r="6" fill="#152c46"/><path d="M40 71Q54 85 67 70" fill="none" stroke="#263e55" stroke-width="3" stroke-linecap="round"/>
  </svg>
  </div>
- <div class="instructions">Как играть: <b>выбери один ответ → нажми «Проверить» → после верного ответа откроется «Следующий код».</b> Устно объясняй свой выбор. Прогресс сохраняется автоматически на этом устройстве.</div>
+ <div class="instructions">Как играть: <b>выбери ответ → нажми «Проверить».</b> На каждый код даются две попытки. После первой ошибки будет подсказка, после второй — объяснение и переход дальше. Энергокристалл получаешь только за правильный ответ с первой попытки. Попытки и прогресс сохраняются на этом устройстве.</div>
 </header>
 <div class="hud" aria-label="Прогресс миссии">
  <div class="stat"><small>ЭТАП</small><strong id="level">1 из 10</strong></div>
@@ -86,10 +86,10 @@ h1{font-size:clamp(32px,4.6vw,50px);line-height:1.08;letter-spacing:-.045em;marg
   <div class="missionbar"><div class="mission-number" id="missionNumber">01</div><div><div class="missiontype" id="kind">Сканирование выражения</div><strong id="missionName">Миссия</strong></div></div>
   <div class="qarea"><p class="source" id="source"></p><h2 class="q" id="question"></h2><div class="math" id="math" hidden></div><p class="micro" id="micro"></p><div class="options" id="options" role="group" aria-label="Варианты ответа"></div><div class="feedback" role="status" id="feedback"></div><div class="actions"><button class="btn" id="check" type="button" disabled>Проверить</button><button class="btn next" id="next" type="button" hidden>Следующий код →</button></div></div>
  </div>
- <div class="finish" id="finish"><div class="stars">✦ ✦ ✦</div><h2>Миссия выполнена!</h2><p>10 энергокристаллов собраны. Ты научился замечать главное действие, составлять выражения и проверять простые задачи.</p><button class="btn reset" id="retry" type="button">Пройти заново</button></div>
+ <div class="finish" id="finish"><div class="stars">✦ ✦ ✦</div><h2>Миссия выполнена!</h2><p>Экспедиция завершена. Посмотри, сколько заданий удалось решить с первой попытки.</p><button class="btn reset" id="retry" type="button">Пройти заново</button></div>
 </section>
 <div style="display:flex;justify-content:end;margin-top:12px"><button class="btn reset" id="reset" type="button">Начать заново</button></div>
-<div class="footer">По упражнениям § 15, № 315–317, 319–320. Учебник «Математика», 5 класс, ч. 1 (2025). Тренажёр для устной работы; без печати и без регистрации.</div>
+<div class="footer">Две попытки на каждое задание. Кристаллы начисляются только за правильные ответы с первой попытки. По упражнениям § 15, № 315–317, 319–320. Учебник «Математика», 5 класс, ч. 1 (2025). Тренажёр для устной работы; без печати и без регистрации.</div>
 </main>
 <script>
 (()=>{'use strict';
@@ -106,27 +106,144 @@ h1{font-size:clamp(32px,4.6vw,50px);line-height:1.08;letter-spacing:-.045em;marg
  {kind:'Задача за 30 секунд',name:'Две книги',src:'№ 319, стр. 110',q:'В первой книге 224 страницы, во второй — в 4 раза меньше. На сколько страниц в первой книге больше?',math:'224 страницы  ·  в 4 раза меньше',options:['56','168','228'],answer:1,hint:'Сначала узнай, сколько страниц во второй книге. Потом сравни.',explain:'224 : 4 = 56; 224 − 56 = 168 страниц.'},
  {kind:'Задача за 30 секунд',name:'Пассажиры электрички',src:'№ 320, стр. 110',q:'В электричке 520 пассажиров. На остановке вышло 216 человек, вошло 106. Сколько пассажиров стало?',math:'520 → вышло 216 → вошло 106',options:['410','630','304'],answer:0,hint:'Когда пассажиры выходят — вычитаем, когда входят — прибавляем.',explain:'520 − 216 + 106 = 410 пассажиров.'}
  ];
+
  const $=id=>document.getElementById(id);
  const els={level:$('level'),crystals:$('crystals'),meterFill:$('meterFill'),meterText:$('meterText'),quiz:$('quiz'),finish:$('finish'),missionNumber:$('missionNumber'),kind:$('kind'),missionName:$('missionName'),source:$('source'),question:$('question'),math:$('math'),micro:$('micro'),options:$('options'),feedback:$('feedback'),check:$('check'),next:$('next')};
- let state={completed:0,ready:false};let choice=null;let justCorrect=false;let attempts=0;
- function load(){try{const data=JSON.parse(localStorage.getItem(STORAGE));if(data&&Number.isInteger(data.completed)&&data.completed>=0&&data.completed<=tasks.length)state={completed:data.completed,ready:!!data.ready};}catch(_){state={completed:0,ready:false};}}
- function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));}catch(_){}}
- function progress(){els.level.textContent=state.completed>=tasks.length?'10 из 10':' '+(state.completed+1)+' из '+tasks.length;els.crystals.textContent=state.completed;const pct=Math.round(state.completed/tasks.length*100);els.meterFill.style.width=pct+'%';els.meterText.textContent=pct+'% завершено';}
- function feedback(text,isCorrect){els.feedback.textContent=text;els.feedback.className='feedback show '+(isCorrect?'ok':'no');}
- function show(){progress();window.scrollTo({top:0,behavior:'smooth'});if(state.completed>=tasks.length){els.quiz.style.display='none';els.finish.style.display='block';return;}
-  els.quiz.style.display='block';els.finish.style.display='none';const t=tasks[state.completed];choice=null;attempts=0;justCorrect=false;
-  els.missionNumber.textContent=String(state.completed+1).padStart(2,'0');els.kind.textContent=t.kind;els.missionName.textContent=t.name;els.source.textContent=t.src;els.question.textContent=t.q;
-  els.math.hidden=!t.math;els.math.textContent=t.math||'';els.micro.textContent='Ответ выбери кнопкой. Сначала объясни решение вслух.';
-  els.options.replaceChildren();t.options.forEach((opt,i)=>{const b=document.createElement('button');b.type='button';b.className='choice';b.setAttribute('aria-pressed','false');const lab=document.createElement('span');lab.className='optlabel';lab.textContent=String.fromCharCode(1040+i);const val=document.createElement('span');val.textContent=opt;b.append(lab,val);b.addEventListener('click',()=>select(i));els.options.append(b);});
-  els.feedback.className='feedback';els.feedback.textContent='';els.check.disabled=true;els.check.hidden=false;els.next.hidden=true;els.next.textContent=state.completed===tasks.length-1?'Завершить экспедицию →':'Следующий код →';
-  if(state.ready){const a=t.answer;justCorrect=true;choice=a;Array.from(els.options.children).forEach((b,j)=>{b.disabled=true;b.classList.toggle('right',j===a);});feedback('✓ Код принят! '+t.explain,true);els.check.hidden=true;els.next.hidden=false;}
-
+ let state={completed:0,ready:false,attempts:0,firstWrong:null,currentOutcome:null,results:[]};
+ let choice=null;
+ function load(){
+  try{
+   const data=JSON.parse(localStorage.getItem(STORAGE));
+   if(data && Number.isInteger(data.completed) && data.completed>=0 && data.completed<=tasks.length){
+    state.completed=data.completed;
+    state.ready=!!data.ready;
+    state.results=Array.isArray(data.results) ? data.results.slice(0,tasks.length) : Array(data.completed).fill('legacy');
+    state.attempts=Number.isInteger(data.attempts)?Math.min(2,Math.max(0,data.attempts)):0;
+    state.firstWrong=Number.isInteger(data.firstWrong)?data.firstWrong:null;
+    state.currentOutcome=typeof data.currentOutcome==='string'?data.currentOutcome:(state.ready?'legacy':null);
+    if(state.ready && !['first','second','miss','legacy'].includes(state.currentOutcome)) state.currentOutcome='legacy';
+   }
+  }catch(_){state={completed:0,ready:false,attempts:0,firstWrong:null,currentOutcome:null,results:[]};}
  }
- function select(i){if(justCorrect)return;choice=i;Array.from(els.options.children).forEach((b,j)=>{b.classList.toggle('active',j===i);b.classList.remove('wrong');b.setAttribute('aria-pressed',String(j===i));});els.check.disabled=false;els.feedback.className='feedback';}
- function check(){if(choice===null||justCorrect)return;const t=tasks[state.completed];if(choice===t.answer){justCorrect=true;state.ready=true;save();Array.from(els.options.children).forEach((b,j)=>{b.disabled=true;b.classList.toggle('right',j===t.answer);b.classList.remove('active','wrong');});feedback('✓ Код принят! '+t.explain,true);els.check.hidden=true;els.next.hidden=false;els.next.focus();}else{attempts+=1;const selected=els.options.children[choice];if(selected)selected.classList.add('wrong');feedback('✕ Пока не совпало. '+t.hint+' Выбери другой ответ и проверь снова.',false);els.check.disabled=true;choice=null;}}
- function advance(){if(!justCorrect)return;state.completed+=1;state.ready=false;save();show();}
- function reset(){if(!window.confirm('Сбросить весь прогресс и начать с первого задания?'))return;state={completed:0,ready:false};save();show();}
- els.check.addEventListener('click',check);els.next.addEventListener('click',advance);$('reset').addEventListener('click',reset);$('retry').addEventListener('click',reset);
+ function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));}catch(_){}}
+ function earned(){return state.results.filter(x=>x==='first'||x==='legacy').length+(state.ready && (state.currentOutcome==='first'||state.currentOutcome==='legacy')?1:0);}
+ function progress(){
+  els.level.textContent=state.completed>=tasks.length?'10 из 10':' '+(state.completed+1)+' из '+tasks.length;
+  els.crystals.textContent=earned();
+  const pct=Math.round(state.completed/tasks.length*100);
+  els.meterFill.style.width=pct+'%';
+  els.meterText.textContent=pct+'% завершено';
+ }
+ function feedback(text,isCorrect){els.feedback.textContent=text;els.feedback.className='feedback show '+(isCorrect?'ok':'no');}
+ function lockAnswers(answer,markWrong){
+  Array.from(els.options.children).forEach((b,j)=>{
+   b.disabled=true;
+   b.classList.remove('active');
+   b.classList.toggle('right',j===answer);
+   b.classList.toggle('wrong',j===markWrong && j!==answer);
+   b.setAttribute('aria-pressed','false');
+  });
+ }
+ function finishTask(result,wrongIndex){
+  const t=tasks[state.completed];
+  state.currentOutcome=result;state.ready=true;choice=null;save();
+  lockAnswers(t.answer,wrongIndex);
+  els.check.hidden=true;els.next.hidden=false;
+  const rightText=t.options[t.answer];
+  if(result==='first') feedback('✓ Правильно с первой попытки! ✦ Кристалл получен. '+t.explain,true);
+  else if(result==='second') feedback('✓ Верно после подсказки. '+t.explain+' Кристалл выдаётся только за правильный ответ с первой попытки.',true);
+  else if(result==='miss') feedback('Две попытки использованы. Правильный ответ: «'+rightText+'». '+t.explain+' Кристалл не начислен. Переходи к следующему коду.',false);
+  else feedback('Задание завершено. '+t.explain,true);
+  els.next.focus();
+ }
+ function show(){
+  progress();
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(state.completed>=tasks.length){
+   els.quiz.style.display='none';els.finish.style.display='block';
+   const primary=state.results.filter(x=>x==='first'||x==='legacy').length;
+   const corrected=state.results.filter(x=>x==='second').length;
+   const reviewed=state.results.filter(x=>x==='miss').length;
+   const p=els.finish.querySelector('p');
+   if(p)p.textContent='Все 10 кодов пройдены! Кристаллы за правильные ответы с первой попытки: '+primary+' из 10. Исправлено со второй попытки: '+corrected+'. Разобрано после двух ошибок: '+reviewed+'.';
+   return;
+  }
+  els.quiz.style.display='block';els.finish.style.display='none';
+  const t=tasks[state.completed];
+  choice=null;
+  els.missionNumber.textContent=String(state.completed+1).padStart(2,'0');
+  els.kind.textContent=t.kind;els.missionName.textContent=t.name;els.source.textContent=t.src;
+  els.question.textContent=t.q;els.math.hidden=!t.math;els.math.textContent=t.math||'';
+  els.micro.textContent='Выбери ответ и объясни решение вслух. На задание только две попытки; кристалл — за первую.';
+  els.options.replaceChildren();
+  t.options.forEach((opt,i)=>{
+   const b=document.createElement('button');b.type='button';b.className='choice';b.setAttribute('aria-pressed','false');
+   const lab=document.createElement('span');lab.className='optlabel';lab.textContent=String.fromCharCode(1040+i);
+   const val=document.createElement('span');val.textContent=opt;
+   b.append(lab,val);b.addEventListener('click',()=>select(i));els.options.append(b);
+  });
+  els.feedback.className='feedback';els.feedback.textContent='';
+  els.check.disabled=true;els.check.hidden=false;els.next.hidden=true;
+  els.next.textContent=state.completed===tasks.length-1?'Завершить экспедицию →':'Следующий код →';
+  if(state.ready){
+   lockAnswers(t.answer,null);
+   els.check.hidden=true;els.next.hidden=false;
+   const result=state.currentOutcome;
+   if(result==='first') feedback('✓ Правильно с первой попытки! ✦ Кристалл получен. '+t.explain,true);
+   else if(result==='second') feedback('✓ Верно после подсказки. '+t.explain+' Кристалл за первую попытку не начислен.',true);
+   else if(result==='miss') feedback('Две попытки использованы. Правильный ответ: «'+t.options[t.answer]+'». '+t.explain+' Кристалл не начислен.',false);
+   else feedback('✓ Код уже принят! '+t.explain,true);
+  } else if(state.attempts===1){
+   if(state.firstWrong!==null && els.options.children[state.firstWrong]){
+    const wrong=els.options.children[state.firstWrong];
+    wrong.disabled=true;wrong.classList.add('wrong');
+   }
+   feedback('Первая попытка была неверной. Осталась 1 попытка. '+t.hint,false);
+  }
+ }
+ function select(i){
+  if(state.ready||els.options.children[i]?.disabled)return;
+  choice=i;
+  Array.from(els.options.children).forEach((b,j)=>{
+   b.classList.toggle('active',j===i);
+   b.setAttribute('aria-pressed',String(j===i));
+  });
+  els.check.disabled=false;
+  if(state.attempts===0)els.feedback.className='feedback';
+ }
+ function check(){
+  if(choice===null||state.ready)return;
+  const t=tasks[state.completed];
+  if(choice===t.answer){
+   finishTask(state.attempts===0?'first':'second',null);
+  }else{
+   state.attempts++;
+   if(state.attempts===1){
+    state.firstWrong=choice;
+    const wrong=els.options.children[choice];
+    if(wrong){wrong.disabled=true;wrong.classList.remove('active');wrong.classList.add('wrong');wrong.setAttribute('aria-pressed','false');}
+    choice=null;els.check.disabled=true;save();
+    feedback('✕ Первая попытка неверная. Осталась одна попытка. '+t.hint,false);
+   }else{
+    finishTask('miss',choice);
+   }
+  }
+ }
+ function advance(){
+  if(!state.ready)return;
+  state.results[state.completed]=state.currentOutcome||'legacy';
+  state.completed++;state.ready=false;state.attempts=0;state.firstWrong=null;state.currentOutcome=null;
+  save();show();
+ }
+ function reset(){
+  if(!window.confirm('Сбросить весь прогресс и начать с первого задания?'))return;
+  state={completed:0,ready:false,attempts:0,firstWrong:null,currentOutcome:null,results:[]};
+  save();show();
+ }
+ els.check.addEventListener('click',check);
+ els.next.addEventListener('click',advance);
+ $('reset').addEventListener('click',reset);
+ $('retry').addEventListener('click',reset);
  load();show();
 })();
 </script>
