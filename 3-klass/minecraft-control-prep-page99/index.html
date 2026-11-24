@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172620">
+<meta name="description" content="Интерактивная математическая экспедиция для третьего класса — повторение тем до страницы 99 учебника.">
+<title>Крепость знаний — математическая экспедиция</title>
+<style>
+:root{--deep:#13211d;--deep2:#1d3029;--forest:#365843;--moss:#628c55;--grass:#84a964;--sand:#f5eedb;--paper:#fffaf0;--stone:#ced2c7;--stone2:#a9afa4;--ink:#243329;--muted:#64756a;--wood:#936a45;--amber:#e5b766;--aqua:#5abfc1;--red:#c86654;--ok:#296e4c;--shadow:0 12px 34px rgba(19,33,29,.16)}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:'Trebuchet MS',Arial,sans-serif;background:linear-gradient(180deg,#dfe9dc 0,#f1f1e6 40%,#e7eddf 100%);line-height:1.5;font-size:17px}
+body:before{content:"";position:fixed;inset:0;z-index:-1;opacity:.11;background-image:linear-gradient(90deg,#33563a 1px,transparent 1px),linear-gradient(#33563a 1px,transparent 1px);background-size:46px 46px;pointer-events:none}
+button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+.app{max-width:1120px;margin:0 auto;padding:18px 20px 54px}
+.pixel-top{height:12px;background:repeating-linear-gradient(90deg,#89ae65 0 26px,#63894b 26px 52px,#4d6e40 52px 76px);border-radius:7px 7px 0 0}
+.hero{position:relative;background:linear-gradient(122deg,#203a2d,#172721 62%,#294331);border-radius:0 0 23px 23px;color:#f7f4e9;box-shadow:var(--shadow);border:2px solid #365841;border-top:0;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr);gap:16px;align-items:center;padding:24px 25px 18px}
+.hero:after{content:"";position:absolute;right:0;bottom:0;width:100%;height:11px;background:repeating-linear-gradient(90deg,#76563d 0 26px,#5d4837 26px 39px,#92704a 39px 49px);opacity:.72}
+.eyebrow{display:inline-block;border:1px solid #a1bd8b;background:#314c35;border-radius:6px;padding:5px 10px;font-size:13px;font-weight:800;letter-spacing:1px;color:#e6efc4}
+h1{font-size:clamp(33px,4.7vw,55px);line-height:1.06;margin:12px 0 12px;color:#fff4d0;letter-spacing:-1px;text-shadow:3px 3px #172920}
+.hero p{font-size:18px;color:#dbe9d8;margin:0;max-width:570px}
+.hero .tiny{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.hero .tiny span{font-weight:700;border:1px solid #64816a;background:rgba(255,255,255,.08);border-radius:7px;padding:6px 10px;font-size:14px;color:#e5f7e4}
+.hero-art{max-width:360px;width:100%;justify-self:end;filter:drop-shadow(0 8px 2px rgba(0,0,0,.15))}
+.status{display:flex;gap:18px;align-items:center;justify-content:space-between;background:var(--paper);border:2px solid #cad3be;border-radius:13px;padding:13px 16px;margin-top:17px;box-shadow:0 4px 9px rgba(24,44,31,.04)}
+.status-left{display:flex;flex-direction:column;gap:6px;flex:1}
+.status-title{display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:900;font-size:15px;color:#314d35}
+.track{height:11px;border:1px solid #a3b7a0;background:#e1e6d6;border-radius:99px;overflow:hidden}
+.fill{background:linear-gradient(90deg,#567e48,#79ac57,#9bc17b);height:100%;width:0;transition:width .3s}
+.relic{background:#e9ecdb;border:1px solid #a9b8a0;border-radius:8px;font-weight:900;padding:8px 12px;white-space:nowrap;color:#315139}
+.map{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:8px;margin:16px 0 20px}
+.map-node{background:#d0d4c8;border:2px solid #aeb4a7;border-bottom:5px solid #979c92;border-radius:7px;color:#737b71;font-weight:900;padding:8px 0 6px;text-align:center;min-height:42px;position:relative}
+.map-node.done{background:#d9eac9;border-color:#80a26b;color:#3f683c;border-bottom-color:#61824c}
+.map-node.active{background:#ffe8a7;border-color:#b89656;color:#72502c;border-bottom-color:#a97939;box-shadow:0 2px 0 #fff inset}
+.map-node .dot{font-size:16px}
+.scene{background:var(--paper);border:3px solid #aeb6a6;border-bottom-width:8px;border-radius:17px;box-shadow:var(--shadow);overflow:hidden}
+.scene-top{padding:18px 23px;background:linear-gradient(100deg,#e8ecdf,#d8e4d1);border-bottom:2px solid #bccab2;display:flex;gap:14px;justify-content:space-between;align-items:center}
+.scene-kicker{font-size:13px;letter-spacing:1px;font-weight:900;color:#54745a}
+.scene h2{font-size:clamp(24px,3.4vw,33px);line-height:1.16;margin:4px 0 0;color:#203c2a}
+.scene-count{border-radius:7px;background:#31503a;color:#fff0ce;padding:8px 11px;font-weight:900;white-space:nowrap;font-size:13px}
+.story{padding:16px 23px;display:grid;grid-template-columns:60px 1fr;gap:15px;align-items:start;background:#fffaf0;border-bottom:1px dashed #c1c5b9}
+.char{display:grid;place-items:center;width:55px;height:55px;background:#e6cf94;border:3px solid #956b47;border-radius:9px;font-size:32px;box-shadow:3px 3px 0 #ded5b7}
+.story-text{font-size:18px;line-height:1.5;margin:0;max-width:800px}
+.taskbody{padding:19px 23px 10px}
+.question{padding:14px 15px;margin:0 0 14px;border:2px solid #d7dbcf;border-radius:11px;background:#fbfcf7}
+.question:nth-child(even){background:#f6f7ef}
+.question-title{font-size:15px;font-weight:900;color:#546e52;margin:0 0 12px}
+.eq{display:flex;align-items:center;flex-wrap:wrap;gap:8px 11px;min-height:44px}
+.eqtext{font-size:clamp(18px,2.9vw,23px);font-weight:900;letter-spacing:.15px;color:#29382c;line-height:1.4;overflow-wrap:anywhere}
+.math-input{background:#fffefa;border:2px solid #b8c5af;box-shadow:inset 0 2px 3px #e4ebdf;border-radius:8px;color:#263b2a;text-align:center;font-size:21px;font-weight:900;width:80px;height:45px;padding:4px 6px;min-width:0}
+.math-input.small{width:64px}.math-input:disabled{opacity:.85;color:#315d3b;background:#e7f2df;border-color:#8cb47e}.math-input.invalid{border-color:#bc6b5b}
+.math-input::placeholder{color:#becab6;font-weight:600;font-size:15px}
+.eqrow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:7px 0;border-bottom:1px dashed #d8ded1}
+.eqrow:last-child{border-bottom:0}
+.inlinefield{display:inline-flex;align-items:center;gap:7px;font-weight:800;color:#324b35}
+.inlinefield span{white-space:nowrap}
+.measure-lines{display:grid;grid-template-columns:1fr;gap:8px}
+.measurerow{display:flex;align-items:center;flex-wrap:wrap;gap:7px 9px;font-size:20px;font-weight:900}
+.measure-label{font-size:20px;color:#345334}
+.unit{font-size:17px;color:#46684c;margin-right:7px}
+.two-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sketch{display:flex;justify-content:center;align-items:center;min-height:85px;background:repeating-linear-gradient(0deg,#ecf1e6 0 20px,#dce6d7 20px 21px),repeating-linear-gradient(90deg,#ecf1e6 0 20px,#dce6d7 20px 21px);border:1px solid #d5e0cf;border-radius:8px;overflow:hidden}
+.sketch svg{max-width:100%;height:90px}
+.goods{display:flex;gap:5px;margin:12px 0 6px;flex-wrap:wrap}.goods span{display:inline-flex;width:34px;height:34px;justify-content:center;align-items:center;background:#d5ba89;border:2px solid #946f44;box-shadow:3px 3px #b3a084;border-radius:3px;font-size:21px}
+.step{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0;font-size:17px;font-weight:900}.step-number{background:#497454;color:white;padding:3px 8px;border-radius:6px;min-width:75px;text-align:center;font-size:15px}
+.answerpair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.answerpair .subbox{background:#f0f2e7;border:1px solid #d4ddcc;padding:12px;border-radius:8px}
+.chooser{display:inline-flex;flex-wrap:nowrap;border:2px solid #b2bfa7;border-radius:7px;overflow:hidden;background:#f6f8ef}
+.choice{border:0;border-right:1px solid #bdc6b7;background:#eef1e8;font-size:21px;font-weight:900;color:#3e5842;min-width:46px;height:43px;padding:0 11px;border-radius:0}
+.choice:last-child{border-right:0}.choice.is-on{background:#4c7753;color:#fff9e2}.choice:disabled{opacity:.75;cursor:default}
+.actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 23px 20px}
+.check,.next,.again{font-size:18px;font-weight:900;padding:12px 19px;border:0;border-radius:8px;box-shadow:0 4px 0 #31583f;background:linear-gradient(#71a978,#4a8053);color:white;min-height:49px}
+.check:hover,.next:hover{filter:brightness(1.05)}.check:active,.next:active{transform:translateY(2px);box-shadow:0 2px 0 #31583f}
+.next{display:none;background:linear-gradient(#efca76,#d2a251);box-shadow:0 4px 0 #9c733d;color:#43331d}.next.show{display:inline-flex}
+.reset{background:transparent;border:1px solid #adb9a3;border-radius:7px;color:#667664;font-weight:700;padding:7px 11px;font-size:14px}
+.feedback{display:none;border:2px solid #c7d0bd;border-radius:9px;padding:12px 15px;margin:2px 23px 15px;font-size:17px;line-height:1.45;font-weight:700;white-space:pre-wrap}
+.feedback.show{display:block}.feedback.good{background:#e3f1dc;border-color:#8daf7e;color:#295b3d}.feedback.bad{background:#f9ede5;border-color:#d8aa8a;color:#8a503a}
+.help{display:none;margin:0 23px 15px;padding:12px 14px;background:#fff2cb;border-left:5px solid #c39343;border-radius:8px;font-size:16px;color:#674e22;font-weight:600}.help.visible{display:block}
+.mini-note{font-size:14px;color:#677d6b;margin-top:4px}
+.end{display:none;margin-top:15px;background:#fffaf0;border:3px solid #8ca875;border-bottom-width:8px;border-radius:18px;padding:35px 22px;text-align:center;box-shadow:var(--shadow)}.end.show{display:block}
+.end h2{font-size:clamp(29px,5vw,46px);margin:8px 0;color:#315b35}.end p{font-size:19px;margin:8px 0 22px}.end .trophy{font-size:70px}
+.footer{text-align:center;font-size:13px;color:#718173;margin-top:16px}
+@media(max-width:780px){.app{padding:10px 12px 32px}.hero{grid-template-columns:1fr;padding:21px 17px 14px}.hero-art{max-width:240px;justify-self:center;height:120px}.hero p{font-size:16px}.map{grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.map-node{min-height:37px;padding:6px 0}.scene-top{padding:14px}.scene-count{font-size:12px}.story{padding:12px 14px;grid-template-columns:42px 1fr;gap:10px}.char{width:39px;height:39px;font-size:24px}.story-text{font-size:16px}.taskbody{padding:13px 13px 4px}.question{padding:11px;margin-bottom:10px}.two-cols,.answerpair{grid-template-columns:1fr}.actions{padding:7px 14px 17px}.feedback,.help{margin-left:14px;margin-right:14px}.eqrow{align-items:flex-start}.measurerow{font-size:17px}.math-input{font-size:19px;width:68px;height:44px}.math-input.small{width:59px}.choice{min-width:42px;padding:0 8px}}
+@media(max-width:380px){.app{padding:8px}.scene-top{gap:6px;flex-wrap:wrap}.hero-art{height:100px}.question{padding:9px}.eq{gap:6px}.eqtext{font-size:18px}.math-input.small{width:54px}.choice{min-width:38px;padding:0 6px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<div class="pixel-top"></div>
+<header class="hero">
+  <div>
+    <span class="eyebrow">МАТЕМАТИЧЕСКАЯ ЭКСПЕДИЦИЯ · 3 КЛАСС</span>
+    <h1>Крепость знаний</h1>
+    <p>В старой крепости погасли математические механизмы. Чтобы открыть хранилище, придётся восстановить каждый из них. Ответы принимает только точный расчёт!</p>
+    <div class="tiny"><span>🪨 11 залов</span><span>💎 11 кристаллов</span><span>✏️ Только числа</span></div>
+  </div>
+  <svg class="hero-art" viewBox="0 0 360 230" aria-hidden="true">
+    <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#3a6258"/><stop offset="1" stop-color="#213b39"/></linearGradient></defs>
+    <rect x="4" y="13" width="352" height="210" fill="url(#sky)" rx="10" opacity=".5"/>
+    <rect x="19" y="170" width="323" height="29" fill="#547b47"/><rect x="19" y="195" width="323" height="26" fill="#886347"/>
+    <g stroke="#395144" stroke-width="2"><rect x="70" y="75" width="217" height="122" fill="#a3a797"/><rect x="106" y="53" width="144" height="143" fill="#c9c8b3"/><rect x="49" y="87" width="62" height="112" fill="#858d7d"/><rect x="252" y="87" width="58" height="112" fill="#858d7d"/><rect x="48" y="68" width="63" height="24" fill="#b6bbaa"/><rect x="251" y="68" width="61" height="24" fill="#b6bbaa"/></g>
+    <g fill="#d8d4c2"><rect x="48" y="57" width="16" height="16"/><rect x="80" y="57" width="16" height="16"/><rect x="111" y="43" width="18" height="19"/><rect x="150" y="43" width="18" height="19"/><rect x="193" y="43" width="18" height="19"/><rect x="232" y="43" width="18" height="19"/><rect x="252" y="57" width="16" height="16"/><rect x="287" y="57" width="18" height="16"/></g>
+    <g fill="#3c5749"><rect x="78" y="121" width="22" height="30"/><rect x="261" y="121" width="21" height="30"/><rect x="142" y="125" width="72" height="73" rx="24"/></g><rect x="157" y="143" width="43" height="55" fill="#5c5138"/><rect x="171" y="150" width="12" height="42" fill="#a57a50"/>
+    <g><path d="M176 12 L201 43 L175 75 L149 43Z" fill="#74dfcf" stroke="#d5fff7" stroke-width="5"/><path d="M176 12 V75 M149 43 H201" stroke="#2a8f89" stroke-width="3"/></g>
+    <g fill="#638750"><rect x="8" y="153" width="55" height="44"/><rect x="307" y="157" width="46" height="40"/></g><g fill="#92a862"><rect x="9" y="146" width="46" height="14"/><rect x="307" y="149" width="46" height="13"/></g>
+  </svg>
+</header>
+<section class="status" aria-label="Прогресс"><div class="status-left"><div class="status-title"><span>ПУТЬ К ХРАНИЛИЩУ</span><span id="statusText">0 из 11</span></div><div class="track"><div class="fill" id="progressFill"></div></div></div><div class="relic" id="relics">💎 0</div></section>
+<nav class="map" id="map" aria-label="Карта залов"></nav>
+<section class="scene" id="scene" aria-live="polite">
+<div class="scene-top"><div><div class="scene-kicker" id="kicker">ЗАЛ 1</div><h2 id="roomTitle">Загрузка...</h2></div><div class="scene-count" id="roomCount">1 / 11</div></div>
+<div class="story"><div class="char" id="character">🧭</div><p class="story-text" id="storyText"></p></div>
+<div class="taskbody" id="questions"></div>
+<div class="feedback" id="feedback" role="status"></div><div class="help" id="hint" role="status"></div>
+<div class="actions"><button type="button" class="reset" id="reset">Начать заново</button><div><button type="button" class="check" id="check">Проверить механизм</button> <button type="button" class="next" id="next">Следующий зал →</button></div></div>
+</section>
+<section class="end" id="end"><div class="trophy">🏰💎</div><h2>Крепость снова сияет!</h2><p>Все механизмы запущены. Кристаллы знаний собраны — можно отправляться на контрольную!</p><button class="again" type="button" id="again">Пройти экспедицию ещё раз</button></section>
+<div class="footer">«Крепость знаний» · самостоятельная подготовка · математика, 3 класс</div>
+</main>
+<script>
+(function(){
+'use strict';
+const n=(key,small=false)=>`<input class="math-input${small?' small':''}" id="${key}" data-answer="${key}" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="3" aria-label="Введите число" placeholder="?">`;
+const q=(name,inner)=>`<div class="question"><div class="question-title">${name}</div>${inner}</div>`;
+const row=(eq,key)=>`<div class="eqrow"><span class="eqtext">${eq}</span>${n(key)}</div>`;
+const steps=(first,second)=>`<div class="question"><div class="step"><span class="step-number">ШАГ 1</span>${first}</div><div class="step"><span class="step-number">ШАГ 2</span>${second}</div></div>`;
+const sign=(key)=>`<span class="chooser" data-sign="${key}" role="group" aria-label="Выберите знак действия"><button type="button" class="choice" data-v="+" aria-pressed="false">+</button><button type="button" class="choice" data-v="−" aria-pressed="false">−</button><button type="button" class="choice" data-v="·" aria-pressed="false">·</button><button type="button" class="choice" data-v=":" aria-pressed="false">:</button></span>`;
+const L=[
+{title:'Мост двух равенств',tag:'ТАЙНА КАМЕННЫХ ТАБЛИЧЕК',icon:'🪨',story:'На воротах высечены две записи. Одна из них обманывает. Вычисли обе стороны каждого равенства — камень сам покажет правду.',body:()=>q('Табличка А',`<div class="eqrow"><span class="eqtext">(4 + 2) · 3 =</span>${n('a1')}</div><div class="eqrow"><span class="eqtext">4 · 3 + 2 · 3 =</span>${n('a2')}</div>`)+q('Табличка Б',`<div class="eqrow"><span class="eqtext">(6 + 3) · 4 =</span>${n('a3')}</div><div class="eqrow"><span class="eqtext">6 + 3 · 4 =</span>${n('a4')}</div>`),expected:{a1:18,a2:18,a3:36,a4:18},hint:'Сначала вычисли действия в скобках. Без скобок умножение выполняется раньше сложения.',win:'Табличка А верная, а Б — ложная. Первый мост восстановлен!'},
+{title:'Шахта круглых чисел',tag:'ЗАПУСК ПОДЪЁМНИКА',icon:'⛏️',story:'Четыре механизма поднимают вагонетки. Каждый работает с десятками. Запусти их правильными числами.',body:()=>q('Заряди подъёмники',row('30 · 3 =','b1')+row('80 : 4 =','b2')+row('80 : 40 =','b3')+row('20 · 4 =','b4')),expected:{b1:90,b2:20,b3:2,b4:80},hint:'Замени десятки удобными числами. Например, 30 · 3 — это 3 десятка по 3 раза.',win:'Вагонетки вернулись на рельсы. Впереди — кузница!'},
+{title:'Кузница умножения',tag:'ГОРЯЧИЕ РАЗРЯДЫ',icon:'🔥',story:'Кузнец разбил числа на десятки и единицы, но забыл собрать ответы. Восстанови четыре слитка.',body:()=>q('Сковать четыре слитка',row('17 · 3 =','c1')+row('36 · 2 =','c2')+row('23 · 4 =','c3')+row('25 · 4 =','c4')),expected:{c1:51,c2:72,c3:92,c4:100},hint:'Разложи двузначное число на десятки и единицы. Умножь каждую часть и сложи результаты.',win:'Кузница заработала! Каждый слиток получился точным.'},
+{title:'Лабиринт действий',tag:'ОСТОРОЖНО: СКОБКИ',icon:'🧩',story:'Коридор меняет направление, если ошибиться с порядком действий. Найди три числа, которые откроют двери.',body:()=>q('Три запертые двери',row('(45 − 35) · 10 =','d1')+row('57 + 48 · 0 =','d2')+row('100 − (72 − 62) · 10 =','d3')),expected:{d1:100,d2:57,d3:0},hint:'Сначала скобки. Затем умножение и деление. И только после этого — сложение и вычитание.',win:'Все двери открыты. Ты не попался в ловушку порядка действий!'},
+{title:'Кладовая мер',tag:'СУНДУКИ С МЕРКАМИ',icon:'📏',story:'В двух сундуках смешались сантиметры, дециметры и минуты. Рассчитай и разложи всё по ячейкам.',body:()=>q('Сундук длины № 1',`<div class="measurerow"><span class="measure-label">34 см + 29 см − 16 см =</span>${n('e1',true)}<span class="unit">дм</span>${n('e2',true)}<span class="unit">см</span></div>`)+q('Сундук длины № 2',`<div class="measurerow"><span class="measure-label">1 м − 55 см + 18 см =</span>${n('e3',true)}<span class="unit">дм</span>${n('e4',true)}<span class="unit">см</span></div>`)+q('Сундук времени',`<div class="measurerow"><span class="measure-label">82 мин =</span>${n('e5',true)}<span class="unit">ч</span>${n('e6',true)}<span class="unit">мин</span></div>`),expected:{e1:4,e2:7,e3:6,e4:3,e5:1,e6:22},hint:'Сначала считай в одной единице: 1 м = 100 см, 1 дм = 10 см, 1 ч = 60 мин. Потом переведи ответ.',win:'Мерки разложены по местам. Сундуки больше не путаются!'},
+{title:'Башня периметров',tag:'РЕМОНТ КРЕПОСТНЫХ СТЕН',icon:'🏯',story:'Нужно узнать длину границы каждой постройки. Стены можно укрепить только верными расчётами.',body:()=>q('Прямоугольная площадка',`<div class="two-cols"><div class="sketch"><svg viewBox="0 0 290 100" aria-hidden="true"><rect x="76" y="24" width="147" height="59" fill="#c2d8b0" stroke="#577651" stroke-width="5"/><text x="150" y="16" text-anchor="middle" font-size="18" font-weight="bold" fill="#3c5837">14 см</text><text x="59" y="58" font-size="17" text-anchor="middle" font-weight="bold" fill="#3c5837">11 см</text></svg></div><div class="measurerow">Периметр = ${n('f1')}<span class="unit">см</span></div></div>`)+q('Квадратная башня',`<div class="two-cols"><div class="sketch"><svg viewBox="0 0 290 100" aria-hidden="true"><rect x="111" y="21" width="65" height="65" fill="#b9d8b4" stroke="#577651" stroke-width="5"/><text x="143" y="16" font-size="17" font-weight="bold" text-anchor="middle" fill="#3c5837">12 дм</text></svg></div><div class="measurerow">Периметр = ${n('f2')}<span class="unit">дм</span></div></div>`),expected:{f1:50,f2:48},hint:'Периметр — сумма длин всех сторон. У квадрата четыре равные стороны, у прямоугольника противоположные стороны равны.',win:'Башни укреплены. Крепость стала прочнее!'},
+{title:'Склад сладких грузов',tag:'ЗАДАЧА · ДВА ШАГА',icon:'📦',story:'В магазин привезли 80 кг вафель в 8 одинаковых коробках. Сколько килограммов вафель было бы в 5 таких коробках?',body:()=>`<div class="goods" aria-hidden="true">${'<span>📦</span>'.repeat(8)}</div>`+steps(`В одной коробке: ${n('g1')} <span class="unit">кг</span>`,`В пяти коробках: ${n('g2')} <span class="unit">кг</span>`),expected:{g1:10,g2:50},hint:'Сначала узнай массу вафель в одной коробке. Потом определи массу в пяти одинаковых коробках.',win:'Груз отправлен без ошибки. Ты умеешь приводить к единице!'},
+{title:'Ледяная арена',tag:'ЗАДАЧА · ДВА ШАГА',icon:'🏒',story:'В пяти хоккейных командах 30 мальчиков, поровну в каждой. Сколько мальчиков в семи таких командах?',body:()=>steps(`В одной команде: ${n('h1')} <span class="unit">чел.</span>`,`В семи командах: ${n('h2')} <span class="unit">чел.</span>`),expected:{h1:6,h2:42},hint:'Все команды одинаковые. Сначала найди число ребят в одной команде.',win:'Арена ожила. Семь команд готовы к игре!'},
+{title:'Гостиница путешественников',tag:'ЗАДАЧА · ДВА ШАГА',icon:'🏠',story:'В гостинице 3 этажа. На каждом этаже 12 номеров люкс и 21 номер комфорт. Сколько всего номеров в гостинице?',body:()=>steps(`На одном этаже всего: ${n('i1')} <span class="unit">номера</span>`,`Во всей гостинице: ${n('i2')} <span class="unit">номеров</span>`),expected:{i1:33,i2:99},hint:'Сначала сложи номера двух видов на одном этаже. Затем найди число номеров на всех трёх этажах.',win:'Путешественники получили ключи от всех комнат!'},
+{title:'Мастерская тёплых вещей',tag:'ЗАДАЧА · ДВА ШАГА',icon:'🧶',story:'На шапку идёт 2 мотка пряжи, на шарф — 3 мотка. Нужно связать 11 комплектов из шапки и шарфа. Сколько мотков пряжи понадобится?',body:()=>steps(`На один комплект: ${n('j1')} <span class="unit">мотков</span>`,`На 11 комплектов: ${n('j2')} <span class="unit">мотков</span>`),expected:{j1:5,j2:55},hint:'Один комплект — это шапка и шарф вместе. Сначала найди расход на один комплект.',win:'Все комплекты готовы. Остался последний замок!'},
+{title:'Последний числовой замок',tag:'ФИНАЛ · КОД 63',icon:'🔐',story:'На двери вырезаны числа 7, 6 и 3. Расставь знаки, вычисли промежуточное число — и открой замок с числом 63. Скобки уже стоят на двери.',body:()=>q('Числовой механизм',`<div class="eq" style="margin:8px 0 14px"><span class="eqtext">6</span>${sign('k1')}<span class="eqtext">3 =</span>${n('k2')}</div><div class="eq"><span class="eqtext">7</span>${sign('k3')}<span class="eqtext">(6 □ 3) =</span>${n('k4')}</div><p class="mini-note">Вторая строка использует тот же знак внутри скобок, который выбран в первой.</p>`),expected:{k1:'+',k2:9,k3:'·',k4:63},hint:'Сначала найди такое действие с числами 6 и 3, чтобы получить удобное число. Затем подумай, как из него и 7 получить 63.',win:'Код 63 принят! Главный замок открыт.'}
+];
+const KEY='grade3_fortress_math_to_page99_v1';
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){S=null}
+if(!S||!Array.isArray(S.solved)||typeof S.index!=='number'){S={index:0,solved:[],errors:{}}}
+S.index=Math.max(0,Math.min(L.length-1,S.index));
+S.solved=S.solved.filter(i=>Number.isInteger(i)&&i>=0&&i<L.length);
+const $=id=>document.getElementById(id);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+function renderMap(){let solved=new Set(S.solved);$('map').innerHTML=L.map((_,i)=>`<div class="map-node ${solved.has(i)?'done':i===S.index?'active':''}" title="Зал ${i+1}"><span class="dot">${solved.has(i)?'◆':i===S.index?'⚒':i+1}</span></div>`).join('');$('statusText').textContent=`${solved.size} из ${L.length}`;$('relics').textContent=`💎 ${solved.size}`;$('progressFill').style.width=(solved.size/L.length*100)+'%'}
+function wire(){document.querySelectorAll('input[data-answer]').forEach(inp=>{inp.addEventListener('input',()=>{inp.value=inp.value.replace(/[^0-9]/g,'').slice(0,3);inp.classList.remove('invalid')})});document.querySelectorAll('.chooser').forEach(group=>{group.addEventListener('click',e=>{let btn=e.target.closest('button[data-v]');if(!btn||group.dataset.locked)return;group.dataset.selected=btn.dataset.v;group.querySelectorAll('button').forEach(b=>{const on=b===btn;b.classList.toggle('is-on',on);b.setAttribute('aria-pressed',String(on))})})})}
+function feedback(kind,text){const el=$('feedback');el.className='feedback show '+kind;el.textContent=text}
+function render(){const level=L[S.index];renderMap();$('kicker').textContent=level.tag;$('roomTitle').textContent=level.title;$('roomCount').textContent=`${S.index+1} / ${L.length}`;$('storyText').textContent=level.story;$('character').textContent=level.icon;$('questions').innerHTML=level.body();$('feedback').className='feedback';$('feedback').textContent='';$('hint').className='help';$('hint').textContent='';$('check').disabled=false;$('check').style.display='inline-block';$('next').className='next';$('next').textContent=S.index===L.length-1?'Открыть хранилище →':'Следующий зал →';$('scene').style.display='block';$('end').classList.remove('show');wire();if((S.errors[S.index]||0)>=2&&!S.solved.includes(S.index)){$('hint').classList.add('visible');$('hint').textContent='💡 '+level.hint}if(S.solved.includes(S.index))completedView(level)}
+function completedView(level){$('check').style.display='none';$('next').classList.add('show');document.querySelectorAll('input[data-answer]').forEach(el=>el.disabled=true);document.querySelectorAll('.chooser').forEach(el=>{el.dataset.locked='1';el.querySelectorAll('button').forEach(b=>b.disabled=true)});feedback('good',level.win)}
+function validate(){const level=L[S.index];const fields=Object.entries(level.expected);for(const [key] of fields){if(key.startsWith('k')&&(key==='k1'||key==='k3')){const group=document.querySelector(`[data-sign="${key}"]`);if(!group?.dataset.selected)return 'fill';}else{const el=$(key);if(!el||!el.value.trim())return 'fill'}}return fields.every(([key,expected])=>{if(key==='k1'||key==='k3')return document.querySelector(`[data-sign="${key}"]`)?.dataset.selected===expected;return Number($(key).value)===expected})}
+$('check').addEventListener('click',()=>{if(S.solved.includes(S.index))return;const result=validate();if(result==='fill'){feedback('bad','В механизме осталось пустое окошко. Заполни все числа и выбери знаки, если они нужны.');return}if(result){S.solved.push(S.index);S.solved=Array.from(new Set(S.solved)).sort((a,b)=>a-b);save();renderMap();completedView(L[S.index]);return}S.errors[S.index]=(S.errors[S.index]||0)+1;save();feedback('bad','Механизм пока не сработал. Проверь вычисления и попробуй ещё раз.');if(S.errors[S.index]>=2){$('hint').classList.add('visible');$('hint').textContent='💡 '+L[S.index].hint}});
+$('next').addEventListener('click',()=>{if(!S.solved.includes(S.index))return;if(S.index===L.length-1){$('scene').style.display='none';$('end').classList.add('show');window.scrollTo({top:0,behavior:'smooth'});return}S.index++;save();render();$('scene').scrollIntoView({behavior:'smooth',block:'start'})});
+function reset(){if(!window.confirm('Начать экспедицию заново? Собранные кристаллы исчезнут.'))return;S={index:0,solved:[],errors:{}};save();render();window.scrollTo({top:0,behavior:'smooth'})}
+$('reset').addEventListener('click',reset);$('again').addEventListener('click',reset);
+render();
+})();
+</script>
+</body>
+</html>
